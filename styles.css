@@ -79,7 +79,7 @@ section > .lede{margin-bottom:56px}
 footer{padding:40px 28px;text-align:center;color:var(--muted);border-top:1px solid var(--border);font-size:14px}
 footer a{color:var(--accent-2)}
 
-@media (max-width:720px){
+/* gallery */ .gallery{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 50%,var(--bg) 100%)} .gallery .shots{max-width:var(--max);margin:48px auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px} .gallery figure{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .25s,transform .25s} .gallery figure:hover{border-color:var(--accent);transform:translateY(-2px)} .gallery figure img{width:100%;height:auto;display:block;background:#000;border-bottom:1px solid var(--border)} .gallery figcaption{padding:18px 20px;color:var(--muted);font-size:14.5px} .gallery figcaption strong{display:block;color:var(--fg);font-size:16px;font-weight:700;margin-bottom:6px} @media (max-width:720px){ .gallery .shots{grid-template-columns:1fr}
   .nav nav{gap:14px}
   .nav nav a:not(.cta){display:none}
   .stats{grid-template-columns:repeat(2,1fr)}
