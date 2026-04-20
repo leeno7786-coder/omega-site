@@ -79,7 +79,36 @@ section > .lede{margin-bottom:56px}
 footer{padding:40px 28px;text-align:center;color:var(--muted);border-top:1px solid var(--border);font-size:14px}
 footer a{color:var(--accent-2)}
 
-/* gallery */ .gallery{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 50%,var(--bg) 100%)} .gallery .shots{max-width:var(--max);margin:48px auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px} .gallery figure{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .25s,transform .25s} .gallery figure:hover{border-color:var(--accent);transform:translateY(-2px)} .gallery figure img{width:100%;height:auto;display:block;background:#000;border-bottom:1px solid var(--border)} .gallery figcaption{padding:18px 20px;color:var(--muted);font-size:14.5px} .gallery figcaption strong{display:block;color:var(--fg);font-size:16px;font-weight:700;margin-bottom:6px} @media (max-width:720px){ .gallery .shots{grid-template-columns:1fr}
+/* gallery */ .gallery{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 50%,var(--bg) 100%)} .gallery .shots{max-width:var(--max);margin:48px auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px} .gallery figure{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .25s,transform .25s} .gallery figure:hover{border-color:var(--accent);transform:translateY(-2px)} .gallery figure img{width:100%;height:auto;display:block;background:#000;border-bottom:1px solid var(--border)} .gallery figcaption{padding:18px 20px;color:var(--muted);font-size:14.5px} .gallery figcaption strong{display:block;color:var(--fg);font-size:16px;font-weight:700;margin-bottom:6px} /* demo video */
+.demo{text-align:center}
+.demo-video{max-width:720px;margin:32px auto 0;aspect-ratio:16/9;background:var(--card);border:1px solid var(--border);border-radius:14px;display:flex;align-items:center;justify-content:center}
+.demo-placeholder{color:var(--muted);font-size:1.1rem;display:flex;flex-direction:column;align-items:center;gap:12px}
+.demo-play{font-size:3rem;color:var(--accent);opacity:0.6}
+
+/* faq */
+.faq{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 50%,var(--bg) 100%)}
+.faq-list{max-width:800px;margin:40px auto 0;display:flex;flex-direction:column;gap:14px}
+.faq-item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 24px;cursor:pointer;transition:border-color .25s}
+.faq-item:hover{border-color:var(--accent)}
+.faq-item summary{font-weight:600;font-size:15.5px;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.faq-item summary::after{content:'+';color:var(--muted);font-size:1.3rem;font-weight:300;transition:transform .2s}
+.faq-item[open] summary::after{transform:rotate(45deg);color:var(--accent)}
+.faq-item p,.faq-multi p{margin-top:14px;color:var(--muted);font-size:14.5px;line-height:1.7}
+.faq-multi p{margin-top:10px}
+.faq-multi p strong{color:var(--fg)}
+
+/* pricing */
+.pricing{text-align:center}
+.price-card{max-width:480px;margin:40px auto 0;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:40px 32px;text-align:center}
+.price-label{font-size:13px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:16px}
+.price-amount{font-size:clamp(36px,5vw,52px);font-weight:800;color:var(--fg);margin-bottom:8px;letter-spacing:-0.02em}
+.price-sub{color:var(--muted);font-size:14.5px;margin-bottom:32px}
+.price-features{text-align:left;color:var(--muted);font-size:14px;line-height:2.1}
+.price-features div{padding-left:4px}
+.price-cta{margin-top:32px;padding-top:24px;border-top:1px solid var(--border)}
+.price-note{margin-top:10px;color:rgba(255,255,255,0.3);font-size:12.5px}
+
+@media (max-width:720px){ .gallery .shots{grid-template-columns:1fr}
   .nav nav{gap:14px}
   .nav nav a:not(.cta){display:none}
   .stats{grid-template-columns:repeat(2,1fr)}
