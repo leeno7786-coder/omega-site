@@ -178,3 +178,7 @@ section{padding:96px 0;position:relative}
 
 :focus-visible{outline:2px solid var(--accent-2);outline-offset:3px;border-radius:4px}
 @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}html{scroll-behavior:auto}}
+
+/* Guardrail: ensure trust strip first item never touches viewport edge */
+.hero-trust{padding-left:4px}
+.hero-trust li:first-child{padding-left:2px}
