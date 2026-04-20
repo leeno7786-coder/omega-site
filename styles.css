@@ -60,7 +60,7 @@ p{margin:0 0 1em;color:var(--text-dim)}
 
 .hero{position:relative;padding:80px 24px 72px;overflow:hidden}
 .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 400px at 85% 40%,rgba(255,45,74,0.18),transparent 60%),radial-gradient(500px 400px at 15% 90%,rgba(120,45,220,0.10),transparent 60%);pointer-events:none;z-index:0}
-.hero-grid{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center;position:relative;z-index:1}
+.hero-grid{max-width:var(--maxw);margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center;position:relative;z-index:1}
 .hero-copy{max-width:620px}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:0.82rem;font-weight:500;color:var(--text-dim);padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,0.02);margin-bottom:22px}
 .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent-glow);animation:pulse 2.2s ease-in-out infinite}
