@@ -441,58 +441,80 @@
     </div>
     <script>
       (function(){
-        // Point this at your Cloudflare tunnel endpoint.
-        // Swap to a same-origin proxy later to hide the tunnel URL.
+        // Omega 2.5 chat endpoint. Swap to a same-origin proxy later to hide the tunnel URL.
         var OMEGA_API = "https://agent.omega-dev.uk/chat";
-        var btn = document.getElementById('omega-chat-btn');
-        var win = document.getElementById('omega-chat-window');
-        var closeBtn = document.getElementById('omega-chat-close');
-        var log = document.getElementById('omega-log');
-        var input = document.getElementById('omega-input');
-        var send = document.getElementById('omega-send');
+        var REQUEST_TIMEOUT_MS = 30000;
+
+        var btn = document.getElementById("omega-chat-btn");
+        var win = document.getElementById("omega-chat-window");
+        var closeBtn = document.getElementById("omega-chat-close");
+        var log = document.getElementById("omega-log");
+        var input = document.getElementById("omega-input");
+        var send = document.getElementById("omega-send");
+
         function toggle(open){
-          if(open === undefined) open = !win.classList.contains('is-open');
-          win.classList.toggle('is-open', open);
+          if(open === undefined) open = !win.classList.contains("is-open");
+          win.classList.toggle("is-open", open);
           if(open) setTimeout(function(){ input.focus(); }, 50);
         }
         function addMsg(text, who){
-          var d = document.createElement('div');
-          d.className = 'msg ' + (who || 'bot');
+          var d = document.createElement("div");
+          d.className = "msg " + (who || "bot");
           d.textContent = text;
           log.appendChild(d);
           log.scrollTop = log.scrollHeight;
           return d;
         }
         function ask(text){
-          addMsg(text, 'user');
-          var thinking = addMsg('…', 'bot');
+          addMsg(text, "user");
+          var thinking = addMsg("…thinking", "bot");
           send.disabled = true;
+
+          var ctrl = new AbortController();
+          var to = setTimeout(function(){ ctrl.abort(); }, REQUEST_TIMEOUT_MS);
+
           fetch(OMEGA_API, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: text })
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: text }),
+            signal: ctrl.signal
           })
-          .then(function(r){ if(!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+          .then(function(r){
+            if(!r.ok) throw new Error("HTTP " + r.status);
+            return r.json();
+          })
           .then(function(data){
-            thinking.textContent = (data && (data.reply || data.response)) || '(no reply)';
+            if(data && data.ok === false){
+              throw new Error(data.error || "Omega returned an error.");
+            }
+            var reply = (data && (data.response || data.reply || data.message)) || "(no reply)";
+            thinking.textContent = reply;
           })
           .catch(function(err){
-            thinking.textContent = 'Omega is offline right now. Please try again later.';
-            thinking.classList.remove('bot'); thinking.classList.add('sys');
+            var msg = (err && err.name === "AbortError")
+              ? "Omega took too long to reply. Please try again."
+              : "Omega is offline right now. Please try again later.";
+            thinking.textContent = msg;
+            thinking.classList.remove("bot"); thinking.classList.add("sys");
           })
-          .finally(function(){ send.disabled = false; input.focus(); });
+          .finally(function(){
+            clearTimeout(to);
+            send.disabled = false;
+            input.focus();
+          });
         }
-        btn.addEventListener('click', function(){ toggle(); });
-        closeBtn.addEventListener('click', function(){ toggle(false); });
-        send.addEventListener('click', function(){
-          var v = input.value.trim(); if(!v) return;
-          input.value = ''; ask(v);
+        btn.addEventListener("click", function(){ toggle(); });
+        closeBtn.addEventListener("click", function(){ toggle(false); });
+        send.addEventListener("click", function(){
+          var t = input.value.trim();
+          if(!t) return;
+          input.value = "";
+          ask(t);
         });
-        input.addEventListener('keydown', function(e){
-          if(e.key === 'Enter' && !e.shiftKey){
+        input.addEventListener("keydown", function(e){
+          if(e.key === "Enter" && !e.shiftKey){
             e.preventDefault();
-            var v = input.value.trim(); if(!v) return;
-            input.value = ''; ask(v);
+            send.click();
           }
         });
       })();
