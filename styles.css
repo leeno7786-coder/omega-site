@@ -44,16 +44,18 @@ p{margin:0 0 1em;color:var(--text-dim)}
 .brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:1.05rem;color:#fff}
 .brand-mark{color:var(--accent);font-size:1.6rem;line-height:1;text-shadow:0 0 20px var(--accent-glow)}
 .brand-version{color:var(--text-mute);font-weight:500}
-.nav-links{display:flex;gap:28px;margin-left:auto}
-.nav-links a{color:var(--text-dim);font-size:0.92rem;font-weight:500}
-.nav-links a:hover{color:#fff}
+.tabs{display:flex;gap:4px;margin-left:auto}
+.tab{background:none;border:none;padding:6px 14px;font-family:var(--font-sans);font-size:0.92rem;font-weight:500;color:var(--text-dim);border-radius:8px;cursor:pointer;transition:color .15s,background .15s}
+.tab:hover{color:#fff}
+.tab.is-active{color:#fff;background:rgba(255,255,255,0.07)}
 .nav-cta{margin-left:4px}
 .nav-toggle{display:none;background:none;border:0;padding:8px;width:40px;height:40px;margin-left:auto;cursor:pointer}
 .nav-toggle span{display:block;height:2px;background:#fff;margin:5px 0;width:22px;border-radius:2px}
 @media (max-width:900px){
-    .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:rgba(7,7,10,0.98);border-bottom:1px solid var(--line);padding:8px 0}
-    .nav-links.is-open{display:flex}
-    .nav-links a{padding:14px 24px;border-top:1px solid var(--line)}
+    .tabs{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:rgba(7,7,10,0.98);border-bottom:1px solid var(--line);padding:8px 0}
+    .tabs.is-open{display:flex}
+    .tab{padding:14px 24px;border-top:1px solid var(--line);border-radius:0;text-align:left;width:100%}
+    .tab.is-active{background:rgba(255,45,74,0.08)}
     .nav-cta{display:none}
     .nav-toggle{display:block}
 }
@@ -182,3 +184,24 @@ section{padding:96px 0;position:relative}
 /* Guardrail: ensure trust strip first item never touches viewport edge */
 .hero-trust{padding-left:4px}
 .hero-trust li:first-child{padding-left:2px}
+
+/* Home CTA block */
+.home-cta{text-align:center;padding:72px 0 32px}
+.home-cta h2{margin-bottom:12px}
+.home-cta .lede{margin-bottom:28px}
+
+/* Trust strip (pricing page) */
+.trust-strip{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:32px;color:var(--text-mute);font-size:0.88rem;flex-wrap:wrap}
+
+/* Lightbox */
+.lightbox{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.92);display:none;align-items:center;justify-content:center;padding:24px}
+.lightbox.is-open{display:flex}
+.lb-figure{position:relative;max-width:min(900px,100%);max-height:calc(100vh - 48px);margin:0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.lb-img{max-width:100%;max-height:calc(100vh - 140px);object-fit:contain;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,0.7)}
+.lb-caption{color:var(--text-dim);font-size:0.92rem;text-align:center;max-width:720px}
+.lb-close{position:fixed;top:16px;right:20px;background:rgba(255,255,255,0.08);border:1px solid var(--line);color:#fff;font-size:1.6rem;line-height:1;width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.lb-close:hover{background:rgba(255,255,255,0.16)}
+.lb-prev,.lb-next{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.08);border:1px solid var(--line);color:#fff;font-size:2rem;line-height:1;width:48px;height:48px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.lb-prev{left:16px}
+.lb-next{right:16px}
+.lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,0.16)}
