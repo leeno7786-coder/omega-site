@@ -62,6 +62,53 @@
 .wp-cta p{color:var(--text-dim);margin:0 0 18px}
 .wp-back{display:inline-flex;align-items:center;gap:6px;color:var(--text-mute);text-decoration:none;font-size:13px;margin-bottom:8px}
 .wp-back:hover{color:var(--text)}
+
+/* ===== Print stylesheet ===== */
+.wp-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.wp-print-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--line-strong);color:var(--text-dim);padding:6px 12px;border-radius:999px;font-size:12px;font-family:var(--font-display);letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:color .15s ease,border-color .15s ease}
+.wp-print-btn:hover{color:var(--text);border-color:var(--accent-2)}
+.wp-print-btn svg{width:13px;height:13px}
+@media print{
+  @page{size:A4;margin:18mm 16mm 20mm}
+  html,body{background:#fff!important;color:#111!important;font-size:10.5pt;line-height:1.5}
+  body{background-image:none!important}
+  .nav,.footer,.nav-toggle,.wp-toc,.wp-back,.wp-cta,.wp-print-btn,.wp-actions,#omega-chat-btn,#omega-chat-window{display:none!important}
+  main{display:block}
+  .wp-wrap{display:block;max-width:none;padding:0;margin:0}
+  .wp-doc{max-width:none}
+  .wp-hero{padding:0 0 14pt;margin:0 0 18pt;border-bottom:1pt solid #999;break-after:avoid}
+  .wp-eyebrow{background:none;color:#a30016;border:none;padding:0;font-size:8pt;letter-spacing:.16em}
+  .wp-eyebrow .dot{display:none}
+  .wp-title{color:#111;font-size:24pt;line-height:1.15;margin:8pt 0 4pt;break-after:avoid}
+  .wp-sub{color:#333;font-size:12pt;max-width:none}
+  .wp-meta{color:#444;font-size:9pt;margin-top:10pt;border-top:0.5pt solid #ccc;padding-top:6pt}
+  .wp-meta strong{color:#111}
+  .wp-section{padding:0;margin:0 0 14pt;page-break-inside:auto;break-inside:auto}
+  .wp-section + .wp-section{border-top:0.5pt solid #ccc;padding-top:12pt;margin-top:12pt}
+  .wp-section-num{color:#a30016;font-size:8pt;letter-spacing:.16em;font-weight:700}
+  .wp-section h2{color:#111;font-size:15pt;line-height:1.2;margin:4pt 0 8pt;break-after:avoid;page-break-after:avoid}
+  .wp-section h3{color:#111;font-size:11pt;margin:10pt 0 4pt;break-after:avoid;page-break-after:avoid}
+  .wp-section p,.wp-section li{color:#222;font-size:10.5pt;line-height:1.5}
+  .wp-section ul,.wp-section ol{padding-left:18pt;margin:6pt 0}
+  .wp-section li::marker{color:#a30016}
+  .wp-section strong{color:#000}
+  .wp-pull{border-left:2pt solid #a30016;background:none;color:#111;font-style:italic;padding:6pt 10pt;margin:10pt 0;border-radius:0;break-inside:avoid;page-break-inside:avoid}
+  .wp-pull::before{color:#a30016}
+  .wp-callout{border:0.5pt solid #999;background:#f6f6f6;color:#111;padding:8pt 10pt;margin:10pt 0;border-radius:2pt;break-inside:avoid;page-break-inside:avoid}
+  .wp-callout-title{color:#a30016;font-size:8pt}
+  .wp-callout p{color:#111}
+  .wp-stack{display:block;margin:8pt 0}
+  .wp-stack .wp-layer{border:0.5pt solid #bbb;background:#fafafa;padding:8pt 10pt;margin:6pt 0;border-radius:2pt;break-inside:avoid;page-break-inside:avoid}
+  .wp-stack .wp-layer h4{color:#111;font-size:11pt;margin:0 0 3pt}
+  .wp-stack .wp-layer p{color:#333;font-size:10pt}
+  .wp-stack .wp-layer .wp-tag{color:#a30016;font-size:7.5pt}
+  .wp-arch{background:#f6f6f6;border:0.5pt solid #bbb;color:#222;font-size:9.5pt;padding:8pt 10pt;break-inside:avoid;page-break-inside:avoid}
+  .wp-arch .l{color:#a30016;font-weight:700}
+  a,a:visited{color:#111;text-decoration:none}
+  a[href^="http"]::after,a[href^="mailto"]::after{content:" (" attr(href) ")";font-size:8.5pt;color:#666;word-break:break-all}
+  a[href^="#"]::after{content:""}
+}
+
 </style>
 </head>
 <body>
@@ -113,7 +160,10 @@
     <article class="wp-doc">
 
       <header class="wp-hero">
-        <a href="index.html" class="wp-back">&larr; Back to Omega</a>
+        <div class="wp-actions">
+          <a href="index.html" class="wp-back">&larr; Back to Omega</a>
+          <button type="button" class="wp-print-btn" onclick="window.print()" aria-label="Print or save as PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>Print &middot; Save as PDF</button>
+        </div>
         <span class="wp-eyebrow"><span class="dot"></span> White Paper &middot; v1.0</span>
         <h1 class="wp-title">Omega 3.0: A Portable, Memory&#8209;First Autonomous Cognitive Substrate</h1>
         <p class="wp-sub">An architecture for bounded autonomy, offline learning, and evolutionary safety.</p>
