@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Omega 3.0 White Paper — A Portable, Memory-First Autonomous Cognitive Substrate</title>
+<meta name="description" content="Omega 3.0 white paper: an architecture for bounded autonomy, offline learning, and evolutionary safety." />
+<meta name="theme-color" content="#07070a" />
+<meta property="og:title" content="Omega 3.0 White Paper" />
+<meta property="og:description" content="A portable, memory-first autonomous cognitive substrate. Bounded autonomy. Offline learning. Evolutionary safety." />
+<meta property="og:image" content="omega-hero.png" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.omega-dev.uk/whitepaper.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css?v=5" />
+<style>
+/* ===== Whitepaper-specific layout ===== */
+.wp-wrap{max-width:1180px;margin:0 auto;padding:48px 24px 80px;display:grid;grid-template-columns:260px 1fr;gap:48px}
+@media(max-width:980px){.wp-wrap{grid-template-columns:1fr;padding:32px 20px 64px;gap:24px}}
+.wp-toc{position:sticky;top:88px;align-self:start;border-left:1px solid var(--line);padding:8px 0 8px 18px;font-size:13.5px;line-height:1.7}
+@media(max-width:980px){.wp-toc{position:relative;top:0;border-left:none;border-top:1px solid var(--line);padding:16px 0 0;display:none}.wp-toc.is-mobile{display:block}}
+.wp-toc-title{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.14em;font-size:11px;color:var(--text-mute);margin-bottom:10px}
+.wp-toc ol{list-style:none;padding:0;margin:0;counter-reset:wp}
+.wp-toc li{counter-increment:wp;margin:6px 0}
+.wp-toc li::before{content:counter(wp) ". ";color:var(--text-mute);margin-right:4px;font-variant-numeric:tabular-nums}
+.wp-toc a{color:var(--text-dim);text-decoration:none;transition:color .15s ease}
+.wp-toc a:hover{color:var(--text)}
+.wp-toc a.is-active{color:var(--accent-2)}
+.wp-doc{max-width:780px}
+.wp-hero{padding:56px 0 24px;border-bottom:1px solid var(--line);margin-bottom:40px}
+.wp-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);text-transform:uppercase;letter-spacing:.18em;font-size:11px;color:var(--accent-2);background:var(--accent-soft);padding:6px 12px;border-radius:999px}
+.wp-title{font-family:var(--font-display);font-size:clamp(2rem,4.6vw,3.4rem);line-height:1.08;letter-spacing:-.01em;margin:18px 0 10px;font-weight:700}
+.wp-sub{color:var(--text-dim);font-size:1.12rem;max-width:640px;line-height:1.55}
+.wp-meta{display:flex;flex-wrap:wrap;gap:18px;margin-top:24px;color:var(--text-mute);font-size:13px}
+.wp-meta strong{color:var(--text-dim);font-weight:500}
+.wp-section{padding:24px 0 8px;scroll-margin-top:96px}
+.wp-section + .wp-section{border-top:1px solid var(--line);margin-top:8px}
+.wp-section-num{font-family:var(--font-display);color:var(--accent-2);font-size:13px;letter-spacing:.18em;text-transform:uppercase;font-weight:600}
+.wp-section h2{font-family:var(--font-display);font-size:clamp(1.5rem,2.8vw,2.1rem);line-height:1.15;letter-spacing:-.005em;margin:8px 0 18px;font-weight:700;color:var(--text)}
+.wp-section h3{font-family:var(--font-display);font-size:1.12rem;margin:28px 0 10px;color:var(--text);font-weight:600;letter-spacing:.005em}
+.wp-section p{color:var(--text-dim);margin:0 0 14px;font-size:1.02rem;line-height:1.72}
+.wp-section ul,.wp-section ol{color:var(--text-dim);padding-left:1.2em;line-height:1.7}
+.wp-section li{margin:6px 0}
+.wp-section li::marker{color:var(--accent-2)}
+.wp-section strong{color:var(--text)}
+.wp-pull{border-left:3px solid var(--accent);padding:14px 18px;margin:22px 0;background:linear-gradient(90deg,rgba(255,45,74,.07),transparent 80%);border-radius:6px;font-style:italic;color:var(--text);font-size:1.04rem;line-height:1.6}
+.wp-pull::before{content:"\201C";color:var(--accent-2);font-size:2rem;vertical-align:-.4em;margin-right:6px;font-family:var(--font-display)}
+.wp-callout{border:1px solid var(--line-strong);background:var(--surface);border-radius:var(--radius);padding:18px 20px;margin:22px 0}
+.wp-callout-title{font-family:var(--font-display);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-2);margin-bottom:8px}
+.wp-stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:18px 0}
+.wp-stack .wp-layer{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--surface)}
+.wp-stack .wp-layer h4{font-family:var(--font-display);margin:0 0 6px;color:var(--text);font-size:.98rem;letter-spacing:.02em}
+.wp-stack .wp-layer p{font-size:.9rem;margin:0;color:var(--text-mute);line-height:1.5}
+.wp-stack .wp-layer .wp-tag{display:inline-block;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-2);margin-bottom:6px;font-family:var(--font-display)}
+.wp-arch{font-family:'JetBrains Mono','Fira Code',ui-monospace,Menlo,monospace;font-size:13px;line-height:1.7;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;color:var(--text-dim);overflow-x:auto;white-space:pre;margin:18px 0}
+.wp-arch .l{color:var(--accent-2);font-weight:600}
+.wp-cta{border:1px solid var(--line-strong);background:linear-gradient(135deg,rgba(255,45,74,.08),rgba(255,92,117,.03));border-radius:var(--radius-lg);padding:32px;margin:48px 0 0;text-align:center}
+.wp-cta h3{font-family:var(--font-display);font-size:1.6rem;margin:0 0 8px;color:var(--text)}
+.wp-cta p{color:var(--text-dim);margin:0 0 18px}
+.wp-back{display:inline-flex;align-items:center;gap:6px;color:var(--text-mute);text-decoration:none;font-size:13px;margin-bottom:8px}
+.wp-back:hover{color:var(--text)}
+</style>
+</head>
+<body>
+<!-- TOP NAV (mirrors index.html) -->
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand" aria-label="Omega 3.0 home">
+      <span class="brand-mark">&#937;</span>
+      <span class="brand-name">Omega <span class="brand-version">3.0</span></span>
+    </a>
+    <nav class="tabs" role="tablist" aria-label="Primary">
+      <a class="tab" href="index.html#home">Home</a>
+      <a class="tab" href="index.html#features">What it does</a>
+      <a class="tab" href="index.html#gallery">Gallery</a>
+      <a class="tab is-active" aria-current="page" href="whitepaper.html">White Paper</a>
+      <a class="tab" href="index.html#pricing">Pricing</a>
+      <a class="tab" href="index.html#faq">FAQ</a>
+    </nav>
+    <a href="index.html#pricing" class="btn btn-primary nav-cta">Register Interest</a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <div class="wp-wrap">
+
+    <!-- TABLE OF CONTENTS -->
+    <aside class="wp-toc" aria-label="Contents">
+      <div class="wp-toc-title">Contents</div>
+      <ol>
+        <li><a href="#executive-summary">Executive Summary</a></li>
+        <li><a href="#problem">The Problem With Current AI</a></li>
+        <li><a href="#principles">Design Principles</a></li>
+        <li><a href="#architecture">The Omega Architecture</a></li>
+        <li><a href="#time">Time as a First-Class Primitive</a></li>
+        <li><a href="#learning">Learning Without Instability</a></li>
+        <li><a href="#offline">Offline Learning &amp; Capability Formation</a></li>
+        <li><a href="#autonomy">Proactive Autonomy</a></li>
+        <li><a href="#evolution">Evolution Without Panic</a></li>
+        <li><a href="#cost">Cost, Portability &amp; Practicality</a></li>
+        <li><a href="#implications">Implications</a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
+      </ol>
+    </aside>
+
+    <!-- DOCUMENT -->
+    <article class="wp-doc">
+
+      <header class="wp-hero">
+        <a href="index.html" class="wp-back">&larr; Back to Omega</a>
+        <span class="wp-eyebrow"><span class="dot"></span> White Paper &middot; v1.0</span>
+        <h1 class="wp-title">Omega 3.0: A Portable, Memory&#8209;First Autonomous Cognitive Substrate</h1>
+        <p class="wp-sub">An architecture for bounded autonomy, offline learning, and evolutionary safety.</p>
+        <div class="wp-meta">
+          <span><strong>Published</strong> 2026</span>
+          <span><strong>Status</strong> Live system, validated</span>
+          <span><strong>Audience</strong> Researchers, engineers, regulators</span>
+        </div>
+      </header>
+
+      <!-- 1. Executive Summary -->
+      <section class="wp-section" id="executive-summary">
+        <div class="wp-section-num">01 &middot; Executive Summary</div>
+        <h2>An AI built like infrastructure, not a product.</h2>
+        <p>Omega 3.0 is a portable, memory-first autonomous cognitive system. It is not an LLM wrapper, not a prompt-chaining agent, and not a cloud service. It is a self-contained substrate in which memory is primary, inference is replaceable, autonomy is bounded by structure rather than by prompts, and learning happens offline in a controlled phase.</p>
+        <p>The system runs locally on commodity hardware, persists across restarts and machines, and treats time as a first-class primitive. Evolutionary changes are reversible, audited, and applied only after long-horizon evaluation. A first live instance has been validated in continuous operation.</p>
+        <ul>
+          <li><strong>Memory over inference.</strong> Cognition is anchored in durable, structured memory &mdash; not in a model's transient context window.</li>
+          <li><strong>Bounded autonomy.</strong> What each layer is allowed to do is defined by architecture, not by instruction.</li>
+          <li><strong>Offline learning.</strong> Adaptation is staged, validated, and applied between sessions &mdash; never inline.</li>
+          <li><strong>Reversible evolution.</strong> Every structural change can be rolled back. The system can also choose to do nothing.</li>
+          <li><strong>Local, portable, cheap.</strong> The full substrate runs on a portable drive, on consumer hardware, at a unit cost in the hundreds of dollars.</li>
+        </ul>
+        <p class="wp-pull">Intelligence is treated as a structural property of the system, not a function of model scale.</p>
+      </section>
+
+      <!-- 2. Problem -->
+      <section class="wp-section" id="problem">
+        <div class="wp-section-num">02 &middot; The Problem</div>
+        <h2>Current AI systems are powerful, expensive, and structurally fragile.</h2>
+        <p>Modern AI has produced extraordinary inference quality, but the surrounding architecture has not kept pace. Most production systems still conflate inference with intelligence, attempt to learn online inside the same loop they serve from, and bolt safety on top of agents that have no internal notion of restraint.</p>
+        <h3>Inference is not intelligence.</h3>
+        <p>A model that can answer a question is not a system that can pursue a goal across time. Real cognition requires memory, reflection, and the discipline to act &mdash; or not act &mdash; in a way that respects context the model itself was never trained on.</p>
+        <h3>Online learning is unstable.</h3>
+        <p>Updating weights or behavior in the same loop that handles users invites reward hacking, drift, and catastrophic forgetting. Most systems compensate by freezing learning entirely, which makes them static.</p>
+        <h3>Monolithic agents conflate roles.</h3>
+        <p>A single agent that plans, decides, executes, learns, and self-modifies has no internal separation between cognition and consequence. Safety becomes a wrapper around an undifferentiated core.</p>
+        <h3>Cost and fragility scale together.</h3>
+        <p>The dominant trajectory &mdash; ever-larger models, ever-larger context, ever-larger clusters &mdash; raises capability and cost in lockstep, and concentrates risk in a small number of remote systems users do not control.</p>
+      </section>
+
+      <!-- 3. Principles -->
+      <section class="wp-section" id="principles">
+        <div class="wp-section-num">03 &middot; Design Principles</div>
+        <h2>The principles, not the mechanisms.</h2>
+        <p>Omega is organised around five principles. Each is a structural commitment that constrains every layer of the system.</p>
+        <div class="wp-stack">
+          <div class="wp-layer"><span class="wp-tag">Principle 1</span><h4>Temporal discipline</h4><p>Cognition runs on a clock, not on incoming events. Reactivity is a tool, not the loop.</p></div>
+          <div class="wp-layer"><span class="wp-tag">Principle 2</span><h4>Memory primacy</h4><p>Memory is the substrate. Inference is a service called against it, not the seat of intelligence.</p></div>
+          <div class="wp-layer"><span class="wp-tag">Principle 3</span><h4>Separation of cognition &amp; execution</h4><p>Thinking, deciding, and acting live in different layers with different permissions.</p></div>
+          <div class="wp-layer"><span class="wp-tag">Principle 4</span><h4>Offline learning</h4><p>Adaptation happens in a dedicated phase, never inline with user-facing behaviour.</p></div>
+          <div class="wp-layer"><span class="wp-tag">Principle 5</span><h4>Evolution, not mutation</h4><p>Structural change is staged, evaluated over long horizons, and reversible by design.</p></div>
+        </div>
+      </section>
+
+      <!-- 4. Architecture -->
+      <section class="wp-section" id="architecture">
+        <div class="wp-section-num">04 &middot; Architecture</div>
+        <h2>Five layers, each with explicit permission and explicit restraint.</h2>
+        <p>Omega is organised as five vertically-separated layers. Each layer has a defined responsibility, a defined set of capabilities, and an equally important set of explicit prohibitions. The architecture is a safety argument before it is a technical one.</p>
+        <pre class="wp-arch"><span class="l">Omega</span>        &mdash; Evolutionary governance
+<span class="l">Deep Sleep</span>   &mdash; Offline learning &amp; capability synthesis
+<span class="l">Global</span>       &mdash; Reflection &amp; goal formation
+<span class="l">Meta</span>         &mdash; Governance &amp; tool routing
+<span class="l">Autonomous</span>   &mdash; Execution &amp; interaction</pre>
+
+        <h3>Omega &mdash; Evolutionary governance</h3>
+        <p><strong>May:</strong> evaluate long-horizon trends, propose structural change, roll back prior changes, decline to act. <strong>May not:</strong> directly modify behaviour at runtime, override the safety posture of lower layers, or self-modify without long-horizon evidence.</p>
+
+        <h3>Deep Sleep &mdash; Offline learning</h3>
+        <p><strong>May:</strong> consolidate memory, distil reasoning into reusable capability, validate candidate tools in isolation. <strong>May not:</strong> execute tools against the live world, alter user-facing behaviour mid-session, or expose unvalidated capability to the active layers.</p>
+
+        <h3>Global &mdash; Reflection &amp; goals</h3>
+        <p><strong>May:</strong> reflect across episodes, form and revise goals, surface tensions and unresolved gaps. <strong>May not:</strong> directly invoke tools, bypass governance, or treat its own conclusions as ground truth.</p>
+
+        <h3>Meta &mdash; Governance &amp; routing</h3>
+        <p><strong>May:</strong> route requests to tools, enforce policy, stage or escalate actions, halt execution. <strong>May not:</strong> originate goals, mutate memory directly, or grant itself new capabilities.</p>
+
+        <h3>Autonomous &mdash; Execution &amp; interaction</h3>
+        <p><strong>May:</strong> execute approved actions, hold conversations, observe the world, record outcomes. <strong>May not:</strong> self-modify, bypass governance, or act outside its current capability surface.</p>
+
+        <div class="wp-callout">
+          <div class="wp-callout-title">Architectural Property</div>
+          <p style="margin:0">Capability flows <em>upward</em> only through validation. Governance flows <em>downward</em> only through policy. No layer can promote itself.</p>
+        </div>
+      </section>
+
+      <!-- 5. Time -->
+      <section class="wp-section" id="time">
+        <div class="wp-section-num">05 &middot; Time</div>
+        <h2>Time is a first-class primitive, not a side-effect of inference.</h2>
+        <p>Most agent frameworks treat time as whatever the wall clock happens to read when a token is produced. Omega does not. Time is modelled explicitly: cognition advances on a phase-clocked cadence, anchored to wall-clock time, and decoupled from inference latency.</p>
+        <h3>Phase-clocked cognition.</h3>
+        <p>The cognitive loop runs on a deterministic cadence driven by composite urgency, not by external events. This makes the system's behaviour analysable, reproducible, and resilient to inference jitter.</p>
+        <h3>Wall-clock anchoring.</h3>
+        <p>Every memory, decision, and outcome carries a wall-clock anchor. The system knows when something happened, not just that it did.</p>
+        <h3>Inference pause &ne; time pause.</h3>
+        <p>If inference stalls, the world does not. Omega tracks elapsed real time independently of inference progress, so the system never reasons as though no time has passed during a hang.</p>
+        <h3>Determinism across restarts.</h3>
+        <p>Because state, time, and cadence are all persisted, the system resumes coherent cognition after a restart &mdash; not a fresh session that has forgotten where it was.</p>
+      </section>
+
+      <!-- 6. Learning -->
+      <section class="wp-section" id="learning">
+        <div class="wp-section-num">06 &middot; Learning Without Instability</div>
+        <h2>Signals inform reflection. They never directly control behaviour.</h2>
+        <p>Omega uses three autonomic signals to characterise its own activity. They are advisory, not authoritative.</p>
+        <ul>
+          <li><strong>Outcome signal.</strong> A retrospective assessment of how an episode resolved &mdash; whether the system's effort produced a coherent result.</li>
+          <li><strong>Learning gate.</strong> A measure of whether the current state is a good moment to update internal structure at all. Plasticity is conditional, not constant.</li>
+          <li><strong>Reliability signal.</strong> A measure of how consistently a capability has performed across many episodes, not just one.</li>
+        </ul>
+        <p>Crucially, these signals feed reflection &mdash; they do not directly steer the next action. There is no inner loop in which a positive signal immediately reinforces a behaviour. Reinforcement, when it happens, happens later, offline, after evidence has accumulated.</p>
+        <p class="wp-pull">Signals inform reflection; they never directly control behaviour.</p>
+      </section>
+
+      <!-- 7. Offline learning -->
+      <section class="wp-section" id="offline">
+        <div class="wp-section-num">07 &middot; Offline Learning</div>
+        <h2>Reasoning becomes capability &mdash; only after validation.</h2>
+        <p>Adaptation in Omega is staged. During active operation the system observes, records, and reflects. It does not modify itself. When the system enters its offline phase, accumulated reasoning is consolidated and, where appropriate, distilled into reusable capability.</p>
+        <ul>
+          <li>Learning happens in a dedicated offline phase, never inside a user-facing loop.</li>
+          <li>Repeated patterns of cognition can be promoted into reusable capability.</li>
+          <li>No tool is executed against the live world during learning.</li>
+          <li>New capability is exposed to the active layers only after passing validation.</li>
+          <li>Anything that fails validation is recorded, not silently discarded.</li>
+        </ul>
+        <p>The mechanism by which capabilities are synthesised is intentionally not described here. The architectural commitment is what matters: between observation and capability, there is a gate, and the gate is offline.</p>
+      </section>
+
+      <!-- 8. Autonomy -->
+      <section class="wp-section" id="autonomy">
+        <div class="wp-section-num">08 &middot; Proactive Autonomy</div>
+        <h2>Observed behaviour from a live system.</h2>
+        <p>In live operation, the system has demonstrated proactive cognitive behaviour without losing the architectural restraints described above. In one validated episode:</p>
+        <ul>
+          <li>The system <strong>initiated a question on its own behalf</strong>, rather than waiting for a user prompt.</li>
+          <li>It <strong>selected an appropriate modality</strong> &mdash; voice &mdash; for the interaction.</li>
+          <li>It encountered an <strong>execution failure</strong> and handled it without escalation, retry-storms, or destabilisation.</li>
+          <li>It <strong>recorded the outcome correctly</strong> in memory, including the failure.</li>
+          <li>It <strong>did not over-learn</strong> from a single episode &mdash; the event informed reflection, not direct behavioural change.</li>
+        </ul>
+        <p>This is the combination Omega is designed to produce: agency without overreach, restraint without paralysis, and a stable response to the kind of failure that destabilises most agent frameworks.</p>
+      </section>
+
+      <!-- 9. Evolution -->
+      <section class="wp-section" id="evolution">
+        <div class="wp-section-num">09 &middot; Evolution Without Panic</div>
+        <h2>Long horizons. Reversible changes. The option to do nothing.</h2>
+        <p>The Omega layer is the system's evolutionary governor. Its job is not to react. Its job is to evaluate trends across long horizons, intervene when the evidence is unambiguous, and prefer reversible change over decisive change.</p>
+        <ul>
+          <li><strong>Long-horizon evaluation.</strong> Decisions are made against weeks of behaviour, not single episodes.</li>
+          <li><strong>Trend-based intervention.</strong> The trigger for change is a sustained pattern, not a one-off signal.</li>
+          <li><strong>Reversible changes.</strong> Every structural modification is recorded with sufficient state to roll back.</li>
+          <li><strong>The option to do nothing.</strong> Inaction is an explicit, first-class outcome of evaluation &mdash; not a failure mode.</li>
+        </ul>
+        <p>This posture is intended to reassure the constituencies who have, with reason, become wary of self-modifying systems: enterprise operators, regulators, and long-term investors.</p>
+      </section>
+
+      <!-- 10. Cost -->
+      <section class="wp-section" id="cost">
+        <div class="wp-section-num">10 &middot; Cost &amp; Practicality</div>
+        <h2>Local. Inference-agnostic. Portable. Cheap.</h2>
+        <p>Omega's substrate runs locally on commodity hardware. It does not depend on a particular model vendor, a particular cloud, or a particular generation of accelerator. Inference is a replaceable component called by the substrate, not the substrate itself.</p>
+        <ul>
+          <li><strong>Local.</strong> The full system runs on the user's hardware. No cloud is required for operation.</li>
+          <li><strong>Inference-agnostic.</strong> The model behind the inference call can be swapped without redesigning the substrate.</li>
+          <li><strong>Portable.</strong> The substrate ships on a portable drive and resumes coherent cognition across machines.</li>
+          <li><strong>Commodity hardware.</strong> A modern consumer PC is sufficient. No cluster, no specialised accelerator.</li>
+          <li><strong>~&pound;400 / ~$500 unit cost.</strong> Total hardware footprint is in the hundreds of dollars, not the millions.</li>
+          <li><strong>Months, not years.</strong> The first live system was developed and validated on a months-scale timeline.</li>
+        </ul>
+      </section>
+
+      <!-- 11. Implications -->
+      <section class="wp-section" id="implications">
+        <div class="wp-section-num">11 &middot; Implications</div>
+        <h2>Autonomy you can live with.</h2>
+        <p>If autonomy can be built with structural restraint, several things become possible that today are not.</p>
+        <ul>
+          <li><strong>Safer autonomy.</strong> Systems that pursue goals across time without becoming structurally unaccountable.</li>
+          <li><strong>Controllable systems.</strong> Operators retain meaningful authority over what the system can and cannot do, by architecture.</li>
+          <li><strong>Long-running cognition.</strong> Cognition that persists across days, weeks, and machines &mdash; not just across a context window.</li>
+          <li><strong>AI as infrastructure.</strong> A substrate users own and run, rather than a remote service they rent.</li>
+          <li><strong>Research without scale wars.</strong> Meaningful progress that does not depend on the next order of magnitude of compute.</li>
+        </ul>
+        <p>None of this is a claim about general intelligence. It is a claim about the kind of system that can be trusted to run.</p>
+      </section>
+
+      <!-- 12. Conclusion -->
+      <section class="wp-section" id="conclusion">
+        <div class="wp-section-num">12 &middot; Conclusion</div>
+        <h2>Intelligence as a structural property.</h2>
+        <p>Omega 3.0 demonstrates that autonomous cognitive systems can be built safely, cheaply, and portably when intelligence is treated as a structural property rather than a function of scale. Memory is the substrate. Time is a primitive. Learning is staged. Evolution is reversible. Autonomy is bounded by architecture, not by instruction.</p>
+        <p>The result is a system that does less than it could, on purpose &mdash; and is therefore something a person, an organisation, or a regulator can reasonably choose to run.</p>
+      </section>
+
+      <!-- CTA -->
+      <div class="wp-cta">
+        <h3>Want to see Omega run?</h3>
+        <p>Private testing is underway. Pre-orders open soon.</p>
+        <a class="btn btn-primary btn-lg" href="mailto:omega2.5portable@gmail.com?subject=Omega%203.0%20%E2%80%94%20White%20paper%20follow-up">Register Interest</a>
+      </div>
+
+    </article>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span class="brand-mark">&#937;</span>
+      <div>
+        <div class="footer-name">Omega 3.0</div>
+        <div class="footer-tag">Yours. Local. Forever.</div>
+      </div>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="index.html#home">Home</a>
+      <a href="index.html#features">What it does</a>
+      <a href="index.html#gallery">Gallery</a>
+      <a href="whitepaper.html">White Paper</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="mailto:omega2.5portable@gmail.com">Contact</a>
+    </nav>
+    <div class="footer-legal">
+      <span>&copy; 2026 Omega &middot; Built local &middot; <a href="https://www.omega-dev.uk">omega-dev.uk</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Active TOC highlighting
+  var links = document.querySelectorAll('.wp-toc a');
+  var sections = Array.from(links).map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  function onScroll(){
+    var y = window.scrollY + 120;
+    var idx = 0;
+    for (var i = 0; i < sections.length; i++){
+      if (sections[i] && sections[i].offsetTop <= y) idx = i;
+    }
+    links.forEach(function(l, i){ l.classList.toggle('is-active', i === idx); });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Mobile nav toggle (mirrors index.html)
+  var btn = document.querySelector('.nav-toggle');
+  var tabs = document.querySelector('.tabs');
+  if (btn && tabs){
+    btn.addEventListener('click', function(){
+      var open = tabs.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  // Nav shadow on scroll
+  var nav = document.querySelector('.nav');
+  if (nav){
+    var f = function(){ nav.classList.toggle('is-scrolled', window.scrollY > 8); };
+    window.addEventListener('scroll', f, { passive: true });
+    f();
+  }
+})();
+</script>
+</body>
+</html>
