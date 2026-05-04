@@ -1,54 +1,45 @@
 # omega-site
 
-Omega 2.5 — Sovereign Intelligence. Fully local, self-evolving cognitive agent.
+Omega 3.0 — Sovereign Intelligence. Portable cognitive substrate. Fully local, self-evolving cognitive agent.
 
 Live site: [www.omega-dev.uk](https://www.omega-dev.uk)
 
 ## Screenshots
 
-Real product captures from the Omega 2.5 HUD and CLI.
+Real product captures from the Omega 3.0 HUD and CLI.
 
-### Omega remembers what it sees
-One command maps an entire project into its permanent memory — every file, every path, catalogued and ready for recall forever.
+### Two faces, one Omega
+Voice-ready by default, build mode on demand — talk to it, or take terminal control.
 
-![CLI scan to memory](docs/screenshots/cli-scan-memory.png)
+![Voice and build mode](docs/screenshots/voice-and-build.png)
+![Build mode terminal takeover](docs/screenshots/voice-and-build-terminal.png)
 
-### Total recall, on demand
-Ask Omega about anything it has seen before and it surfaces the exact files, along with what they do and why they matter.
+### The brain
+Cycle traversal in real time — every layer, every decision, traceable.
 
-![CLI recall guardian](docs/screenshots/cli-recall-guardian.png)
+![Brain panel](docs/screenshots/brain-panel.png)
 
-### Not a database. An understanding.
-Omega doesn't just store files — it comprehends their purpose and can explain each one in its own words.
+### The memory
+Recall that’s audited end-to-end — from query to top-k to persistence anchors.
 
-![CLI guardian summaries](docs/screenshots/cli-guardian-summaries.png)
+![Memory panel](docs/screenshots/memory-panel.png)
 
-### Watch Omega think
-The Cognition view streams live reflections as Omega evaluates its own performance and decides how to evolve.
+### The guardian
+Protected by default. Every action staged, approved, or escalated — every intervention logged with its severity.
 
-![Cognition reflection](docs/screenshots/cognition-reflection.png)
+![Guardian governance posture](docs/screenshots/guardian-posture.png)
+![Guardian recent interventions](docs/screenshots/guardian-interventions.png)
 
-### A mind with shelves
-Memory is organised across Dewey-style lobes — Knowledge, Journal, Where, When — all searchable, all yours.
+### The omega
+Self-aware, self-correcting. From current objective to identity timeline — every trait drift, contradiction, and emergent capability is tracked, named, and owned.
 
-![Memory browser](docs/screenshots/memory-browser.png)
+![Omega current objective](docs/screenshots/omega-objective.png)
+![Omega tensions and gaps](docs/screenshots/omega-tensions.png)
+![Omega identity timeline](docs/screenshots/omega-identity.png)
 
-### Autonomous curiosity
-Omega picks a topic, reads the source, synthesises what it learned, and scores itself — all without being asked.
+### The autoloop
+Always thinking, never idle. Pressure-driven cadence, open curiosity, staged proposals — and the discipline to falsify, reject, or persist its own ideas.
 
-![Learning activity](docs/screenshots/learning-activity.png)
-
-### The heartbeat
-A live look at Omega's body: CPU, RAM, uptime, memory leaves, and system posture — the glowing Ω pulsing at the centre.
-
-![Vitals HUD](docs/screenshots/vitals-hud.png)
-
-### Emotion, measured
-Reward, novelty and stress signals drive how Omega learns — a synthetic autonomic nervous system tuned in real time.
-
-![Autonomic view](docs/screenshots/autonomic-view.png)
-
-### A creature with a creator
-Ask Omega about Noah, and it answers — not from a script, but from memory.
-
-![Creator message](docs/screenshots/creator-message.png)
+![Autoloop system pressure](docs/screenshots/autoloop-pressure.png)
+![Autoloop curiosity and proposals](docs/screenshots/autoloop-proposals.png)
+![Autoloop abandoned paths](docs/screenshots/autoloop-abandoned.png)
