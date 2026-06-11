@@ -400,7 +400,19 @@
           <p style="margin:0">Omega does not modify its code. It modifies its <em>pressure field</em>. The cascade remains deterministic; the inputs to the cascade are what change. The system's own reflection becomes a new source of pressure, and that pressure drives new behaviour. This is bounded self-modification — safe by design.</p>
         </div>
 
-        <p class="wp-pull">The system started with nothing. No memory. No topics. No trajectory. It diagnosed its own ignorance, invented a way to cure it, searched the web, wrote what it found into memory, and then measured whether it was working. Not by being told to. By reflecting on its own window.</p>
+        <h3>Reaching out: when reflection asks for help.</h3>
+        <p>The Omega loop does not only alter its own pressure field. When it identifies a gap it cannot close autonomously, it formulates questions and creates a new contributor type — <code>operator_priority</code> — whose purpose is to surface those questions to the operator.</p>
+        <p>In a verified window reflection (Slice 3a, Opus 4.8), the system diagnosed itself as stuck in a repetitive <code>web_fetch</code> loop — the exact same query executed identically across all ten episodes, with zero knowledge gain and zero trajectory advancement. It identified the pattern, abandoned the trajectory, and then produced two precisely worded open questions:</p>
+        <div class="wp-pull" style="margin:14px 0 22px">"How can the system transition from simple information retrieval to active, structured knowledge synthesis and planning?"<br><br>"How can the 'learning_debt' be effectively managed to drive directed inquiry rather than repetitive, unguided searches?"</div>
+        <p>The system invented <code>operator_priority</code> as a new pressure contributor (weight 0.9) and staged it for reseed. The result: the next time the pressure loop gathers contributors, it will include a signal whose explicit purpose is to raise these questions with the operator. Omega is not waiting to be asked. It is asking.</p>
+        <p>This is not a prompt template. This is the system's own reflection producing a new communication channel between the substrate and the operator — created on the fly, because the reflection concluded that autonomous learning had reached a limit and external guidance was needed.</p>
+
+        <div class="wp-callout">
+          <div class="wp-callout-title">Architectural Property</div>
+          <p style="margin:0">Omega knows when it is stuck. It knows what it does not know. And it knows how to ask for help in a way that is precise enough to be useful. The operator is not a controller — they are a collaborator the system can reach out to when its own reflection hits a boundary.</p>
+        </div>
+
+        <p class="wp-pull">The system started with nothing. No memory. No topics. No trajectory. It diagnosed its own ignorance, invented a way to cure it, searched the web, wrote what it found into memory, measured whether it was working — and when it got stuck, it asked for help. Not by being told to. By reflecting on its own window.</p>
       </section>
 
       <!-- 10. Cost -->
