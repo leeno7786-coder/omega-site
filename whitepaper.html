@@ -127,7 +127,7 @@
       <a class="tab" href="index.html#pricing">Pricing</a>
       <a class="tab" href="index.html#faq">FAQ</a>
     </nav>
-    <a href="index.html#pricing" class="btn btn-primary nav-cta">Register Interest</a>
+    <a href="index.html#pricing" class="btn btn-primary nav-cta">Get Omega</a>
     <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -222,32 +222,38 @@
       <!-- 4. Architecture -->
       <section class="wp-section" id="architecture">
         <div class="wp-section-num">04 &middot; Architecture</div>
-        <h2>Five layers, each with explicit permission and explicit restraint.</h2>
-        <p>Omega is organised as five vertically-separated layers. Each layer has a defined responsibility, a defined set of capabilities, and an equally important set of explicit prohibitions. The architecture is a safety argument before it is a technical one.</p>
-        <pre class="wp-arch"><span class="l">Omega</span>        &mdash; Evolutionary governance
-<span class="l">Deep Sleep</span>   &mdash; Offline learning &amp; capability synthesis
-<span class="l">Global</span>       &mdash; Reflection &amp; goal formation
-<span class="l">Meta</span>         &mdash; Governance &amp; tool routing
-<span class="l">Autonomous</span>   &mdash; Execution &amp; interaction</pre>
+        <h2>A deterministic cascade, each layer with explicit permission and restraint.</h2>
+        <p>Omega is organised as a pressure-driven cascade. Every ignited episode flows through a fixed sequence of layers. Each layer has defined capabilities and explicit prohibitions. The architecture is a safety argument before it is a technical one.</p>
+        <pre class="wp-arch"><span class="l">Pressure</span>     &mdash; Attention &amp; episode ignition
+<span class="l">Global A</span>     &mdash; Intent routing (deterministic)
+<span class="l">Meta A</span>       &mdash; Execution planning (deterministic)
+<span class="l">AUTO</span>         &mdash; Model execution &amp; tool dispatch
+<span class="l">Meta B</span>       &mdash; Outcome reflection (deterministic)
+<span class="l">Global B</span>     &mdash; Outcome assembly (deterministic)
+<span class="l">Omega</span>        &mdash; Windowed metacognitive reflection
+<span class="l">DeepSleep</span>    &mdash; Consolidation, closure &amp; reseed</pre>
 
-        <h3>Omega &mdash; Evolutionary governance</h3>
-        <p><strong>May:</strong> evaluate long-horizon trends, propose structural change, roll back prior changes, decline to act. <strong>May not:</strong> directly modify behaviour at runtime, override the safety posture of lower layers, or self-modify without long-horizon evidence.</p>
+        <h3>Pressure &mdash; Attention &amp; ignition</h3>
+        <p><strong>May:</strong> gather contributors (operator input, curiosity, learning debt, idle probes), evaluate neuromodulated pressure, and ignite episodes when threshold is met. <strong>May not:</strong> bypass the cascade, initiate actions directly, or override Guardian gating.</p>
 
-        <h3>Deep Sleep &mdash; Offline learning</h3>
-        <p><strong>May:</strong> consolidate memory, distil reasoning into reusable capability, validate candidate tools in isolation. <strong>May not:</strong> execute tools against the live world, alter user-facing behaviour mid-session, or expose unvalidated capability to the active layers.</p>
+        <h3>Global A &amp; B &mdash; Intent &amp; outcome</h3>
+        <p><strong>Global A may:</strong> route ignition reason to one of eight allowed intents, extract targets, and assemble action goals. <strong>Global B may:</strong> assemble episode outcomes, map disposition, generate followups. <strong>Neither may:</strong> invoke tools directly, bypass governance, or originate goals without pressure ignition.</p>
 
-        <h3>Global &mdash; Reflection &amp; goals</h3>
-        <p><strong>May:</strong> reflect across episodes, form and revise goals, surface tensions and unresolved gaps. <strong>May not:</strong> directly invoke tools, bypass governance, or treat its own conclusions as ground truth.</p>
+        <h3>Meta A &amp; B &mdash; Planning &amp; reflection</h3>
+        <p><strong>Meta A may:</strong> plan execution, select tools, determine memory scope, and route to AUTO. <strong>Meta B may:</strong> check consistency, map AUTO disposition, assemble reflection packs. <strong>Neither may:</strong> run model inference, mutate memory directly, or grant new capabilities.</p>
 
-        <h3>Meta &mdash; Governance &amp; routing</h3>
-        <p><strong>May:</strong> route requests to tools, enforce policy, stage or escalate actions, halt execution. <strong>May not:</strong> originate goals, mutate memory directly, or grant itself new capabilities.</p>
+        <h3>AUTO &mdash; Execution &amp; interaction</h3>
+        <p><strong>May:</strong> execute model inference, recall memory, dispatch tools, generate images and documents, hold conversations. <strong>May not:</strong> self-modify, bypass governance, or write memory without Guardian approval.</p>
 
-        <h3>Autonomous &mdash; Execution &amp; interaction</h3>
-        <p><strong>May:</strong> execute approved actions, hold conversations, observe the world, record outcomes. <strong>May not:</strong> self-modify, bypass governance, or act outside its current capability surface.</p>
+        <h3>Omega &mdash; Metacognitive reflection</h3>
+        <p><strong>May:</strong> analyse 10-episode windows, evaluate trajectory, identify contradictions, and stage pressure feedback. <strong>May not:</strong> directly modify behaviour at runtime, override lower-layer safety, or self-modify without long-horizon evidence.</p>
+
+        <h3>DeepSleep &mdash; Consolidation &amp; closure</h3>
+        <p><strong>May:</strong> consolidate memory, update mastery, promote durable products into the cortex, reseed pressure contributors. <strong>May not:</strong> execute tools against the live world, alter user-facing behaviour mid-session, or expose unvalidated capability to active layers.</p>
 
         <div class="wp-callout">
           <div class="wp-callout-title">Architectural Property</div>
-          <p style="margin:0">Capability flows <em>upward</em> only through validation. Governance flows <em>downward</em> only through policy. No layer can promote itself.</p>
+          <p style="margin:0">Model-running layers (AUTO, Omega) are separated by deterministic layers (Global A/B, Meta A/B, DeepSleep). Every memory write is gated by the Guardian. No layer can promote itself.</p>
         </div>
       </section>
 
@@ -327,15 +333,15 @@
       <!-- 10. Cost -->
       <section class="wp-section" id="cost">
         <div class="wp-section-num">10 &middot; Cost &amp; Practicality</div>
-        <h2>Local. Inference-agnostic. Portable. Cheap.</h2>
+        <h2>Local. Inference-agnostic. Portable. Commodity.</h2>
         <p>Omega's substrate runs locally on commodity hardware. It does not depend on a particular model vendor, a particular cloud, or a particular generation of accelerator. Inference is a replaceable component called by the substrate, not the substrate itself.</p>
         <ul>
           <li><strong>Local.</strong> The full system runs on the user's hardware. No cloud is required for operation.</li>
           <li><strong>Inference-agnostic.</strong> The model behind the inference call can be swapped without redesigning the substrate.</li>
           <li><strong>Portable.</strong> The substrate ships on a portable drive and resumes coherent cognition across machines.</li>
-          <li><strong>Commodity hardware.</strong> A modern consumer PC is sufficient. No cluster, no specialised accelerator.</li>
-          <li><strong>~&pound;400 / ~$500 unit cost.</strong> Total hardware footprint is in the hundreds of dollars, not the millions.</li>
-          <li><strong>Months, not years.</strong> The first live system was developed and validated on a months-scale timeline.</li>
+          <li><strong>Commodity hardware.</strong> Windows 10/11 or Linux, 16GB+ RAM, modern CPU. Optional GPU/NPU acceleration.</li>
+          <li><strong>Biological signals.</strong> Dopamine, serotonin, plasticity, and stress modulate encoding strength and decay — no other system does this.</li>
+          <li><strong>Active development.</strong> The v2 rebuild is shipped and operational. Slice 1 (Pressure &rarr; Global A) and Slice 2 (Meta A) are live.</li>
         </ul>
       </section>
 
@@ -364,9 +370,9 @@
 
       <!-- CTA -->
       <div class="wp-cta">
-        <h3>Want to see Omega run?</h3>
-        <p>Private testing is underway. Pre-orders open soon.</p>
-        <a class="btn btn-primary btn-lg" href="mailto:omega2.5portable@gmail.com?subject=Omega%203.0%20%E2%80%94%20White%20paper%20follow-up">Register Interest</a>
+        <h3>Want to run Omega?</h3>
+        <p>Active development. Patent pending. Direct from the builder.</p>
+        <a class="btn btn-primary btn-lg" href="mailto:omega2.5portable@gmail.com?subject=Omega%203.0%20%E2%80%94%20White%20paper%20follow-up">Get in touch</a>
       </div>
 
     </article>

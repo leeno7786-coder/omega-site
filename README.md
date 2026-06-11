@@ -1,45 +1,66 @@
 # omega-site
 
-Omega 3.0 — Sovereign Intelligence. Portable cognitive substrate. Fully local, self-evolving cognitive agent.
+Omega 3.0 — Sovereign Intelligence. Portable autonomous cognitive substrate. Patent pending.
 
 Live site: [www.omega-dev.uk](https://www.omega-dev.uk)
 
 ## Screenshots
 
-Real product captures from the Omega 3.0 HUD and CLI.
+Real product captures from the Omega 3.0 HUD, panels, and browser agent.
 
-### Two faces, one Omega
-Voice-ready by default, build mode on demand — talk to it, or take terminal control.
+### Chat
+The main interface — Omega greets you, remembers you, and works without the cloud.
 
-![Voice and build mode](docs/screenshots/voice-and-build.png)
-![Build mode terminal takeover](docs/screenshots/voice-and-build-terminal.png)
+![Chat welcome](docs/screenshots/hud-chat-welcome.png)
 
-### The brain
-Cycle traversal in real time — every layer, every decision, traceable.
+### Help
+Every panel, voice command, and tip explained without leaving the flow.
+
+![Help menu](docs/screenshots/hud-help.png)
+
+### Brain
+Real-time cognition state, load, coherence, contradiction tracking, and system pressure at a glance.
 
 ![Brain panel](docs/screenshots/brain-panel.png)
 
-### The memory
-Recall that’s audited end-to-end — from query to top-k to persistence anchors.
+### Memory
+Live cube activity, recall fit, write velocity, persistence anchors, and an interactive node graph.
 
 ![Memory panel](docs/screenshots/memory-panel.png)
+![Memory graph](docs/screenshots/memory-graph.png)
+![Memory graph detail](docs/screenshots/memory-graph-creator.png)
 
-### The guardian
-Protected by default. Every action staged, approved, or escalated — every intervention logged with its severity.
+### Identity
+Self vector, drift velocity, presence field with operator recognition, and closed-world ledger.
 
-![Guardian governance posture](docs/screenshots/guardian-posture.png)
-![Guardian recent interventions](docs/screenshots/guardian-interventions.png)
+![Identity panel](docs/screenshots/identity-panel.png)
 
-### The omega
-Self-aware, self-correcting. From current objective to identity timeline — every trait drift, contradiction, and emergent capability is tracked, named, and owned.
+### Omega
+Epoch constellation, identity coherence, coherence trajectory, contradiction field, and reflection.
 
-![Omega current objective](docs/screenshots/omega-objective.png)
-![Omega tensions and gaps](docs/screenshots/omega-tensions.png)
-![Omega identity timeline](docs/screenshots/omega-identity.png)
+![Omega panel](docs/screenshots/omega-panel.png)
 
-### The autoloop
-Always thinking, never idle. Pressure-driven cadence, open curiosity, staged proposals — and the discipline to falsify, reject, or persist its own ideas.
+### Autoloop
+Respiratory field, autonomic pressure, and neuromodulator status for self-directed cognition.
 
-![Autoloop system pressure](docs/screenshots/autoloop-pressure.png)
-![Autoloop curiosity and proposals](docs/screenshots/autoloop-proposals.png)
-![Autoloop abandoned paths](docs/screenshots/autoloop-abandoned.png)
+![Autoloop panel](docs/screenshots/autoloop-panel.png)
+
+### DeepSleep
+Consolidation flow, progress, and sleep metrics — memory optimization while you rest.
+
+![DeepSleep panel](docs/screenshots/deepsleep-panel.png)
+
+### Settings
+Operator profile, themes, voice, terminal, and memory graph configuration.
+
+![Settings panel](docs/screenshots/settings-panel.png)
+
+### Dev terminal
+Build mode takeover with live stream, agent status, and direct terminal access.
+
+![Dev terminal](docs/screenshots/terminal-dev-panel.png)
+
+### Browser agent
+Dedicated browsing workspace with sidepanel commands, navigation, and content extraction.
+
+![Browser agent](docs/screenshots/browser-agent.png)
