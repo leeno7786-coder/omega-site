@@ -386,12 +386,21 @@
 
         <p>The full loop is complete: <em>diagnose failure → reflect on window → invent mechanism → generate topic → search web → acquire knowledge → persist to memory</em>. From a cold start. No operator input. No seeded data. The system bootstrapped its own trajectory.</p>
 
+        <h3>Closing the loop: reflect, commit, measure, reflect.</h3>
+        <p>The Omega loop does not merely narrate. It validates. In a verified architecture test (Slice 3a), the system wrote a trajectory target, executed episodes, and then — in the next windowed reflection — read the per-episode mastery deltas back to confirm or falsify its own prior hypothesis.</p>
+        <div class="wp-arch">Measured deltas from the window:
+<span class="l">knowledge_delta</span>   0.1  (climbing — acquisition is working)
+<span class="l">application_delta</span>   0.0  (flat — execution is stalled)</div>
+        <p>Omega's own reflection on these numbers:</p>
+        <div class="wp-pull" style="margin:14px 0 22px">"The system has successfully navigated the acquisition phase but has failed to transition to the application phase, confirming the initial rationale that the mastery gap lies in execution, not data acquisition."</div>
+        <p>The system <strong>read its own deltas</strong>, <strong>reasoned about the trend</strong>, and <strong>confirmed its own prior hypothesis</strong> with newly measured data. This is the reflect → commit → measure → reflect loop closing on real numbers — not a summary of what happened, but a validation of what was predicted.</p>
+
         <div class="wp-callout">
           <div class="wp-callout-title">Architectural Property</div>
           <p style="margin:0">Omega does not modify its code. It modifies its <em>pressure field</em>. The cascade remains deterministic; the inputs to the cascade are what change. The system's own reflection becomes a new source of pressure, and that pressure drives new behaviour. This is bounded self-modification — safe by design.</p>
         </div>
 
-        <p class="wp-pull">The system started with nothing. No memory. No topics. No trajectory. It diagnosed its own ignorance, invented a way to cure it, searched the web, and wrote what it found into memory. Not by being told to. By reflecting on its own window.</p>
+        <p class="wp-pull">The system started with nothing. No memory. No topics. No trajectory. It diagnosed its own ignorance, invented a way to cure it, searched the web, wrote what it found into memory, and then measured whether it was working. Not by being told to. By reflecting on its own window.</p>
       </section>
 
       <!-- 10. Cost -->
