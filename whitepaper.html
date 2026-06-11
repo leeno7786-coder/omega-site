@@ -374,6 +374,16 @@
           <li><strong>Dispatch a tool call</strong> via the AUTO layer. Telemetry records: <code>tool=web_fetch</code>, <code>domain=knowledge-acquisition-learning</code>, query <code>'Knowledge Acquisition / Learning'</code>. The search returned zero direct results but identified two credible sources.</li>
           <li><strong>Ingest the results</strong> into the memory cortex as structured knowledge, gated by the Guardian. Multiple memory encodings were promoted with full persistence anchor chains: <code>embed → embed_persist → persistence_anchor → reflection_eligibility → deepsleep_candidacy</code>.</li>
         </ul>
+
+        <h3>The disposition shift: before and after reflection.</h3>
+        <p>Here is the critical evidence that the bootstrap succeeded. Before the Omega reflection, every episode ended with the same disposition:</p>
+        <div class="wp-arch"><span class="l">Before</span>  meta/meta_reflection_pack DATA idle | disposition=idle
+          reason=NO_TOPIC_AVAILABLE — no resolvable learning target; aborting LEARN
+
+<span class="l">After</span>   meta/meta_reflection_pack DATA success | disposition=completed
+          reason=Acquire knowledge on topic: Knowledge Acquisition / Learning</div>
+        <p>The system went from <em>"I want to learn but have nothing to learn from"</em> to <em>"I am acquiring knowledge on Knowledge Acquisition / Learning"</em> — in a single reflection window. No operator intervened. No training data was fed. The cascade itself, driven by the system's own reflection, changed its own outcome.</p>
+
         <p>The full loop is complete: <em>diagnose failure → reflect on window → invent mechanism → generate topic → search web → acquire knowledge → persist to memory</em>. From a cold start. No operator input. No seeded data. The system bootstrapped its own trajectory.</p>
 
         <div class="wp-callout">
