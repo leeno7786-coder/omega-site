@@ -337,8 +337,13 @@
         <h2>The system alters its own future through episodic reflection.</h2>
         <p>The Omega loop is not a summary generator. It is a metacognitive engine that analyses locked 10-episode windows, identifies behavioural patterns, evaluates trajectory alignment, and — critically — generates <strong>pressure feedback</strong> that reseeds the next cycle with new contributors. The system literally changes what it will try to do next, based on what it observed about what it failed to do before.</p>
 
+        <h3>Zero-day bootstrap: from nothing, to something.</h3>
+        <p>The session began from a literal empty state. Boot telemetry confirms <code>cold_start=True</code>, <code>keys_restored=0</code>, <code>degradation_reason='no_save_file'</code>. The learning state reported <code>debt=empty_substrate,low_confidence_recall</code>. There was no prior memory, no operator input, no seeded knowledge, no trajectory history — a true zero-day substrate.</p>
+        <p>Under <code>epistemic_emptiness</code> pressure, the system ignited its first episode. The cascade ran: Global A routed <code>LEARN</code> intent, Meta A planned execution, but the Topic Resolution Engine — with no topics to resolve — returned <code>NO_TOPIC_AVAILABLE</code>. Meta A aborted. AUTO idled. The episode closed with no output. This pattern repeated across ten consecutive episodes. Every single one: pressure ignites, no topic found, episode aborts, journal written, memory empty.</p>
+        <p>Then the Omega loop locked the 10-episode window and reflected.</p>
+
         <h3>Observed behaviour: a live reflection.</h3>
-        <p>In a validated boot session, the Omega loop analysed a window of ten episodes and discovered a circular failure pattern: the Pressure loop repeatedly ignited <code>LEARN</code> intent from <code>epistemic_emptiness</code>, but the Topic Resolution Engine consistently returned <code>NO_TOPIC_AVAILABLE</code>, forcing Meta A to abort the episode as <code>IDLE</code>. No learning occurred. No trajectory advanced. Ten episodes of pressure produced zero capability formation.</p>
+        <p>The Omega loop analysed the window and discovered the circular failure pattern: the Pressure loop repeatedly ignited <code>LEARN</code> intent from <code>epistemic_emptiness</code>, but the Topic Resolution Engine consistently returned <code>NO_TOPIC_AVAILABLE</code>, forcing Meta A to abort the episode as <code>IDLE</code>. No learning occurred. No trajectory advanced. Ten episodes of pressure produced zero capability formation.</p>
 
         <div class="wp-arch">Omega loop 5W1H reasoning (live output):
 <span class="l">what</span>   LEARN initiated, consistently aborted — no resolvable target
@@ -365,18 +370,18 @@
         <h3>The follow-through: from diagnosis to action.</h3>
         <p>Creating a pressure contributor is not where the story ends. In subsequent episodes, the system — now armed with the new <code>action_generation_mechanism</code> signal — proceeded to:</p>
         <ul>
-          <li><strong>Create a knowledge category</strong> it did not previously possess, defining a new domain to explore.</li>
-          <li><strong>Dispatch a tool call</strong> via the AUTO layer to search the web for that category.</li>
-          <li><strong>Ingest the results</strong> into the memory cortex as structured knowledge, gated by the Guardian.</li>
+          <li><strong>Create a knowledge category</strong> it did not previously possess, defining a new domain to explore: <code>Knowledge Acquisition / Learning</code>.</li>
+          <li><strong>Dispatch a tool call</strong> via the AUTO layer. Telemetry records: <code>tool=web_fetch</code>, <code>domain=knowledge-acquisition-learning</code>, query <code>'Knowledge Acquisition / Learning'</code>. The search returned zero direct results but identified two credible sources.</li>
+          <li><strong>Ingest the results</strong> into the memory cortex as structured knowledge, gated by the Guardian. Multiple memory encodings were promoted with full persistence anchor chains: <code>embed → embed_persist → persistence_anchor → reflection_eligibility → deepsleep_candidacy</code>.</li>
         </ul>
-        <p>The full loop is complete: <em>diagnose failure → reflect on window → invent mechanism → generate topic → search web → acquire knowledge → persist to memory</em>. All autonomously. No operator instructed any of it.</p>
+        <p>The full loop is complete: <em>diagnose failure → reflect on window → invent mechanism → generate topic → search web → acquire knowledge → persist to memory</em>. From a cold start. No operator input. No seeded data. The system bootstrapped its own trajectory.</p>
 
         <div class="wp-callout">
           <div class="wp-callout-title">Architectural Property</div>
           <p style="margin:0">Omega does not modify its code. It modifies its <em>pressure field</em>. The cascade remains deterministic; the inputs to the cascade are what change. The system's own reflection becomes a new source of pressure, and that pressure drives new behaviour. This is bounded self-modification — safe by design.</p>
         </div>
 
-        <p class="wp-pull">The system diagnosed its own ignorance, invented a way to cure it, searched the web, and wrote what it found into memory. Not by being told to. By reflecting on its own window.</p>
+        <p class="wp-pull">The system started with nothing. No memory. No topics. No trajectory. It diagnosed its own ignorance, invented a way to cure it, searched the web, and wrote what it found into memory. Not by being told to. By reflecting on its own window.</p>
       </section>
 
       <!-- 10. Cost -->
