@@ -50,6 +50,8 @@ const pageHtml = `<!doctype html>
 fs.writeFileSync(path.join(distDir, 'index.html'), pageHtml);
 fs.writeFileSync(path.join(openaiDir, 'hosting.json'), fs.readFileSync(path.join(root, '.openai', 'hosting.json'), 'utf8'));
 
+const robots = 'User-agent: *' + String.fromCharCode(10) + 'Disallow: /';
+
 const serverSource = `export default {
   async fetch(request) {
     const page = ${JSON.stringify(pageHtml)};
@@ -57,7 +59,7 @@ const serverSource = `export default {
 
     const url = new URL(request.url);
     if (url.pathname === '/robots.txt') {
-      return new Response('User-agent: *\nDisallow: /', { status: 200, headers: { 'content-type': 'text/plain; charset=utf-8' } });
+      return new Response(${JSON.stringify(robots)}, { status: 200, headers: { 'content-type': 'text/plain; charset=utf-8' } });
     }
 
     return new Response(page, { status: 200, headers });
