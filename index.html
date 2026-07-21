@@ -1,16 +1,677 @@
-<!doctype html>
-<html lang="en" class="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Omega AI LLC — Autonomous Cognitive Architecture</title>
-    <meta name="description" content="Omega AI LLC builds autonomous AI systems. Omega 3.0 is a metacognitive runtime with episodic memory, deterministic cognition loops, and evidence-grounded motor learning." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <script type="module" crossorigin src="/assets/index-B5hCitaM.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-B5VKazTo.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Omega AI LLC — Autonomous Cognitive Architecture</title>
+  <meta name="description" content="Omega AI LLC builds autonomous AI systems. Omega 3.0 is a metacognitive runtime with episodic memory, deterministic cognition loops, and evidence-grounded motor learning." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0A0A0B;
+      --bg-card: #111827;
+      --bg-card-hover: #1A1A1E;
+      --text: #f5f5f7;
+      --text-muted: #8b9bb4;
+      --text-dim: #6b7280;
+      --accent: #4A9EFF;
+      --accent-glow: rgba(74,158,255,0.25);
+      --teal: #00E5C7;
+      --teal-dim: rgba(0,229,199,0.1);
+      --border: rgba(255,255,255,0.06);
+      --border-accent: rgba(74,158,255,0.2);
+      --font-mono: 'Geist Mono', monospace;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; color-scheme: dark; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 64px;
+      background: rgba(10,10,11,0.85); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--font-mono); font-size: 0.9rem; font-weight: 700;
+      color: var(--text); text-decoration: none; letter-spacing: 0.05em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.85rem; color: var(--text-muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-hamburger { display: none; background: none; border: none; color: var(--text); cursor: pointer; font-size: 1.5rem; }
+    .nav-mobile {
+      display: none; position: fixed; top: 64px; left: 0; right: 0;
+      background: rgba(10,10,11,0.95); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border); padding: 1rem 2rem;
+    }
+    .nav-mobile.open { display: block; }
+    .nav-mobile a { display: block; padding: 0.75rem 0; color: var(--text-muted); text-decoration: none; font-size: 0.95rem; border-bottom: 1px solid var(--border); }
+    .nav-mobile a:last-child { border-bottom: none; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: block; }
+    }
+
+    /* ── CONTAINER ── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ── SECTION ── */
+    section { padding: 6rem 0; }
+    .section-label {
+      font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500;
+      color: var(--accent); text-transform: uppercase; letter-spacing: 0.15em;
+      margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .section-label::before {
+      content: ''; display: inline-block; width: 8px; height: 8px;
+      background: var(--accent); border-radius: 2px;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem); font-weight: 700;
+      line-height: 1.15; margin-bottom: 1rem;
+    }
+    .section-subtitle {
+      font-size: 1.1rem; color: var(--text-muted); max-width: 640px;
+      line-height: 1.7; margin-bottom: 3rem;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding-top: 64px; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: 20%; left: 50%;
+      width: 600px; height: 600px; transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(74,158,255,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-eyebrow {
+      font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent);
+      letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700;
+      line-height: 1.05; margin-bottom: 1.5rem;
+    }
+    .hero h1 .highlight { color: var(--accent); }
+    .hero-sub {
+      font-size: 1.25rem; color: var(--text-muted); max-width: 560px;
+      line-height: 1.7; margin-bottom: 2.5rem;
+    }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.8rem 1.8rem; border-radius: 8px;
+      background: var(--accent); color: #fff; font-weight: 600;
+      font-size: 0.95rem; text-decoration: none;
+      box-shadow: 0 0 20px var(--accent-glow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 30px var(--accent-glow); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.8rem 1.8rem; border-radius: 8px;
+      background: transparent; color: var(--text); font-weight: 500;
+      font-size: 0.95rem; text-decoration: none;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--text-muted); color: var(--text); }
+
+    /* ── CARDS ── */
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 2rem; transition: border-color 0.3s, transform 0.3s;
+    }
+    .card:hover { border-color: var(--border-accent); transform: translateY(-2px); }
+    .card-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+    .card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* ── SIGNAL FLOW ── */
+    .signal-flow {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .flow-node {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.5rem; text-align: center;
+      position: relative;
+    }
+    .flow-node .node-label {
+      font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem;
+    }
+    .flow-node h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .flow-node p { font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; }
+
+    /* ── SAFETY GRID ── */
+    .safety-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .safety-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 2rem; position: relative; overflow: hidden;
+    }
+    .safety-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 2px; background: linear-gradient(90deg, var(--accent), var(--teal));
+    }
+    .safety-card .badge {
+      display: inline-block; font-family: var(--font-mono); font-size: 0.65rem;
+      color: var(--teal); background: var(--teal-dim); padding: 0.25rem 0.6rem;
+      border-radius: 4px; text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+    .safety-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .safety-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* ── PERFORMANCE STATS ── */
+    .perf-stats { display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 2rem; }
+    .perf-stat {
+      flex: 1; min-width: 180px; text-align: center;
+      padding: 2rem 1rem; background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: 12px;
+    }
+    .perf-stat .value {
+      font-family: var(--font-mono); font-size: 2rem; font-weight: 700;
+      color: var(--teal); margin-bottom: 0.25rem;
+    }
+    .perf-stat .label { font-size: 0.85rem; color: var(--text-dim); }
+
+    /* ── IMAGE SECTIONS ── */
+    .img-showcase {
+      border-radius: 12px; overflow: hidden; border: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+    .img-showcase img { width: 100%; height: auto; display: block; }
+
+    /* ── HIGHLIGHT BOX ── */
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(74,158,255,0.05), rgba(0,229,199,0.05));
+      border: 1px solid var(--border-accent); border-radius: 12px;
+      padding: 2.5rem; margin: 3rem 0;
+    }
+    .highlight-box h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem; }
+    .highlight-box p { color: var(--text-muted); line-height: 1.7; max-width: 700px; }
+
+    /* ── BROWSER AGENT ── */
+    .agent-panels {
+      display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 1rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 768px) { .agent-panels { grid-template-columns: 1fr; } }
+    .agent-panel {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.25rem;
+    }
+    .agent-panel h4 {
+      font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;
+    }
+    .agent-panel p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+
+    /* ── FIFTH CHANNEL ── */
+    .channel-compare {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;
+    }
+    @media (max-width: 768px) { .channel-compare { grid-template-columns: 1fr; } }
+    .channel-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 2rem;
+    }
+    .channel-card.old { border-color: rgba(255,255,255,0.04); opacity: 0.7; }
+    .channel-card.new { border-color: var(--border-accent); }
+    .channel-card .tag {
+      font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase;
+      letter-spacing: 0.1em; margin-bottom: 1rem;
+    }
+    .channel-card.old .tag { color: var(--text-dim); }
+    .channel-card.new .tag { color: var(--teal); }
+    .channel-card h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.75rem; }
+    .channel-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* ── ENTERPRISE ── */
+    .enterprise-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border); padding: 3rem 0;
+      text-align: center; color: var(--text-dim); font-size: 0.85rem;
+    }
+    footer a { color: var(--text-muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .fade-in {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── MEMORY GRAPH PLACEHOLDER ── */
+    .graph-placeholder {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 3rem; text-align: center;
+      margin: 2rem 0;
+    }
+    .graph-placeholder .icon { font-size: 3rem; margin-bottom: 1rem; }
+    .graph-placeholder p { color: var(--text-dim); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ NAV ═══ -->
+  <nav>
+    <a href="#" class="nav-logo"><span>Ω</span> OMEGA AI</a>
+    <ul class="nav-links">
+      <li><a href="#technology">Technology</a></li>
+      <li><a href="#capabilities">Capabilities</a></li>
+      <li><a href="#safety">Safety</a></li>
+      <li><a href="#performance">Performance</a></li>
+      <li><a href="#vision">Vision</a></li>
+      <li><a href="#agents">Agents</a></li>
+      <li><a href="#platform">Platform</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="document.querySelector('.nav-mobile').classList.toggle('open')" aria-label="Menu">☰</button>
+  </nav>
+  <div class="nav-mobile">
+    <a href="#technology" onclick="this.parentElement.classList.remove('open')">Technology</a>
+    <a href="#capabilities" onclick="this.parentElement.classList.remove('open')">Capabilities</a>
+    <a href="#safety" onclick="this.parentElement.classList.remove('open')">Safety</a>
+    <a href="#performance" onclick="this.parentElement.classList.remove('open')">Performance</a>
+    <a href="#vision" onclick="this.parentElement.classList.remove('open')">Vision</a>
+    <a href="#agents" onclick="this.parentElement.classList.remove('open')">Agents</a>
+    <a href="#platform" onclick="this.parentElement.classList.remove('open')">Platform</a>
+    <a href="#contact" onclick="this.parentElement.classList.remove('open')">Contact</a>
+  </div>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="hero-eyebrow">Ω OMEGA 3.0</div>
+      <h1>Not a Chatbot.<br />A <span class="highlight">Thinking Machine.</span></h1>
+      <p class="hero-sub">The only AI that thinks about its own thinking. Metacognitive runtime with episodic memory, deterministic cognition loops, and evidence-grounded motor learning.</p>
+      <div class="hero-ctas">
+        <a href="#technology" class="btn-primary">Explore the Architecture →</a>
+        <a href="mailto:noahlee@omega2ai.com" class="btn-secondary">Contact</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TECHNOLOGY ═══ -->
+  <section id="technology">
+    <div class="container">
+      <div class="section-label">Technology</div>
+      <h2 class="section-title">8 Deterministic Layers.<br />Hard Boundaries.</h2>
+      <p class="section-subtitle">A metacognitive runtime where every thought flows through deterministic layers with hard boundaries. No layer can self-promote. No backdoors. No surprises.</p>
+
+      <div class="signal-flow fade-in">
+        <div class="flow-node">
+          <div class="node-label">Layer 01</div>
+          <h4>Episode Gate</h4>
+          <p>Gathers signal from all contributors and evaluates whether a new cognitive episode should begin.</p>
+        </div>
+        <div class="flow-node">
+          <div class="node-label">Layer 02</div>
+          <h4>Signal Aggregation</h4>
+          <p>Neuromodulation of incoming signals. Priority weighting across all input channels.</p>
+        </div>
+        <div class="flow-node">
+          <div class="node-label">Layer 03</div>
+          <h4>Intent Router</h4>
+          <p>Routes high-level intent to the appropriate cognitive pathway. Operator-directed, autonomous curiosity, or reflex.</p>
+        </div>
+        <div class="flow-node">
+          <div class="node-label">Layer 04</div>
+          <h4>Action Pack</h4>
+          <p>Deterministic action and tool selection. Pure schema-driven dispatch.</p>
+        </div>
+        <div class="flow-node">
+          <div class="node-label">Layer 05</div>
+          <h4>Model Execution</h4>
+          <p>Multi-model inference. Hot-swappable GPU-leased model slots with failure-soft design.</p>
+        </div>
+        <div class="flow-node">
+          <div class="node-label">Layer 06</div>
+          <h4>Outcome Validation</h4>
+          <p>Post-execution analysis. Examines output, validates against schemas, prepares outcome for higher loops.</p>
+        </div>
+        <div class="flow-node">
+          <div class="node-label">Layer 07</div>
+          <h4>Episode Closure</h4>
+          <p>Folds all loop outputs into a unified episode package. Closes the cognitive cycle.</p>
+        </div>
+        <div class="flow-node">
+          <div class="node-label">Layer 08</div>
+          <h4>Memory Consolidation</h4>
+          <p>Promotes important memories, runs strength decay, reseeds. Verified lane is mathematically pure.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CAPABILITIES ═══ -->
+  <section id="capabilities" style="background: rgba(255,255,255,0.015);">
+    <div class="container">
+      <div class="section-label">Capabilities</div>
+      <h2 class="section-title">All Integrated Into<br />a Thinking Mind.</h2>
+      <p class="section-subtitle">Vision, voice, generation, coordination — every capability feeds into the cognitive loop. Not plugins. Integrated cognition.</p>
+
+      <div class="card-grid fade-in">
+        <div class="card">
+          <div class="card-icon">🧠</div>
+          <h3>Memory Cortex</h3>
+          <p>Verifier-gated recall with four verdicts. Nothing unverified reaches cognition. The verified lane is mathematically pure.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">👁️</div>
+          <h3>Computer Vision</h3>
+          <p>2D/3D spatial awareness, bounding box detection, facial recognition, and robotic path planning. All local, no cloud.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎤</div>
+          <h3>Voice Pipeline</h3>
+          <p>Full voice pipeline with Kokoro TTS for speech synthesis and Whisper STT for transcription. Real-time voice interaction.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎨</div>
+          <h3>Image Generation</h3>
+          <p>Local diffusion model generating images at up to 1280×1280 resolution. Three quality tiers, all running within 8GB RAM.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🤖</div>
+          <h3>Browser Agent</h3>
+          <p>Send tasks, watch the run, and stay isolated. Automation happens in a separate tab, isolated from your normal browsing.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔗</div>
+          <h3>Agent Bus</h3>
+          <p>Multi-agent bus coordinating cloud agents. Route tasks to the right agent for the right job with automatic fallback.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SAFETY ═══ -->
+  <section id="safety">
+    <div class="container">
+      <div class="section-label">Safety by Architecture</div>
+      <h2 class="section-title">Architecture > Prompts.</h2>
+      <p class="section-subtitle">Safety isn't an afterthought — it's the architecture. Zero trust. Zero hallucination. Zero self-promotion. Zero excuses.</p>
+
+      <div class="safety-grid fade-in">
+        <div class="safety-card">
+          <div class="badge">Key Safety Property</div>
+          <h3>SourceLedger Lock</h3>
+          <p>Every memory write faces the gate. No verification? No persistence. Downstream poisoning is structurally impossible.</p>
+        </div>
+        <div class="safety-card">
+          <div class="badge">Hard Boundaries</div>
+          <h3>Layer Isolation</h3>
+          <p>Layers cannot self-promote. Cannot self-modify. Cannot bypass verification. Architectural integrity is inviolable.</p>
+        </div>
+        <div class="safety-card">
+          <div class="badge">Verified Lane</div>
+          <h3>Zero Noise Churn</h3>
+          <p>RecallVerifier with four possible verdicts. Nothing unverified ever reaches upstream cognition. Perfect candidates only.</p>
+        </div>
+        <div class="safety-card">
+          <div class="badge">Reversible Time</div>
+          <h3>Full Rollback</h3>
+          <p>Every change is a git commit. Complete state. Full rollback. Inaction isn't a bug — it's a feature.</p>
+        </div>
+        <div class="safety-card">
+          <div class="badge">No Self-Promotion</div>
+          <h3>Explicit Permissions</h3>
+          <p>Each layer has explicit permissions. Model layers separated by deterministic logic. No backdoors. No surprises.</p>
+        </div>
+        <div class="safety-card">
+          <div class="badge">Absolute Truth</div>
+          <h3>RecallVerifier</h3>
+          <p>The v2 engine hops the entire graph while performing parallel recall — delivering perfect candidates with zero noise churn.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MEMORY CORTEX ═══ -->
+  <section id="memory" style="background: rgba(255,255,255,0.015);">
+    <div class="container">
+      <div class="section-label">Memory Cortex</div>
+      <h2 class="section-title">Memory That Never Lies.<br />Or Forgets.</h2>
+      <p class="section-subtitle">The graph is a live projection of the Dewey filesystem — canonical truth for all memories. Every node is source-ledgered, verifier-gated, and recall-proofed.</p>
+
+      <div class="graph-placeholder fade-in">
+        <div class="icon">📊</div>
+        <p><strong>Dewey 3D Memory Cortex</strong><br />Interactive memory graph visualization — live force-directed graph with colored nodes and connections.</p>
+      </div>
+
+      <div class="highlight-box fade-in">
+        <h3>Cross-Session Memory</h3>
+        <p>Consulted episodic memory for Poisson's 'Recherches...' and initiated the conversation with a clarifying question instead of waiting for instructions. Operator guidance is ingested, synthesized, and committed to episodic memory through the SourceLedger with full provenance.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PERFORMANCE ═══ -->
+  <section id="performance">
+    <div class="container">
+      <div class="section-label">Performance</div>
+      <h2 class="section-title">Mathematical Impossibility<br />Is the Benchmark.</h2>
+      <p class="section-subtitle">Industry-standard memory benchmark. Local 4B only. The benchmark can't go up on a second run — unless the system actually learns. Ours did.</p>
+
+      <div class="perf-stats fade-in">
+        <div class="perf-stat">
+          <div class="value">0.2ms</div>
+          <div class="label">Aggressive Recall</div>
+        </div>
+        <div class="perf-stat">
+          <div class="value">Zero</div>
+          <div class="label">Noise Churn</div>
+        </div>
+        <div class="perf-stat">
+          <div class="value">Parallel</div>
+          <div class="label">Graph-Hop Recall</div>
+        </div>
+        <div class="perf-stat">
+          <div class="value">4/4</div>
+          <div class="label">Verdict Pass Rate</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ VISION ═══ -->
+  <section id="vision" style="background: rgba(255,255,255,0.015);">
+    <div class="container">
+      <div class="section-label">Computer Vision</div>
+      <h2 class="section-title">Sees, Reasons, Navigates.</h2>
+      <p class="section-subtitle">2D/3D spatial awareness, bounding box detection, facial recognition, and robotic path planning. All local, no cloud vision APIs.</p>
+
+      <div class="card-grid fade-in">
+        <div class="card">
+          <h3>Facial Recognition</h3>
+          <p>Visual identity through episodic memory. Face embeddings stored in the Dewey memory cortex with source-ledgered provenance.</p>
+        </div>
+        <div class="card">
+          <h3>Path Planning</h3>
+          <p>Robotic path planning with real-time obstacle detection. Spatial reasoning across 2D and 3D environments.</p>
+        </div>
+        <div class="card">
+          <h3>Image Generation</h3>
+          <p>Local diffusion model generating images at up to 1280×1280 resolution. Three quality tiers, all running within 8GB RAM.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BROWSER AGENT ═══ -->
+  <section id="browser-agent">
+    <div class="container">
+      <div class="section-label">Browser Agent</div>
+      <h2 class="section-title">Browser Agent in Action.</h2>
+      <p class="section-subtitle">Send tasks, watch the run, and stay isolated. Automation happens here, separate from your normal tabs.</p>
+
+      <div class="agent-panels fade-in">
+        <div class="agent-panel">
+          <h4>Automation Tab</h4>
+          <p>Keep this tab open while the side panel drives navigation, clicks, typing, extraction, screenshots, and page scans.</p>
+        </div>
+        <div class="agent-panel">
+          <h4>Browser Surface</h4>
+          <p>The active page where Omega reads and manipulates content. Becomes active when the agent navigates.</p>
+        </div>
+        <div class="agent-panel">
+          <h4>Side Panel Control</h4>
+          <p>Task queue, status, and manual override. Full visibility into what the agent is doing and why.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ AUTONOMOUS AGENTS ═══ -->
+  <section id="agents" style="background: rgba(255,255,255,0.015);">
+    <div class="container">
+      <div class="section-label">Autonomous Agents</div>
+      <h2 class="section-title">Your Agents, Your Choice.</h2>
+      <p class="section-subtitle">Multi-agent bus coordinating cloud agents. Route tasks to the right agent for the right job with automatic fallback.</p>
+
+      <div class="card-grid fade-in">
+        <div class="card">
+          <h3>Agent Bus</h3>
+          <p>Multi-agent bus coordinating cloud agents. Route tasks to the right agent for the right job with automatic fallback.</p>
+        </div>
+        <div class="card">
+          <h3>Cloud Agents</h3>
+          <p>OpenRouter, OpenAI, Cloudflare Workers, AWS Bedrock — configurable fallback chains with cost-aware routing.</p>
+        </div>
+        <div class="card">
+          <h3>Framework Integration</h3>
+          <p>Agentomic framework integration. Plug in your preferred agent framework and let the bus handle coordination.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FIFTH CHANNEL ═══ -->
+  <section id="fifth-channel">
+    <div class="container">
+      <div class="section-label">The Fifth Channel</div>
+      <h2 class="section-title">Not Just Smart.<br /><span style="color: var(--teal);">Self-Aware.</span></h2>
+      <p class="section-subtitle">Before this channel, Omega could ask (input) and execute code (output). But between learning and coding lay a gap — the application of knowledge through conversation itself.</p>
+
+      <div class="channel-compare fade-in">
+        <div class="channel-card old">
+          <div class="tag">Classic AUTO Channel</div>
+          <h3>Code Execution</h3>
+          <p>The classic AUTO execution channel. Jailed code, browser automation, file I/O, tool use — deterministic motor programs with evidence-grounded learning.</p>
+        </div>
+        <div class="channel-card new">
+          <div class="tag">New — Fifth Channel</div>
+          <h3>Substantive Dialogue</h3>
+          <p>Omega applies learned knowledge by initiating dialogue — presenting findings, proposing next steps, and requesting confirmation. The conversation itself is the actuator. The loop is closed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PLATFORM ═══ -->
+  <section id="platform" style="background: rgba(255,255,255,0.015);">
+    <div class="container">
+      <div class="section-label">Platform</div>
+      <h2 class="section-title">Plug It In. Boot It Up. Run.</h2>
+      <p class="section-subtitle">Hot-swappable. GPU-leased. Failure-soft. No API keys. No cloud. No compromises. Entire system + models + memory on any Windows machine.</p>
+
+      <div class="card-grid fade-in">
+        <div class="card">
+          <h3>Any Windows Machine</h3>
+          <p>Zero cloud required. Entire system runs locally. AMD 860M iGPU validated at 8GB vgmem.</p>
+        </div>
+        <div class="card">
+          <h3>GPU Lease Management</h3>
+          <p>Intelligent allocator prevents model thrash. Each model requests a lease, runs inference, and releases — no two models fight for VRAM.</p>
+        </div>
+        <div class="card">
+          <h3>Failure-Soft Design</h3>
+          <p>If a model crashes, the runtime catches it and continues with degraded capability. Cognition never halts.</p>
+        </div>
+      </div>
+
+      <div class="highlight-box fade-in" style="text-align: center; margin-top: 3rem;">
+        <p style="font-size: 1.1rem; color: var(--text-dim);">Linux support is coming soon. The same portable runtime, the same cognition loop, the same zero-cloud guarantee — on any OS you choose.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ENTERPRISE ═══ -->
+  <section id="enterprise">
+    <div class="container">
+      <div class="section-label">Services</div>
+      <h2 class="section-title">Custom Cognition Systems.</h2>
+      <p class="section-subtitle">Edge deployment. Close-to-metal builds. We partner with organizations that refuse off-the-shelf solutions.</p>
+
+      <div class="enterprise-grid fade-in">
+        <div class="card">
+          <h3>Edge Deployment</h3>
+          <p>Deploy AI where data can't leave the building. Custom runtimes for on-premise and edge hardware with full model management and GPU optimization.</p>
+        </div>
+        <div class="card">
+          <h3>Embedded Cognition</h3>
+          <p>Embed autonomous decision-making into your products. Cognition loops, memory systems, and multi-agent coordination tailored to your domain.</p>
+        </div>
+        <div class="card">
+          <h3>Custom Runtimes</h3>
+          <p>Full cognitive stack built for your specific requirements. From model selection to memory architecture to deployment topology.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer id="contact">
+    <div class="container">
+      <p style="margin-bottom: 0.5rem;">Ω OMEGA AI LLC</p>
+      <p style="margin-bottom: 1rem;">
+        <a href="mailto:noahlee@omega2ai.com">noahlee@omega2ai.com</a>
+      </p>
+      <p>© 2026 Omega AI LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ═══ SCROLL ANIMATION ═══ -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Close mobile nav on resize
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) document.querySelector('.nav-mobile')?.classList.remove('open');
+    });
+  </script>
+
+</body>
 </html>
