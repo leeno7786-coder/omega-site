@@ -77,10 +77,14 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="mt-8 pt-6" style={{ borderTop: '1px solid #1A1A2E' }}>
-            <p className="text-[11px] text-[#5A6A8A] leading-relaxed max-w-[640px]">
+          <div className="mt-8 pt-6 flex flex-col items-center gap-4" style={{ borderTop: '1px solid #1A1A2E' }}>
+            <p className="text-[11px] text-[#5A6A8A] leading-relaxed max-w-[640px] text-center">
               Pricing varies depending on project scope, complexity, timeline, and hardware requirements. All engagements begin with a free consultation. The Omega 3.0 runtime and related cognitive architectures are patent pending. Results and benchmarks reflect validated performance on specified hardware configurations — your results may vary based on your specific environment.
             </p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <iframe src="https://github.com/sponsors/leeno7786-coder/button" title="Sponsor leeno7786-coder" height="32" width="114" style={{ border: 0, borderRadius: 6 }} />
+              <iframe src="https://github.com/sponsors/leeno7786-coder/card" title="Sponsor leeno7786-coder" height="225" width="600" style={{ border: 0 }} />
+            </div>
           </div>
         </div>
       </footer>
