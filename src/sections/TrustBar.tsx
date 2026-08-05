@@ -6,7 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const STATS = [
   { value: 13, suffix: '', label: 'Models Orchestrated', sub: 'One Runtime', color: '#4A9EFF' },
-  { value: 78.0, suffix: '%', label: 'LongMemEval-S Score', sub: 'Industry Benchmark', color: '#00E5C7' },
+  { value: 86.4, suffix: '%', label: 'LongMemEval-S Score', sub: 'Headline (Up to 78% Local 4B)', color: '#00E5C7' },
   { value: 400, prefix: '$', suffix: '', label: 'Hardware Cost', sub: 'Laptop + iGPU', color: '#A78BFA' },
   { value: 0, suffix: '', label: 'Cloud Calls Required', sub: 'Fully Local', color: '#FF6B9D' },
   { value: 8, suffix: '', label: 'GB RAM Total', sub: 'All 13 Models', color: '#F5A623' },

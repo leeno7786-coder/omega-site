@@ -1,0 +1,44 @@
+{
+  "benchmark": "LongMemEval-S (500 questions)",
+  "judge": "openai/gpt-4o-2024-08-06 via official evaluate_qa.py (pinned, unmodified scoring logic)",
+  "current_site_number": {
+    "value": "69.2%",
+    "status": "SUPERSEDED — this is the R2 run from 2026-07-07",
+    "cases": "346/500"
+  },
+  "headline": {
+    "official_best": {
+      "value": "86.4%",
+      "cases": "432/500",
+      "answer_model": "mistral-large",
+      "date": "2026-07-31",
+      "note": "Frozen board-500-v2 evidence; retrieval identical to the 4B arm, isolating the answer model."
+    },
+    "local_4b": {
+      "value_single_judged_replay": "78.0%",
+      "cases_single_judged_replay": "390/500",
+      "value_mean_of_3_trials": "76.7%",
+      "cases_mean_of_3_trials": "383.3/500",
+      "answer_model": "gemma-4-E4B (4B-class, Q4_K_XL quant, f16 KV, local, 8 GB RAM budget)",
+      "display_guidance": "If one number is shown, prefer 76.7% (3-trial mean) or phrase as 'up to 78%'. 78.0% alone overstates run-to-run stability."
+    }
+  },
+  "progression_local_4b": [
+    { "label": "R1", "date": "2026-07-05", "value": "51.8%", "cases": "259/500" },
+    { "label": "R2", "date": "2026-07-07", "value": "69.2%", "cases": "346/500" },
+    { "label": "current", "date": "2026-07-31", "value": "78.0%", "cases": "390/500" }
+  ],
+  "key_claim": "Same frozen retrieval evidence under both answer models: the local 4B gives up only ~8.4pp to mistral-large (78.0% vs 86.4%). The memory system carries the score; the answer model is close to swappable.",
+  "provenance": {
+    "canonical_doc": "omega_memory_mcp/docs/STATE_OF_PLAY.md (copied into this folder as SOURCE_STATE_OF_PLAY.md)",
+    "judged_files_on_this_machine": [
+      "omega_memory_mcp/.artifacts/replays/board-gemma-f16kv.jsonl.eval-results-gpt-4o (the 78.0% replay)",
+      "board-500-v2 archive per STATE_OF_PLAY.md (mistral-large 86.4%)"
+    ],
+    "reproduce": "python .artifacts/instruments/progression_table.py --oracle D:/LongMemEval/longmemeval_oracle.json <judged files> (see SOURCE_STATE_OF_PLAY.md)"
+  },
+  "numbers_not_for_the_website": {
+    "mistral_w64_82.6%": "negative experiment arm (windowed evidence), judged 2026-08-05, did not beat its 85.0% matched control; listed here only so nobody mistakes it for a headline",
+    "20/20_blind_ten": "n=20 gate result, explicitly NOT an official score per project rules (official = full 500 only)"
+  }
+}

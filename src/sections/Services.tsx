@@ -51,17 +51,13 @@ export default function Services() {
           ))}
         </div>
 
-        <div className="mt-12 glass-panel p-6 border-l-2 border-[#F5A623]">
-          <div className="flex items-start gap-4">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="mt-0.5 flex-shrink-0">
-              <circle cx="10" cy="10" r="9" stroke="#F5A623" strokeWidth="1.5" />
-              <path d="M10 6V10M10 13V14" stroke="#F5A623" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-            <div>
-              <p className="text-sm text-[#E5E5E7] font-medium">Pricing varies depending on project scope</p>
-              <p className="text-sm text-[#8A8A8E] mt-1 leading-relaxed">Every engagement is unique. We do not publish fixed price lists because each project involves different hardware requirements, integration complexity, timeline constraints, and ongoing support needs. All engagements begin with a free consultation — we will provide a detailed proposal tailored to your specific situation.</p>
-            </div>
+        <div className="mt-12 glass-panel p-5 border-l-2 border-[#4A9EFF] flex items-center justify-between flex-wrap gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-2 h-2 rounded-full bg-[#4A9EFF]" />
+            <span className="text-sm text-[#E5E5E7]">Tailored Engineering Engagements</span>
+            <span className="text-xs text-[#8A8A8E] hidden sm:inline">— Custom proposals based on hardware, scope, and SLA requirements.</span>
           </div>
+          <a href="#contact" onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }} className="font-mono text-xs text-[#4A9EFF] hover:underline">Request Proposal &rarr;</a>
         </div>
       </div>
     </section>

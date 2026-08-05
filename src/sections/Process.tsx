@@ -46,16 +46,13 @@ export default function Process() {
           ))}
         </div>
 
-        <div className="mt-12 glass-panel p-6 border-l-2 border-[#F5A623]">
-          <div className="flex items-start gap-4">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="mt-0.5 flex-shrink-0">
-              <circle cx="10" cy="10" r="9" stroke="#F5A623" strokeWidth="1.5" />
-              <path d="M10 6V10M10 13V14" stroke="#F5A623" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-            <p className="text-sm text-[#8A8A8E] leading-relaxed">
-              <span className="text-[#E5E5E7] font-medium">Pricing varies depending on project scope, complexity, timeline, and hardware requirements.</span> All engagements begin with a free consultation — no obligation, no pressure.
-            </p>
+        <div className="mt-12 glass-panel p-5 border-l-2 border-[#00E5C7] flex items-center justify-between flex-wrap gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-2 h-2 rounded-full bg-[#00E5C7]" />
+            <span className="text-sm text-[#E5E5E7]">Ready to begin phase one?</span>
+            <span className="text-xs text-[#8A8A8E] hidden sm:inline">All discovery evaluations begin with a free, no-obligation technical assessment.</span>
           </div>
+          <a href="#contact" onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }} className="font-mono text-xs text-[#00E5C7] hover:underline">Schedule Discovery &rarr;</a>
         </div>
       </div>
     </section>

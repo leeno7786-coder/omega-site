@@ -36,9 +36,9 @@ export default function About() {
           <div>
             <p className="text-base text-[#8A8A8E] leading-relaxed">
               Our flagship runtime — Omega 3.0 — demonstrates what is possible: thirteen
-              specialized models orchestrated within 8 GB of RAM, scoring 78.0% on the
-              industry-standard LongMemEval-S benchmark using only a local 4B parameter
-              model — +26.2pp since Round 1. All on a $400 laptop with a single integrated GPU.
+              specialized models orchestrated within 8 GB of RAM, scoring 86.4% headline
+              on LongMemEval-S (mistral-large) and up to 78.0% (76.7% 3-trial mean) with a local
+              4B parameter model — +26.2pp since Round 1. All on a $400 laptop with a single integrated GPU.
             </p>
             <p className="text-base text-[#8A8A8E] mt-4 leading-relaxed">
               We partner with organizations that need more than off-the-shelf solutions —

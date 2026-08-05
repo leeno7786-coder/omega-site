@@ -6,15 +6,15 @@ import AnimatedOrbs from '../sections/AnimatedOrbs';
 import NeuralConstellation from '../sections/NeuralConstellation';
 import Navbar from '../sections/Navbar';
 import Hero from '../sections/Hero';
-import About from '../sections/About';
 import TrustBar from '../sections/TrustBar';
+import About from '../sections/About';
+import OmegaShowcase from '../sections/OmegaShowcase';
+import Benchmarks from '../sections/Benchmarks';
 import Services from '../sections/Services';
 import Portability from '../sections/Portability';
 import Process from '../sections/Process';
-import OmegaShowcase from '../sections/OmegaShowcase';
 import FAQ from '../sections/FAQ';
 import Contact from '../sections/Contact';
-import ContactForm from '../sections/ContactForm';
 import CursorGlow from '../sections/CursorGlow';
 import Footer from '../sections/Footer';
 
@@ -44,15 +44,15 @@ export default function Home() {
       <Navbar />
       <main className="relative">
         <Hero />
-        <About />
         <TrustBar />
+        <About />
+        <OmegaShowcase />
+        <Benchmarks />
         <Services />
         <Portability />
         <Process />
-        <OmegaShowcase />
         <FAQ />
         <Contact />
-        <ContactForm />
       </main>
       <Footer />
     </>

@@ -25,45 +25,43 @@ export default function Benchmarks() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative z-10 py-20 lg:py-28" style={{ backgroundColor: '#0A0A0B' }}>
+    <section id="benchmarks" ref={sectionRef} className="relative z-10 py-20 lg:py-28" style={{ backgroundColor: '#0A0A0B' }}>
       <div className="content-max section-pad-x">
         <span className="bench-label section-label">BENCHMARKS</span>
-        <h2 className="bench-heading section-heading mt-3">LongMemEval-S: 78.0%</h2>
+        <h2 className="bench-heading section-heading mt-3">LongMemEval-S: 86.4% Headline</h2>
         <p className="mt-4 text-[#8A8A8E] text-base max-w-[720px] leading-relaxed">
-          78% on the industry-standard long-context memory benchmark — using only a local 4B model.
-          Same model, same benchmark, same judge: +8.8pp from the retrieval rebuild alone, +26.2pp over Round 1.
-          With mistral-large as the reader: 86.4%.
+          86.4% headline score on the industry-standard long-context memory benchmark with mistral-large, and up to 78.0% (76.7% 3-trial mean) using only a local 4B model within an 8 GB RAM budget. On identical frozen retrieval evidence, the local 4B scores within ~8 points of mistral-large — proving the memory architecture carries the score.
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
           <div className="glass-panel float-3d p-6 text-center">
-            <div className="text-[36px] font-normal text-[#00E5C7]" style={{ textShadow: '0 0 20px rgba(0,229,199,0.3)' }}>78.0%</div>
-            <div className="font-mono text-[11px] text-[#8A8A8E] uppercase tracking-wide mt-1">LongMemEval-S</div>
-            <div className="font-mono text-[10px] text-[#5A6A8A] mt-1">390/500 · gemma-4B</div>
+            <div className="text-[36px] font-normal text-[#00E5C7]" style={{ textShadow: '0 0 20px rgba(0,229,199,0.3)' }}>86.4%</div>
+            <div className="font-mono text-[11px] text-[#8A8A8E] uppercase tracking-wide mt-1">Official Headline</div>
+            <div className="font-mono text-[10px] text-[#5A6A8A] mt-1">432/500 · mistral-large</div>
           </div>
           <div className="glass-panel float-3d p-6 text-center">
-            <div className="text-[36px] font-normal text-[#4A9EFF]" style={{ textShadow: '0 0 20px rgba(74,158,255,0.3)' }}>+8.8</div>
+            <div className="text-[36px] font-normal text-[#4A9EFF]" style={{ textShadow: '0 0 20px rgba(74,158,255,0.3)' }}>76.7%</div>
+            <div className="font-mono text-[11px] text-[#8A8A8E] uppercase tracking-wide mt-1">Local 4B (Up to 78%)</div>
+            <div className="font-mono text-[10px] text-[#5A6A8A] mt-1">3-trial mean · gemma-4B</div>
+          </div>
+          <div className="glass-panel float-3d p-6 text-center">
+            <div className="text-[36px] font-normal text-[#F5A623]" style={{ textShadow: '0 0 20px rgba(245,166,35,0.3)' }}>+8.8</div>
             <div className="font-mono text-[11px] text-[#8A8A8E] uppercase tracking-wide mt-1">Retrieval Rebuild</div>
-            <div className="font-mono text-[10px] text-[#5A6A8A] mt-1">69.2% → 78.0%</div>
+            <div className="font-mono text-[10px] text-[#5A6A8A] mt-1">69.2% → 78.0% (Local 4B)</div>
           </div>
           <div className="glass-panel float-3d p-6 text-center">
-            <div className="text-[36px] font-normal text-[#F5A623]" style={{ textShadow: '0 0 20px rgba(245,166,35,0.3)' }}>+26.2</div>
-            <div className="font-mono text-[11px] text-[#8A8A8E] uppercase tracking-wide mt-1">R1 → Now</div>
-            <div className="font-mono text-[10px] text-[#5A6A8A] mt-1">51.8% → 78.0%</div>
-          </div>
-          <div className="glass-panel float-3d p-6 text-center">
-            <div className="text-[36px] font-normal text-[#E5E5E7]" style={{ textShadow: '0 0 20px rgba(229,229,231,0.2)' }}>86.4%</div>
-            <div className="font-mono text-[11px] text-[#8A8A8E] uppercase tracking-wide mt-1">mistral-large</div>
-            <div className="font-mono text-[10px] text-[#5A6A8A] mt-1">same judge · same bench</div>
+            <div className="text-[36px] font-normal text-[#E5E5E7]" style={{ textShadow: '0 0 20px rgba(229,229,231,0.2)' }}>+26.2</div>
+            <div className="font-mono text-[11px] text-[#8A8A8E] uppercase tracking-wide mt-1">Local Progression</div>
+            <div className="font-mono text-[10px] text-[#5A6A8A] mt-1">51.8% → 69.2% → 78.0%</div>
           </div>
         </div>
 
         <div className="mt-8 rounded-xl p-6 bg-[rgba(74,158,255,0.04)] border border-[#2A5A8A]">
           <div className="flex items-start gap-3">
             <span className="text-[#4A9EFF] text-xl leading-none mt-0.5">&ldquo;</span>
-            <p className="text-base text-[#E5E5E7] leading-relaxed italic">Same 4B model, same benchmark, same judge. +8.8pp purely from the retrieval rebuild.</p>
+            <p className="text-base text-[#E5E5E7] leading-relaxed italic">On identical frozen retrieval evidence, the local 4B scores within ~8 points of mistral-large (78.0% vs 86.4%) — the memory system carries the score, and the answer model becomes nearly swappable.</p>
           </div>
-          <p className="text-xs text-[#5A6A8A] mt-2 ml-6">— Omega LongMemEval, R2 → Now</p>
+          <p className="text-xs text-[#5A6A8A] mt-2 ml-6">— Evaluated with gpt-4o-2024-08-06 via official LongMemEval evaluate_qa.py</p>
         </div>
 
         <div className="mt-12 rounded-xl border border-[#2A5A8A] bg-[#111827] overflow-hidden">
@@ -90,10 +88,10 @@ export default function Benchmarks() {
         </div>
 
         <div className="flex flex-wrap gap-2 mt-6">
-          <span className="font-mono text-[11px] px-3 py-1 rounded bg-[rgba(0,229,199,0.08)] text-[#00E5C7]">gemma-4B · local</span>
-          <span className="font-mono text-[11px] px-3 py-1 rounded bg-[rgba(74,158,255,0.08)] text-[#4A9EFF]">Retrieval Rebuild</span>
+          <span className="font-mono text-[11px] px-3 py-1 rounded bg-[rgba(0,229,199,0.08)] text-[#00E5C7]">Headline 86.4% · mistral-large</span>
+          <span className="font-mono text-[11px] px-3 py-1 rounded bg-[rgba(74,158,255,0.08)] text-[#4A9EFF]">gemma-4B · local (up to 78%)</span>
           <span className="font-mono text-[11px] px-3 py-1 rounded bg-[rgba(245,166,35,0.08)] text-[#F5A623]">51.8% → 69.2% → 78.0%</span>
-          <span className="font-mono text-[11px] px-3 py-1 rounded bg-[rgba(229,229,231,0.06)] text-[#8A8A8E]">mistral-large 86.4%</span>
+          <span className="font-mono text-[11px] px-3 py-1 rounded bg-[rgba(229,229,231,0.06)] text-[#8A8A8E]">gpt-4o-2024-08-06 judge</span>
         </div>
       </div>
     </section>

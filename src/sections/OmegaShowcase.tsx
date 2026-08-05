@@ -38,14 +38,7 @@ const TIERS = [
   { src: img1280, res: '1280\u00d71280', label: 'Ultra', px: '1.64 MP' },
 ];
 
-const CATEGORIES = [
-  { name: 'Temporal Reasoning', r2: 70.7, now: 78.9, delta: '+8.3' },
-  { name: 'Multi-Session', r2: 54.1, now: 66.9, delta: '+12.8' },
-  { name: 'Single-Session Assistant', r2: 80.4, now: 96.4, delta: '+16.0' },
-  { name: 'Knowledge Update', r2: 71.8, now: 80.8, delta: '+9.0' },
-  { name: 'Single-Session User', r2: 92.9, now: 94.3, delta: '+1.4' },
-  { name: 'Single-Session Preference', r2: 46.7, now: 43.3, delta: '−3.4' },
-];
+
 
 const CAPABILITIES = [
   { title: 'Autonomous Cognition', desc: 'Self-directing metacognitive loops — the system thinks about its own thinking, evaluates performance, and adapts behavior.' },
@@ -53,7 +46,7 @@ const CAPABILITIES = [
   { title: '13-Model Orchestration', desc: 'LLMs, encoders, audio, vision, diffusion — all hot-swapped and GPU-leased within 8 GB RAM. Zero OOM.' },
   { title: 'Substantive Dialogue', desc: 'The conversation itself becomes an actuator. Ask, learn, theorize, apply — through code and through dialogue.' },
   { title: 'Edge & Local-First', desc: 'Runs on a $400 laptop with integrated GPU. No cloud. No API keys. Full voice I/O, vision, and image generation.' },
-  { title: 'LongMemEval-S: 78.0%', desc: '78% on the industry-standard long-context benchmark using only a local 4B parameter model — +8.8pp from the retrieval rebuild alone.' },
+  { title: 'LongMemEval-S: 86.4% Headline', desc: '86.4% headline score (mistral-large) and up to 78% (76.7% 3-trial mean) with a local 4B parameter model — +8.8pp from the retrieval rebuild alone.' },
 ];
 
 export default function OmegaShowcase() {
@@ -77,7 +70,7 @@ export default function OmegaShowcase() {
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
-          {[{ val: '13', label: 'Model Slots', color: '#4A9EFF' }, { val: '8 GB', label: 'Total RAM', color: '#00E5C7' }, { val: '78.0%', label: 'LongMemEval-S', color: '#F5A623' }, { val: '0', label: 'Cloud Calls', color: '#A78BFA' }].map((s) => (
+          {[{ val: '13', label: 'Model Slots', color: '#4A9EFF' }, { val: '8 GB', label: 'Total RAM', color: '#00E5C7' }, { val: '86.4%', label: 'LongMemEval-S', color: '#F5A623' }, { val: '0', label: 'Cloud Calls', color: '#A78BFA' }].map((s) => (
             <div key={s.label} className="glass-panel float-3d p-6 text-center">
               <div className="text-[40px] font-normal" style={{ color: s.color, textShadow: `0 0 25px ${s.color}40` }}>{s.val}</div>
               <div className="font-mono text-[11px] text-[#8A8A8E] uppercase tracking-wide mt-1">{s.label}</div>
@@ -121,49 +114,6 @@ export default function OmegaShowcase() {
                 </div>
               );
             })}
-          </div>
-        </div>
-
-        <div className="mt-12">
-          <h3 className="text-xl text-white font-normal tracking-tight mb-1">LongMemEval-S: 78.0%</h3>
-          <p className="text-xs text-[#5A6A8A] font-mono mb-6">78% on the industry-standard long-context benchmark — local 4B model · mistral-large 86.4%</p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            {[{ val: '78.0%', label: 'LongMemEval-S', sub: '390/500 · gemma-4B', color: '#00E5C7' }, { val: '+8.8', label: 'Retrieval Rebuild', sub: '69.2% to 78.0%', color: '#4A9EFF' }, { val: '+26.2', label: 'R1 to Now', sub: '51.8% to 78.0%', color: '#F5A623' }, { val: '86.4%', label: 'mistral-large', sub: 'same judge · same bench', color: '#E5E5E7' }].map((s) => (
-              <div key={s.label} className="glass-panel float-3d p-6 text-center">
-                <div className="text-[36px] font-normal" style={{ color: s.color, textShadow: `0 0 20px ${s.color}40` }}>{s.val}</div>
-                <div className="font-mono text-[11px] text-[#8A8A8E] uppercase tracking-wide mt-1">{s.label}</div>
-                <div className="font-mono text-[10px] text-[#5A6A8A] mt-1">{s.sub}</div>
-              </div>
-            ))}
-          </div>
-          <div className="rounded-xl p-6 bg-[rgba(74,158,255,0.04)] border border-[#2A5A8A] mb-8">
-            <div className="flex items-start gap-3">
-              <span className="text-[#4A9EFF] text-xl leading-none mt-0.5">&ldquo;</span>
-              <p className="text-base text-[#E5E5E7] leading-relaxed italic">Same 4B model, same benchmark, same judge. +8.8pp purely from the retrieval rebuild.</p>
-            </div>
-            <p className="text-xs text-[#5A6A8A] mt-2 ml-6">— Omega LongMemEval, R2 to Now</p>
-          </div>
-          <div className="rounded-xl border border-[#2A5A8A] bg-[#111827] overflow-hidden">
-            <div className="grid grid-cols-12 gap-2 px-6 py-3 border-b border-[#2A5A8A] font-mono text-[10px] uppercase tracking-wider text-[#5A6A8A]">
-              <span className="col-span-4">Category</span>
-              <span className="col-span-2 text-right">Round 2</span>
-              <span className="col-span-3 text-right">Now</span>
-              <span className="col-span-3 text-right">Δ</span>
-            </div>
-            {CATEGORIES.map((cat) => (
-              <div key={cat.name} className="grid grid-cols-12 gap-2 px-6 py-3 border-b border-[#1A1A1E] items-center">
-                <span className="col-span-4 text-sm text-[#E5E5E7]">{cat.name}</span>
-                <span className="col-span-2 text-right font-mono text-sm text-[#8A8A8E]">{cat.r2}%</span>
-                <span className="col-span-3 text-right font-mono text-sm text-[#00E5C7]">{cat.now}%</span>
-                <span className={`col-span-3 text-right font-mono text-sm ${cat.delta.startsWith('−') ? 'text-[#8A8A8E]' : 'text-[#4A9EFF]'}`}>{cat.delta}</span>
-              </div>
-            ))}
-            <div className="grid grid-cols-12 gap-2 px-6 py-4 bg-[rgba(74,158,255,0.06)]">
-              <span className="col-span-4 text-sm font-medium text-white">Overall</span>
-              <span className="col-span-2 text-right font-mono text-sm text-[#8A8A8E]">69.2%</span>
-              <span className="col-span-3 text-right font-mono text-sm text-[#4A9EFF] font-medium">78.0%</span>
-              <span className="col-span-3 text-right font-mono text-sm text-[#4A9EFF]">+8.8</span>
-            </div>
           </div>
         </div>
 
