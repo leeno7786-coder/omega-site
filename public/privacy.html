@@ -2,11 +2,158 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="refresh" content="0; url=/privacy" />
-    <link rel="canonical" href="https://omega2ai.com/privacy" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Privacy Policy — Omega AI LLC</title>
+    <meta
+      name="description"
+      content="Privacy Policy for Omega AI LLC, the Omega 3.0 runtime, and Google Workspace Sign-In."
+    />
+    <link rel="canonical" href="https://omega2ai.com/privacy" />
+    <style>
+      :root { color-scheme: dark; }
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        background: #020617;
+        color: #f5f5f7;
+      }
+      main { max-width: 780px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; line-height: 1.65; }
+      a { color: #4A9EFF; }
+      h1 { font-size: 1.85rem; margin: 0 0 0.6rem; }
+      h2 { margin-top: 1.75rem; font-size: 1.2rem; }
+      h3 { margin-top: 1.25rem; font-size: 1.05rem; }
+      p, li { color: #d7d9e0; }
+      table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
+      td, th { border: 1px solid #2A5A8A; padding: 0.5rem 0.6rem; vertical-align: top; text-align: left; }
+      th { color: #E5E5E7; }
+      .meta { color: #8A8A8E; font-size: 0.92rem; }
+    </style>
   </head>
   <body>
-    <p><a href="/privacy">Privacy Policy</a></p>
+    <main>
+      <h1>Privacy Policy</h1>
+      <p class="meta">Omega AI LLC · Last updated: August 7, 2026</p>
+      <p>
+        This policy covers <strong>omega2ai.com</strong>, contact with Omega AI LLC, and
+        <strong>Sign in with Google / Google Workspace</strong> used by the Omega 3.0 runtime.
+      </p>
+      <p><a href="/">Back to homepage</a></p>
+
+      <h2>1. Who we are</h2>
+      <p>
+        Omega AI LLC builds autonomous AI systems. Omega 3.0 is a local-first metacognitive
+        runtime. Contact:
+        <a href="mailto:noahlee@omega2ai.com">noahlee@omega2ai.com</a>.
+      </p>
+
+      <h2>2. Website and direct contact</h2>
+      <p>
+        On this website we only process information you voluntarily send (for example via
+        email or a contact form): name, email, company, and project description. We do not
+        sell personal data. We do not use advertising cookies or third-party ad trackers on
+        omega2ai.com for this purpose.
+      </p>
+      <p>
+        Contact submissions may be retained up to 24 months for business development. You may
+        request deletion by emailing
+        <a href="mailto:noahlee@omega2ai.com">noahlee@omega2ai.com</a>.
+      </p>
+
+      <h2>3. Google Sign-In and Google Workspace (Omega 3.0)</h2>
+      <p>
+        When you use <strong>Sign in with Google</strong> from an Omega 3.0 installation,
+        Omega requests only the OAuth scopes required for the product ceiling:
+      </p>
+      <ul>
+        <li>OpenID identity (<code>openid</code>, <code>email</code>)</li>
+        <li>Gmail (<code>gmail.modify</code>) — read and bounded changes; no permanent-delete scope</li>
+        <li>Calendar, Tasks, and Drive — as enabled in your connection settings</li>
+      </ul>
+
+      <h3>What Omega stores, and where</h3>
+      <table>
+        <tr>
+          <th>Data</th>
+          <th>Storage</th>
+        </tr>
+        <tr>
+          <td>Google OAuth client secret (owner-configured once)</td>
+          <td>AES-256-GCM connector vault on the Omega host</td>
+        </tr>
+        <tr>
+          <td>Refresh / access tokens</td>
+          <td>AES-256-GCM connector vault, bound to your connection passphrase</td>
+        </tr>
+        <tr>
+          <td>Connection contract (capabilities, authority, retention)</td>
+          <td>Local guardian state — configuration only, no message bodies</td>
+        </tr>
+        <tr>
+          <td>Raw Workspace observations on intake</td>
+          <td>Local SourceLedger (plaintext before Guardian screening)</td>
+        </tr>
+        <tr>
+          <td>Derived memory after screening</td>
+          <td>Local Omega memory (episode SRAM → DeepSleep → filesystem/graph)</td>
+        </tr>
+        <tr>
+          <td>Action / sync operational state</td>
+          <td>Local ledgers: IDs, revisions, cursors, counts, digests — not Workspace payload content</td>
+        </tr>
+      </table>
+      <p>
+        Google Workspace payloads and secrets are not placed in application logs, test output,
+        Git, provider cursor state, or HUD progress labels.
+      </p>
+
+      <h3>How Omega uses Workspace data</h3>
+      <ol>
+        <li>Ingest selected mail, calendar, tasks, and files into <em>local</em> memory.</li>
+        <li>Align standing work after you approve a package.</li>
+        <li>
+          Act only inside the connection contract and, for autonomous standing work, an exact
+          approved grant. Send-class Gmail operations require send authority and revision-bound
+          approval when configured that way.
+        </li>
+      </ol>
+      <p>Omega does not sell Workspace data or use it to advertise to third parties.</p>
+
+      <h3>Sharing</h3>
+      <p>
+        Omega does not transmit your Workspace content to Google beyond the API calls you
+        authorize, and does not share that content with other product vendors as part of this
+        connection.
+      </p>
+
+      <h3>Retention and deletion</h3>
+      <ul>
+        <li>Retention follows the connection contract you set in Omega.</li>
+        <li>
+          Disconnect revokes Omega’s Google authority, then clears local credentials and
+          connector state according to that contract.
+        </li>
+        <li>
+          You can also remove Omega from
+          <a href="https://myaccount.google.com/connections" rel="noopener noreferrer"
+            >Google Account → Connections</a
+          >.
+        </li>
+      </ul>
+
+      <h2>4. Children</h2>
+      <p>
+        Omega’s Google Workspace integration is not directed at children under 13 (or the
+        equivalent minimum age in your jurisdiction).
+      </p>
+
+      <h2>5. Contact</h2>
+      <p>
+        Privacy questions:
+        <a href="mailto:noahlee@omega2ai.com">noahlee@omega2ai.com</a> ·
+        <a href="https://omega2ai.com/">https://omega2ai.com/</a>
+      </p>
+
+      <p><a href="/">Back to homepage</a></p>
+    </main>
   </body>
 </html>
