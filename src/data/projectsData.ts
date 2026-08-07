@@ -81,4 +81,22 @@ export const PROJECTS: ProjectItem[] = [
     githubUrl: 'https://github.com/leeno7786-coder/devcard-ai',
     featured: false,
   },
+  {
+    id: 'omega-browser-agent',
+    title: 'Omega Browser Agent',
+    subtitle: 'Autonomous Browser Automation Extension',
+    category: 'Developer Tools',
+    badge: 'Edge / Chrome Extension',
+    description:
+      'Microsoft Edge & Chromium extension running an autonomous web browsing agent against local inference backends (Omega-Portable Lite, LM Studio) or OpenRouter. Executes in an isolated agent workspace tab with streaming tool-call cards, page structure extraction, form filling, and automated screenshots.',
+    techStack: ['Manifest V3', 'Chromium SidePanel API', 'Chrome Storage API', 'Omega-Portable Lite', 'OpenRouter API'],
+    metrics: [
+      { label: 'Platform', value: 'Edge / Chrome' },
+      { label: 'Backends', value: 'Local / Cloud' },
+      { label: 'UI Layout', value: 'Side Panel' },
+      { label: 'Isolation', value: 'Dedicated Tab' },
+    ],
+    githubUrl: 'https://github.com/leeno7786-coder/Omega3.0',
+    featured: true,
+  },
 ];
