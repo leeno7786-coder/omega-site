@@ -34,6 +34,7 @@ export const PANELS: PanelItem[] = [
     badge: '13 Models',
     subSections: [
       { id: 'showcase', label: 'Omega 3.0' },
+      { id: 'ecosystem', label: 'Ecosystem Suite' },
       { id: 'architecture', label: 'Architecture' },
       { id: 'agent-layer', label: 'Agent Layer' },
       { id: 'memory-graph', label: 'Memory Graph' },

@@ -7,6 +7,7 @@ import TrustBar from '../sections/TrustBar';
 import AutonomousDemo from '../sections/AutonomousDemo';
 
 import OmegaShowcase from '../sections/OmegaShowcase';
+import ProjectsEcosystem from '../sections/ProjectsEcosystem';
 import ArchitectureOverview from '../sections/ArchitectureOverview';
 import ArchitectureDeepDive from '../sections/ArchitectureDeepDive';
 import AgentLayer from '../sections/AgentLayer';
@@ -109,6 +110,7 @@ export default function PanelContainer({ activePanelId, onSelectPanel }: PanelCo
         {activePanelId === 'products' && (
           <>
             <div id="showcase"><OmegaShowcase /></div>
+            <div id="ecosystem"><ProjectsEcosystem /></div>
             <div id="architecture">
               <ArchitectureOverview />
               <div className="mt-12"><ArchitectureDeepDive /></div>
