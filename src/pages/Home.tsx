@@ -4,57 +4,105 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import AnimatedOrbs from '../sections/AnimatedOrbs';
 import NeuralConstellation from '../sections/NeuralConstellation';
-import Navbar from '../sections/Navbar';
-import Hero from '../sections/Hero';
-import TrustBar from '../sections/TrustBar';
-import About from '../sections/About';
-import OmegaShowcase from '../sections/OmegaShowcase';
-import Benchmarks from '../sections/Benchmarks';
-import Services from '../sections/Services';
-import Portability from '../sections/Portability';
-import Process from '../sections/Process';
-import FAQ from '../sections/FAQ';
-import Contact from '../sections/Contact';
 import CursorGlow from '../sections/CursorGlow';
 import Footer from '../sections/Footer';
+
+import PanelSwitcherNav from '../components/PanelSwitcherNav';
+import PanelContainer from '../components/PanelContainer';
+import PanelDock from '../components/PanelDock';
+import { PANELS, DEFAULT_PANEL_ID } from '../config/panelsConfig';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
+  const [activePanelId, setActivePanelId] = useState<string>(() => {
+    const hash = window.location.hash.replace('#', '');
+    const found = PANELS.find((p) => p.id === hash);
+    return found ? found.id : DEFAULT_PANEL_ID;
+  });
+
+  const [activeSubSection, setActiveSubSection] = useState<string | undefined>();
   const [constellationVisible, setConstellationVisible] = useState(true);
 
+  // Synchronize hash in URL when panel changes
+  const handleSelectPanel = (panelId: string) => {
+    setActivePanelId(panelId);
+    setActiveSubSection(undefined);
+    window.history.pushState(null, '', `#${panelId}`);
+  };
+
+  // Sub-section scroll handler
+  const handleSelectSubSection = (subId: string) => {
+    setActiveSubSection(subId);
+    const element = document.getElementById(subId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Keyboard navigation shortcuts (1 - 5)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't trigger if user is typing in an input field
+      if (['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName)) return;
+
+      const num = parseInt(e.key, 10);
+      if (!isNaN(num) && num >= 1 && num <= PANELS.length) {
+        handleSelectPanel(PANELS[num - 1].id);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  // Listen to browser hash changes (Back / Forward navigation)
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '');
+      const found = PANELS.find((p) => p.id === hash);
+      if (found) {
+        setActivePanelId(found.id);
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  // NeuralConstellation background visibility control
   useEffect(() => {
     const handleScroll = () => {
-      const heroHeight = window.innerHeight * 0.7;
-      setConstellationVisible(window.scrollY < heroHeight);
+      setConstellationVisible(window.scrollY < window.innerHeight);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
-    const refreshTimer = setTimeout(() => { ScrollTrigger.refresh(); }, 100);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      clearTimeout(refreshTimer);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <>
+    <div className="min-h-screen bg-[#0A0A0B] text-white selection:bg-[#4A9EFF]/30 selection:text-white">
       <NeuralConstellation visible={constellationVisible} />
       <AnimatedOrbs />
       <CursorGlow />
-      <Navbar />
-      <main className="relative">
-        <Hero />
-        <TrustBar />
-        <About />
-        <OmegaShowcase />
-        <Benchmarks />
-        <Services />
-        <Portability />
-        <Process />
-        <FAQ />
-        <Contact />
-      </main>
+
+      <PanelSwitcherNav
+        activePanelId={activePanelId}
+        onSelectPanel={handleSelectPanel}
+        activeSubSection={activeSubSection}
+        onSelectSubSection={handleSelectSubSection}
+      />
+
+      <PanelContainer
+        activePanelId={activePanelId}
+        onSelectPanel={handleSelectPanel}
+      />
+
+      <PanelDock
+        activePanelId={activePanelId}
+        onSelectPanel={handleSelectPanel}
+      />
+
       <Footer />
-    </>
+    </div>
   );
 }
