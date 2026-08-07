@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://omega2ai.com/sitemap.xml
