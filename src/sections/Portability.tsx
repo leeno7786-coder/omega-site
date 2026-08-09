@@ -8,7 +8,7 @@ const REQUIREMENTS = [
   { label: 'Storage', value: '1-2 TB SSD', detail: 'Entire system + models + memory' },
   { label: 'RAM', value: '8 GB minimum', detail: '13 models orchestrated simultaneously' },
   { label: 'GPU', value: 'Integrated OK', detail: 'AMD 860M iGPU validated · no dGPU required' },
-  { label: 'OS', value: 'Windows 10/11', detail: 'Linux support coming soon' },
+  { label: 'OS', value: 'Windows / Linux', detail: 'Windows evidence; Linux support available' },
 ];
 
 export default function Portability() {
@@ -31,7 +31,7 @@ export default function Portability() {
               <span className="port-label font-mono text-[10px] text-[#4A9EFF] uppercase tracking-[0.15em]">PORTABILITY</span>
               <h2 className="port-heading text-[clamp(28px,4vw,42px)] text-white font-normal leading-[1.1] tracking-[-0.02em] mt-3">Plug It In. Boot It Up. Run.</h2>
               <p className="mt-4 text-[#8A8A8E] text-base leading-relaxed">
-                Omega 3.0 is fully portable across almost any Windows machine — including a $400 laptop with a single AMD 860M integrated GPU. The entire system lives on a single 1-2 TB SSD. No cloud setup. No dependency hell. Just plug in the drive and boot.
+                Omega 3.0 has been demonstrated on Windows hardware including a $400 laptop with a single AMD 860M integrated GPU. The entire system lives on a single 1-2 TB SSD, and Linux support is available for custom deployments.
               </p>
             </div>
             <div className="lg:max-w-[440px] w-full">
@@ -49,7 +49,7 @@ export default function Portability() {
             </div>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-6 mt-10 pt-8 border-t border-[#1A2A3A]">
-            {[{ c: '#00E5C7', l: '1-2 TB SSD' }, { c: '#4A9EFF', l: 'Any Windows Machine' }, { c: '#F5A623', l: 'Zero Cloud Required' }, { c: '#A78BFA', l: 'Linux Coming Soon' }].map((t) => (
+            {[{ c: '#00E5C7', l: '1-2 TB SSD' }, { c: '#4A9EFF', l: 'Windows Validation' }, { c: '#F5A623', l: 'Zero Cloud Required' }, { c: '#A78BFA', l: 'Linux Support Available' }].map((t) => (
               <div key={t.l} className="flex items-center gap-2"><div className="w-2 h-2 rounded-full" style={{ background: t.c }} /><span className="font-mono text-[11px] text-[#8A8A8E] uppercase tracking-wide">{t.l}</span></div>
             ))}
           </div>
