@@ -1,5 +1,7 @@
 import SiteHeader from '../components/layout/SiteHeader';
+import Capabilities from '../sections/company/Capabilities';
 import Hero from '../sections/company/Hero';
+import OmegaProofPreview from '../sections/company/OmegaProofPreview';
 import ProofRail from '../sections/company/ProofRail';
 
 export default function Home() {
@@ -9,6 +11,8 @@ export default function Home() {
       <main id="main-content" tabIndex={-1}>
         <Hero />
         <ProofRail />
+        <Capabilities />
+        <OmegaProofPreview />
       </main>
     </div>
   );
