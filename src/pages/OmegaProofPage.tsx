@@ -1,9 +1,9 @@
 import SiteHeader from '../components/layout/SiteHeader';
 import ProofDisclosure from '../components/proof/ProofDisclosure';
-import image1024 from '../assets/ab_1024.png';
-import image1152 from '../assets/ab_1152.png';
-import image1280 from '../assets/ab_1280.png';
-import memoryGraph from '../assets/memory-graph.png';
+import image1024 from '../assets/ab_1024.webp';
+import image1152 from '../assets/ab_1152.webp';
+import image1280 from '../assets/ab_1280.webp';
+import memoryGraph from '../assets/memory-graph.webp';
 
 const architectureLayers = [
   { name: 'PRESSURE', role: 'Ignition', detail: 'Gathers contributing signals and decides whether a cognitive episode should begin.' },
