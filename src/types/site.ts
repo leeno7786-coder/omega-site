@@ -1,0 +1,45 @@
+export interface NavigationItem {
+  label: string;
+  href: string;
+}
+
+export interface Capability {
+  id: 'metacognitive-ai' | 'custom-runtimes' | 'digital-products' | 'computers-integrations';
+  title: string;
+  description: string;
+  tags: readonly string[];
+}
+
+export interface ProofMetric {
+  value: string;
+  label: string;
+  qualifier: string;
+}
+
+export interface ProcessStep {
+  id: 'discover' | 'architect' | 'build' | 'deploy';
+  title: string;
+  description: string;
+}
+
+export interface Founder {
+  name: 'Noah Lee' | 'Mitchell Ray' | 'Larone Williamson';
+  role: 'Co-founder';
+  initials: 'NL' | 'MR' | 'LW';
+}
+
+export type ProjectCategory =
+  | 'Metacognitive or agentic AI'
+  | 'Custom AI runtime, local AI, or edge AI'
+  | 'Website, web application, or Android application'
+  | 'Custom computer, Linux, or hardware integration'
+  | 'Unsure or another type of project';
+
+export interface ProjectInquiryPayload {
+  name: string;
+  email: string;
+  company: string;
+  category: ProjectCategory | '';
+  description: string;
+  'bot-field': string;
+}

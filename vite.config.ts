@@ -15,6 +15,13 @@ export default defineConfig({
     },
   },
   build: {
+    manifest: true,
     chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      input: {
+        home: path.resolve(__dirname, 'index.html'),
+        omega3: path.resolve(__dirname, 'omega-3/index.html'),
+      },
+    },
   },
 });
