@@ -5,34 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Terms of Service — Omega AI LLC</title>
     <meta name="description" content="Terms of Service for Omega AI LLC." />
-    <link rel="canonical" href="https://omega2ai.com/terms" />
+    <link rel="canonical" href="https://omega2ai.com/terms/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <style>
-      :root { color-scheme: dark; }
+      :root { color-scheme: dark; font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif; }
+      * { box-sizing: border-box; }
       body {
         margin: 0;
-        padding: 0;
-        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-        background: #020617;
-        color: #f5f5f7;
+        background: #071019;
+        color: #dffbff;
       }
-      main { max-width: 780px; margin: 0 auto; padding: 2.5rem 1.25rem; line-height: 1.6; }
-      a { color: #4A9EFF; }
-      h1 { font-size: 1.8rem; margin-bottom: 0.6rem; }
-      h2 { margin-top: 1.6rem; font-size: 1.2rem; }
+      header { border-bottom: 1px solid #193a4b; }
+      footer { border-top: 1px solid #193a4b; }
+      .shell { width: min(calc(100% - 40px), 980px); margin: 0 auto; }
+      header .shell, footer .shell { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 72px; }
+      nav { display: flex; flex-wrap: wrap; gap: 20px; }
+      main { max-width: 780px; margin: 0 auto; padding: 4.5rem 1.25rem 5rem; line-height: 1.65; }
+      a { color: #5eead4; }
+      a:hover { color: #dffbff; }
+      h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); line-height: 0.98; margin: 0 0 1rem; letter-spacing: -0.055em; }
+      h2 { margin-top: 2rem; font-size: 1.2rem; }
+      p { color: #a9bbc4; }
+      .brand { color: #dffbff; font-weight: 700; letter-spacing: 0.12em; text-decoration: none; }
+      .meta { color: #8098a8; }
+      @media (max-width: 560px) { header .shell, footer .shell { align-items: flex-start; flex-direction: column; padding-block: 20px; } }
     </style>
   </head>
   <body>
+    <header>
+      <div class="shell">
+        <a class="brand" href="/">OMEGA AI</a>
+        <nav aria-label="Site navigation"><a href="/">Company</a><a href="/omega-3/">Omega 3.0 proof</a><a href="/privacy/">Privacy</a></nav>
+      </div>
+    </header>
     <main>
       <h1>Terms of Service</h1>
-      <p>Last updated: July 18, 2026</p>
+      <p class="meta">Omega AI LLC · Last updated: August 9, 2026</p>
 
       <p>By using this website, you agree to use it lawfully and with good faith.</p>
       <p>The site and services are offered for informational and commercial communications. Any AI-related claims are specific to our implementations and may vary by deployment.</p>
+
+      <h2>Project inquiries</h2>
+      <p>Submitting the inquiry form does not create a client relationship or obligate either party to begin work. We will use the supplied details to evaluate and respond to the request. A separate written agreement defines any paid engagement, deliverables, timelines, ownership, confidentiality, and support terms.</p>
+
+      <h2>Intellectual property</h2>
+      <p>The website, branding, and described Omega AI systems remain the property of their respective owners. Public repositories are governed by the license included with each repository. Client-work ownership is governed by the applicable written agreement.</p>
+
+      <h2>No warranty</h2>
+      <p>This public website and its informational content are provided as-is. Technical results are qualified by the disclosed models, hardware, datasets, and trial conditions; results may differ in another deployment.</p>
 
       <h2>Contact</h2>
       <p>Email <a href="mailto:noahlee@omega2ai.com">noahlee@omega2ai.com</a> for legal or contractual questions.</p>
 
       <p><a href="/">Back to homepage</a></p>
     </main>
+    <footer><div class="shell"><span>© 2026 Omega AI LLC</span><nav aria-label="Legal navigation"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav></div></footer>
   </body>
 </html>

@@ -15,3 +15,8 @@ await Promise.all(
       .toFile(output),
   ),
 );
+
+await sharp('public/og-source.svg')
+  .resize(1200, 630)
+  .png({ compressionLevel: 9 })
+  .toFile('public/og-image.png');

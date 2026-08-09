@@ -8,28 +8,43 @@
       name="description"
       content="Privacy Policy for Omega AI LLC, the Omega 3.0 runtime, and Google Workspace Sign-In."
     />
-    <link rel="canonical" href="https://omega2ai.com/privacy" />
+    <link rel="canonical" href="https://omega2ai.com/privacy/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <style>
-      :root { color-scheme: dark; }
+      :root { color-scheme: dark; font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif; }
+      * { box-sizing: border-box; }
       body {
         margin: 0;
-        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-        background: #020617;
-        color: #f5f5f7;
+        background: #071019;
+        color: #dffbff;
       }
-      main { max-width: 780px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; line-height: 1.65; }
-      a { color: #4A9EFF; }
-      h1 { font-size: 1.85rem; margin: 0 0 0.6rem; }
+      header, footer { border-bottom: 1px solid #193a4b; }
+      footer { border-top: 1px solid #193a4b; border-bottom: 0; }
+      .shell { width: min(calc(100% - 40px), 980px); margin: 0 auto; }
+      header .shell, footer .shell { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 72px; }
+      nav { display: flex; flex-wrap: wrap; gap: 20px; }
+      main { max-width: 780px; margin: 0 auto; padding: 4.5rem 1.25rem 5rem; line-height: 1.65; }
+      a { color: #5eead4; }
+      a:hover { color: #dffbff; }
+      h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); line-height: 0.98; margin: 0 0 1rem; letter-spacing: -0.055em; }
       h2 { margin-top: 1.75rem; font-size: 1.2rem; }
       h3 { margin-top: 1.25rem; font-size: 1.05rem; }
-      p, li { color: #d7d9e0; }
+      p, li { color: #a9bbc4; }
       table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
-      td, th { border: 1px solid #2A5A8A; padding: 0.5rem 0.6rem; vertical-align: top; text-align: left; }
-      th { color: #E5E5E7; }
-      .meta { color: #8A8A8E; font-size: 0.92rem; }
+      td, th { border: 1px solid #193a4b; padding: 0.65rem 0.75rem; vertical-align: top; text-align: left; }
+      th { color: #dffbff; }
+      .brand { color: #dffbff; font-weight: 700; letter-spacing: 0.12em; text-decoration: none; }
+      .meta { color: #8098a8; font-size: 0.92rem; }
+      @media (max-width: 560px) { header .shell, footer .shell { align-items: flex-start; flex-direction: column; padding-block: 20px; } table { display: block; overflow-x: auto; } }
     </style>
   </head>
   <body>
+    <header>
+      <div class="shell">
+        <a class="brand" href="/">OMEGA AI</a>
+        <nav aria-label="Site navigation"><a href="/">Company</a><a href="/omega-3/">Omega 3.0 proof</a><a href="/terms/">Terms</a></nav>
+      </div>
+    </header>
     <main>
       <h1>Privacy Policy</h1>
       <p class="meta">Omega AI LLC · Last updated: August 7, 2026</p>
@@ -57,6 +72,11 @@
         Contact submissions may be retained up to 24 months for business development. You may
         request deletion by emailing
         <a href="mailto:noahlee@omega2ai.com">noahlee@omega2ai.com</a>.
+      </p>
+      <p>
+        Project-inquiry forms are processed by Netlify on Omega AI LLC's behalf so the submission
+        can be delivered to our company contacts. Netlify may process the fields you submit and
+        technical request data as described in its own privacy documentation.
       </p>
 
       <h2>3. Google Sign-In and Google Workspace (Omega 3.0)</h2>
@@ -155,5 +175,6 @@
 
       <p><a href="/">Back to homepage</a></p>
     </main>
+    <footer><div class="shell"><span>© 2026 Omega AI LLC</span><nav aria-label="Legal navigation"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav></div></footer>
   </body>
 </html>
