@@ -1,5 +1,7 @@
 import SiteHeader from '../components/layout/SiteHeader';
 import Capabilities from '../sections/company/Capabilities';
+import CompanyOverview from '../sections/company/CompanyOverview';
+import EngagementProcess from '../sections/company/EngagementProcess';
 import Hero from '../sections/company/Hero';
 import OmegaProofPreview from '../sections/company/OmegaProofPreview';
 import ProofRail from '../sections/company/ProofRail';
@@ -13,6 +15,8 @@ export default function Home() {
         <ProofRail />
         <Capabilities />
         <OmegaProofPreview />
+        <EngagementProcess />
+        <CompanyOverview />
       </main>
     </div>
   );
