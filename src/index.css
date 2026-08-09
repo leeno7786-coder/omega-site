@@ -541,6 +541,8 @@ a {
 }
 
 .proof-metric {
+  display: flex;
+  flex-direction: column;
   min-width: 0;
   padding: 26px clamp(18px, 2.4vw, 34px);
   border-right: 1px solid var(--border);
@@ -550,7 +552,8 @@ a {
   border-right: 0;
 }
 
-.proof-metric dd {
+.proof-metric__value {
+  order: 1;
   margin: 0 0 8px;
   color: var(--ice);
   font-size: clamp(1.45rem, 2vw, 2rem);
@@ -559,12 +562,14 @@ a {
 }
 
 .proof-metric dt {
+  order: 2;
   color: #a8bac3;
   font-size: 0.75rem;
   line-height: 1.4;
 }
 
-.proof-metric span {
+.proof-metric__qualifier {
+  order: 3;
   display: block;
   margin-top: 7px;
   color: #617b89;
@@ -644,7 +649,7 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  color: #5e7885;
+  color: #6f8996;
   font-family: 'Geist Mono', monospace;
   font-size: 0.58rem;
   letter-spacing: 0.1em;
@@ -1099,7 +1104,7 @@ a {
 
 .inquiry-section__direct span,
 .inquiry-section__expectations dt {
-  color: #5e7885;
+  color: #6f8996;
   font-family: 'Geist Mono', monospace;
   font-size: 0.57rem;
   letter-spacing: 0.1em;
@@ -1224,7 +1229,7 @@ a {
 }
 
 .form-field small {
-  color: #5d7581;
+  color: #718b98;
   font-size: 0.67rem;
   line-height: 1.5;
 }
@@ -1248,7 +1253,7 @@ a {
 
 .inquiry-form__actions p {
   margin: 0;
-  color: #5d7581;
+  color: #718b98;
   font-size: 0.62rem;
   line-height: 1.5;
 }

@@ -16,9 +16,9 @@ export default function ProofRail({ metrics = HOME_PROOF_METRICS }: ProofRailPro
         <dl className="proof-rail__metrics">
           {metrics.map((metric) => (
             <div className="proof-metric" data-testid="proof-metric" key={`${metric.value}-${metric.label}`}>
-              <dd>{metric.value}</dd>
               <dt>{metric.label}</dt>
-              <span>{metric.qualifier}</span>
+              <dd className="proof-metric__value">{metric.value}</dd>
+              <dd className="proof-metric__qualifier">{metric.qualifier}</dd>
             </div>
           ))}
         </dl>

@@ -208,7 +208,7 @@ export default function OmegaProofPage() {
               <p>+8.8 points from the retrieval rebuild: 69.2% → 78.0%</p>
               <p>Evaluated with gpt-4o-2024-08-06 using the official LongMemEval evaluator</p>
             </div>
-            <div className="benchmark-table" role="table" aria-label="LongMemEval-S category results">
+            <div className="benchmark-table" role="table" aria-label="LongMemEval-S category results" tabIndex={0}>
               <div className="benchmark-table__header" role="row">
                 <span role="columnheader">Category</span>
                 <span role="columnheader">Round 2</span>
@@ -235,7 +235,7 @@ export default function OmegaProofPage() {
               The local runtime assigns specialists to cognition, memory, speech, vision, diffusion, face analysis,
               code, and semantic overlap without requiring every model to remain resident at once.
             </p>
-            <div className="model-table" role="table" aria-label="Omega 3.0 model roster">
+            <div className="model-table" role="table" aria-label="Omega 3.0 model roster" tabIndex={0}>
               {models.map((model, index) => (
                 <div role="row" key={model.name}>
                   <span role="cell">{String(index + 1).padStart(2, '0')}</span>

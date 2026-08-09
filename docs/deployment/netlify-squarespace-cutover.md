@@ -61,3 +61,27 @@ If the apex, `www`, HTTPS, or form flow fails and cannot be corrected promptly:
 - [ ] After at least one complete production verification cycle and confirmed form delivery, disable GitHub Pages for this repository.
 - [ ] Remove obsolete GitHub Pages domain configuration only after Netlify is stable and the rollback window is closed.
 - [ ] Keep this checklist and the captured DNS rollback values with the deployment records.
+
+## 8. Local release verification — August 9, 2026
+
+- [x] `npm run check` passed: ESLint, 13 Vitest files / 24 tests, TypeScript, Vite production build, route checks, metadata checks, sitemap checks, and asset budgets.
+- [x] Homepage JavaScript measured 67,089 gzip bytes against the 204,800-byte budget.
+- [x] Every production image is below 512,000 bytes; retained proof images range from 29 KB to 121 KB.
+- [x] `npm run test:e2e` passed 34 desktop/mobile Playwright checks covering buyer journeys, direct routes, successful and failed form behavior, six viewport widths, axe analysis, keyboard focus, skip navigation, and reduced motion.
+- [x] `npm audit --omit=dev` reported zero production vulnerabilities.
+- [x] Local production preview returned the correct Privacy and Terms documents on their direct routes.
+- [x] The generated 1200 × 630 Open Graph card was visually inspected and is 51,497 bytes.
+- [x] No Squarespace DNS records were changed during implementation or local verification.
+
+## 9. Netlify deploy-preview verification — pending
+
+These checks require the branch to be published and connected to Netlify. Record the deploy URL and results here before authorizing any production DNS change.
+
+- [ ] Deploy-preview URL:
+- [ ] Real non-sensitive form delivery reaches both company email notifications.
+- [ ] Preview Lighthouse performance, accessibility, best-practices, and SEO scores are recorded.
+- [ ] Netlify custom 404 behavior is verified.
+- [ ] Browser console is free of errors on `/`, `/omega-3/`, `/privacy/`, and `/terms/`.
+- [ ] Metadata and the social card pass a public share-preview inspection.
+- [ ] Direct proof and legal routes return their intended documents.
+- [ ] Mobile widths and at least one physical mobile device pass a smoke test.
