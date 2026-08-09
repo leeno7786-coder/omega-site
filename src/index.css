@@ -1058,6 +1058,228 @@ a {
   font-size: 0.53rem;
 }
 
+.inquiry-section {
+  position: relative;
+  border-bottom: 1px solid var(--border);
+  background: var(--obsidian);
+}
+
+.inquiry-section__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(480px, 1.15fr);
+  gap: clamp(64px, 10vw, 150px);
+  padding-block: clamp(104px, 13vw, 180px);
+}
+
+.inquiry-section h2 {
+  max-width: 10ch;
+  margin: 0;
+  color: var(--ice);
+  font-size: clamp(2.7rem, 5.2vw, 5.35rem);
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  line-height: 0.98;
+}
+
+.inquiry-section__intro > p:not(.eyebrow) {
+  max-width: 54ch;
+  margin: 30px 0 0;
+  color: #92a7b2;
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+.inquiry-section__direct {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 9px;
+  margin-top: 54px;
+}
+
+.inquiry-section__direct span,
+.inquiry-section__expectations dt {
+  color: #5e7885;
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.57rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.inquiry-section__direct a {
+  color: var(--ice);
+  font-size: 0.84rem;
+  text-decoration: underline;
+  text-decoration-color: var(--border-bright);
+  text-underline-offset: 4px;
+}
+
+.inquiry-section__direct a:hover {
+  text-decoration-color: var(--teal);
+}
+
+.inquiry-section__expectations {
+  display: grid;
+  gap: 0;
+  margin: 54px 0 0;
+  border-top: 1px solid var(--border);
+}
+
+.inquiry-section__expectations div {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 24px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.inquiry-section__expectations dd {
+  margin: 0;
+  color: #78909c;
+  font-size: 0.73rem;
+  line-height: 1.55;
+}
+
+.inquiry-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
+  gap: 24px 18px;
+  padding: clamp(28px, 4vw, 52px);
+  border: 1px solid var(--border-bright);
+  background: rgba(10, 22, 33, 0.62);
+}
+
+.honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.form-field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.form-field--wide {
+  grid-column: 1 / -1;
+}
+
+.form-field label {
+  color: #9eb2bc;
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.61rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  color: var(--ice);
+  background: rgba(7, 16, 25, 0.76);
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.form-field input,
+.form-field select {
+  height: 48px;
+  padding: 0 14px;
+}
+
+.form-field textarea {
+  min-height: 162px;
+  padding: 14px;
+  resize: vertical;
+}
+
+.form-field input:hover,
+.form-field select:hover,
+.form-field textarea:hover {
+  border-color: var(--border-bright);
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--teal);
+  outline: 1px solid var(--teal);
+  outline-offset: 0;
+  background: rgba(7, 16, 25, 0.95);
+}
+
+.form-field select {
+  color-scheme: dark;
+}
+
+.form-field small {
+  color: #5d7581;
+  font-size: 0.67rem;
+  line-height: 1.5;
+}
+
+.inquiry-form__actions {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-top: 6px;
+}
+
+.inquiry-form__actions .button {
+  flex: 0 0 auto;
+}
+
+.inquiry-form__actions .button:disabled {
+  cursor: wait;
+  opacity: 0.68;
+  transform: none;
+}
+
+.inquiry-form__actions p {
+  margin: 0;
+  color: #5d7581;
+  font-size: 0.62rem;
+  line-height: 1.5;
+}
+
+.form-status {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  color: #9eb2bc;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.form-status strong {
+  color: var(--ice);
+  font-weight: 600;
+}
+
+.form-status--success {
+  border-color: rgba(94, 234, 212, 0.45);
+  background: rgba(94, 234, 212, 0.06);
+}
+
+.form-status--error {
+  border-color: rgba(248, 113, 113, 0.52);
+  color: #fecaca;
+  background: rgba(248, 113, 113, 0.06);
+}
+
 .static-legal-footer {
   display: flex;
   width: min(100% - 48px, 1240px);
@@ -1120,6 +1342,11 @@ a {
   }
 
   .company-section__inner {
+    grid-template-columns: 1fr;
+    gap: 72px;
+  }
+
+  .inquiry-section__grid {
     grid-template-columns: 1fr;
     gap: 72px;
   }
@@ -1311,6 +1538,20 @@ a {
 
   .founder-list li {
     min-height: 94px;
+  }
+
+  .inquiry-form {
+    grid-template-columns: 1fr;
+    padding: 24px 18px;
+  }
+
+  .form-field--wide {
+    grid-column: auto;
+  }
+
+  .inquiry-form__actions {
+    align-items: stretch;
+    flex-direction: column;
   }
 
   .proof-stack li p {

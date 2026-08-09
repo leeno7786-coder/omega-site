@@ -5,6 +5,7 @@ import EngagementProcess from '../sections/company/EngagementProcess';
 import Hero from '../sections/company/Hero';
 import OmegaProofPreview from '../sections/company/OmegaProofPreview';
 import ProofRail from '../sections/company/ProofRail';
+import ProjectInquiryForm from '../sections/company/ProjectInquiryForm';
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
         <OmegaProofPreview />
         <EngagementProcess />
         <CompanyOverview />
+        <ProjectInquiryForm />
       </main>
     </div>
   );
