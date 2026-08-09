@@ -1,7 +1,15 @@
+import SiteHeader from '../components/layout/SiteHeader';
+import Hero from '../sections/company/Hero';
+import ProofRail from '../sections/company/ProofRail';
+
 export default function Home() {
   return (
-    <main id="main-content" tabIndex={-1}>
-      <h1>We build AI systems that think beyond the prompt.</h1>
-    </main>
+    <div className="site-frame">
+      <SiteHeader currentPage="home" />
+      <main id="main-content" tabIndex={-1}>
+        <Hero />
+        <ProofRail />
+      </main>
+    </div>
   );
 }
