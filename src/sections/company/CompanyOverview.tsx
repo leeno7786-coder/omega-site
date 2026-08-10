@@ -22,7 +22,7 @@ export default function CompanyOverview() {
       <div className="content-shell company-section__inner">
         <div className="company-section__statement">
           <p className="eyebrow">
-            <span aria-hidden="true">05</span>
+            <span aria-hidden="true">06</span>
             Company
           </p>
           <p className="company-section__positioning">{COMPANY_CONTENT.eyebrow}</p>

@@ -6,6 +6,7 @@ import Hero from '../sections/company/Hero';
 import OmegaProofPreview from '../sections/company/OmegaProofPreview';
 import ProofRail from '../sections/company/ProofRail';
 import ProjectInquiryForm from '../sections/company/ProjectInquiryForm';
+import SelectedSystems from '../sections/company/SelectedSystems';
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         <ProofRail />
         <Capabilities />
         <OmegaProofPreview />
+        <SelectedSystems />
         <EngagementProcess />
         <CompanyOverview />
         <ProjectInquiryForm />

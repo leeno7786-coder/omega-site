@@ -14,6 +14,22 @@ test('technical visitor can open the proof page', async ({ page }) => {
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(/Omega 3.0 technical proof/i);
 });
 
+test('visitor can inspect Noah and the selected systems', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByRole('heading', { name: 'Omega Browser Agent' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'DevCard AI' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Noah Lee' })).toBeVisible();
+  await expect(page.getByText('Founder & Principal Engineer')).toBeVisible();
+  await expect(page.getByRole('link', { name: 'View source: Omega Browser Agent' })).toHaveAttribute(
+    'href',
+    'https://github.com/leeno7786-coder/Omega3.0/tree/main/browser_agent_extension',
+  );
+  await expect(page.getByRole('link', { name: 'Open live app: DevCard AI' })).toHaveAttribute(
+    'href',
+    'https://www.omega-dev.uk/',
+  );
+});
+
 for (const legalPage of [
   { path: '/privacy/', heading: 'Privacy Policy' },
   { path: '/terms/', heading: 'Terms of Service' },

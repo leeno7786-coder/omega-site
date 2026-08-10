@@ -48,7 +48,7 @@ export default function ProjectInquiryForm({ submit = submitProjectInquiry }: Pr
       <div className="content-shell inquiry-section__grid">
         <div className="inquiry-section__intro">
           <p className="eyebrow">
-            <span aria-hidden="true">06</span>
+            <span aria-hidden="true">07</span>
             Start a project
           </p>
           <h2 id="inquiry-title">What are you trying to build?</h2>
