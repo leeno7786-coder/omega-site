@@ -11,7 +11,7 @@ const proofFacts = [
 const evidenceLinks = [
   { label: 'Architecture', href: '/omega-3/#architecture' },
   { label: 'Benchmarks', href: '/omega-3/#benchmarks' },
-  { label: 'Repositories', href: 'https://github.com/leeno7786-coder/Omega3.0', external: true },
+  { label: 'Repositories', href: '/omega-3/#repositories' },
   { label: 'Screenshots', href: '/omega-3/#screenshots' },
 ] as const;
 
@@ -32,11 +32,9 @@ export default function OmegaProofPreview() {
               <a
                 key={link.label}
                 href={link.href}
-                target={'external' in link && link.external ? '_blank' : undefined}
-                rel={'external' in link && link.external ? 'noreferrer' : undefined}
               >
                 {link.label}
-                <span aria-hidden="true">↗</span>
+                <span aria-hidden="true">→</span>
               </a>
             ))}
           </nav>

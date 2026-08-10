@@ -16,10 +16,11 @@ describe('OmegaProofPreview', () => {
     render(<OmegaProofPreview />);
     expect(screen.getByRole('link', { name: 'Architecture' })).toHaveAttribute('href', '/omega-3/#architecture');
     expect(screen.getByRole('link', { name: 'Benchmarks' })).toHaveAttribute('href', '/omega-3/#benchmarks');
-    expect(screen.getByRole('link', { name: 'Repositories' })).toHaveAttribute(
-      'href',
-      'https://github.com/leeno7786-coder/Omega3.0',
-    );
+    const repositories = screen.getByRole('link', { name: 'Repositories' });
+    expect(repositories).toHaveAttribute('href', '/omega-3/#repositories');
+    expect(repositories).not.toHaveAttribute('target');
+    expect(repositories).not.toHaveAttribute('rel');
+    expect(document.querySelector('a[href*="leeno7786-coder/Omega3.0"]')).not.toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Screenshots' })).toHaveAttribute('href', '/omega-3/#screenshots');
     expect(screen.queryByText(/video/i)).not.toBeInTheDocument();
   });

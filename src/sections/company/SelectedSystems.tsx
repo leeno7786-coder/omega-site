@@ -6,15 +6,17 @@ interface SelectedSystemsProps {
 }
 
 function SystemAction({ system }: { system: SelectedSystem }) {
+  const isExternal = system.action === 'external';
+
   return (
     <a
       aria-label={`${system.linkLabel}: ${system.title}`}
       className="system-dossier__action"
       href={system.href}
-      target="_blank"
-      rel="noreferrer"
+      target={isExternal ? '_blank' : undefined}
+      rel={isExternal ? 'noreferrer' : undefined}
     >
-      {system.linkLabel}<span aria-hidden="true">↗</span>
+      {system.linkLabel}<span aria-hidden="true">{isExternal ? '↗' : '→'}</span>
     </a>
   );
 }

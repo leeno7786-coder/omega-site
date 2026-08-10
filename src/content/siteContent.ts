@@ -172,7 +172,7 @@ export const SELECTED_SYSTEMS = [
     id: 'omega-browser-agent',
     title: 'Omega Browser Agent',
     tier: 'featured',
-    status: 'Working source · Edge MV3',
+    status: 'Working build · Edge MV3',
     summary:
       'A chat-style autonomous browser agent built to operate with a local 4B model. It plans tasks, navigates, clicks, types, reads page structure and screenshots, and can expand to cloud models when greater capability is needed.',
     evidence: [
@@ -183,8 +183,9 @@ export const SELECTED_SYSTEMS = [
       'Isolated multi-tab workspace',
       'Action confirmation controls',
     ],
-    href: 'https://github.com/leeno7786-coder/Omega3.0/tree/main/browser_agent_extension',
-    linkLabel: 'View source',
+    action: 'inquiry',
+    href: '#project-inquiry',
+    linkLabel: 'Request a demo',
   },
   {
     id: 'devcard-ai',
@@ -202,6 +203,7 @@ export const SELECTED_SYSTEMS = [
       'Ten visual themes',
       'HTML, README, and React/Next.js exports',
     ],
+    action: 'external',
     href: 'https://www.omega-dev.uk/',
     linkLabel: 'Open live app',
   },
@@ -213,6 +215,7 @@ export const SELECTED_SYSTEMS = [
     summary:
       'Hardware-aware inference infrastructure spanning model discovery, streaming APIs, process supervision, packaged runtimes, and CPU/GPU/NPU execution paths.',
     evidence: ['Python', 'FastAPI', 'PowerShell', 'ONNX and GGUF'],
+    action: 'external',
     href: 'https://github.com/leeno7786-coder/Omega-NPU-Runtime',
     linkLabel: 'View source',
   },
@@ -220,12 +223,13 @@ export const SELECTED_SYSTEMS = [
     id: 'omega-memory-mcp',
     title: 'Omega Memory MCP',
     tier: 'supporting',
-    status: 'Persistent memory infrastructure',
+    status: 'Private memory infrastructure',
     summary:
       'Cross-platform persistent-memory infrastructure with typed MCP access, verified recall, graph projections, embeddings, packaging, and acceptance tests.',
     evidence: ['Python', 'MCP', 'ONNX', 'Verified recall'],
-    href: 'https://github.com/leeno7786-coder/omega-memory-mcp',
-    linkLabel: 'View source',
+    action: 'inquiry',
+    href: '#project-inquiry',
+    linkLabel: 'Discuss this system',
   },
   {
     id: 'nanoagent',
@@ -235,6 +239,7 @@ export const SELECTED_SYSTEMS = [
     summary:
       'A local-model coding agent with a chat/TUI workflow, MCP connectivity, concurrent sub-agents, workspace sandboxing, validation, and npm packaging.',
     evidence: ['TypeScript', 'React TUI', 'Bun', 'MCP'],
+    action: 'external',
     href: 'https://github.com/leeno7786-coder/nanoagent',
     linkLabel: 'View source',
   },

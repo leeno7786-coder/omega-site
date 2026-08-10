@@ -60,28 +60,42 @@ const models = [
   { name: 'dme_overlap_matmul', role: 'Semantic overlap', type: 'Encoder' },
 ] as const;
 
+interface RepositoryBase {
+  name: string;
+  description: string;
+}
+
+type Repository = RepositoryBase & (
+  | { access: 'public'; href: `https://${string}` }
+  | { access: 'private'; href: '/#project-inquiry' }
+);
+
 const repositories = [
   {
     name: 'Omega 3.0',
     description: 'Flagship autonomous cognitive architecture and shared proof source.',
-    href: 'https://github.com/leeno7786-coder/Omega3.0',
+    access: 'private',
+    href: '/#project-inquiry',
   },
   {
     name: 'NanoAgent',
     description: 'Tiny-model-first autonomous CLI and TUI coding agent.',
+    access: 'public',
     href: 'https://github.com/leeno7786-coder/nanoagent',
   },
   {
     name: 'Omega Memory MCP',
     description: 'Local-first MCP memory server with Dewey organization and verified recall.',
-    href: 'https://github.com/leeno7786-coder/omega-memory-mcp',
+    access: 'private',
+    href: '/#project-inquiry',
   },
   {
     name: 'Omega NPU Runtime',
     description: 'AMD Ryzen AI and Linux enablement work targeting XDNA NPUs.',
+    access: 'public',
     href: 'https://github.com/leeno7786-coder/Omega-NPU-Runtime',
   },
-] as const;
+] as const satisfies readonly Repository[];
 
 export default function OmegaProofPage() {
   return (
@@ -353,8 +367,16 @@ export default function OmegaProofPage() {
           >
             <div className="repository-grid">
               {repositories.map((repository) => (
-                <a href={repository.href} target="_blank" rel="noreferrer" key={repository.name}>
-                  <span>Public repository ↗</span>
+                <a
+                  href={repository.href}
+                  target={repository.access === 'public' ? '_blank' : undefined}
+                  rel={repository.access === 'public' ? 'noreferrer' : undefined}
+                  key={repository.name}
+                >
+                  <span>
+                    {repository.access === 'public' ? 'Public repository' : 'Private engineering repository'}
+                    {repository.access === 'public' && <span aria-hidden="true"> ↗</span>}
+                  </span>
                   <h3>{repository.name}</h3>
                   <p>{repository.description}</p>
                 </a>

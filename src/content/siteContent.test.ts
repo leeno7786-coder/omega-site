@@ -55,12 +55,17 @@ describe('site content contract', () => {
       linkLabel: 'Open live app',
     });
     expect(SELECTED_SYSTEMS.find((system) => system.id === 'omega-browser-agent')).toMatchObject({
-      status: 'Working source · Edge MV3',
-      href: 'https://github.com/leeno7786-coder/Omega3.0/tree/main/browser_agent_extension',
-      linkLabel: 'View source',
+      status: 'Working build · Edge MV3',
+      href: '#project-inquiry',
+      linkLabel: 'Request a demo',
+    });
+    expect(SELECTED_SYSTEMS.find((system) => system.id === 'omega-memory-mcp')).toMatchObject({
+      status: 'Private memory infrastructure',
+      href: '#project-inquiry',
+      linkLabel: 'Discuss this system',
     });
     expect(JSON.stringify({ FOUNDER_PROFILE, SELECTED_SYSTEMS })).not.toMatch(
-      /337-396-5510|downloads?\/.*resume|completed client/i,
+      /337-396-5510|downloads?\/.*resume|completed client|github\.com\/leeno7786-coder\/(?:Omega3\.0\/tree\/main\/browser_agent_extension|omega-memory-mcp)/i,
     );
   });
 

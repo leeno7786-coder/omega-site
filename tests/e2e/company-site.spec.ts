@@ -20,14 +20,40 @@ test('visitor can inspect Noah and the selected systems', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'DevCard AI' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Noah Lee' })).toBeVisible();
   await expect(page.getByText('Founder & Principal Engineer')).toBeVisible();
-  await expect(page.getByRole('link', { name: 'View source: Omega Browser Agent' })).toHaveAttribute(
-    'href',
-    'https://github.com/leeno7786-coder/Omega3.0/tree/main/browser_agent_extension',
-  );
-  await expect(page.getByRole('link', { name: 'Open live app: DevCard AI' })).toHaveAttribute(
-    'href',
-    'https://www.omega-dev.uk/',
-  );
+  const browserDemo = page.getByRole('link', { name: 'Request a demo: Omega Browser Agent' });
+  await expect(browserDemo).toHaveAttribute('href', '#project-inquiry');
+  await expect(browserDemo).not.toHaveAttribute('target');
+  await expect(browserDemo).not.toHaveAttribute('rel');
+  const devCard = page.getByRole('link', { name: 'Open live app: DevCard AI' });
+  await expect(devCard).toHaveAttribute('href', 'https://www.omega-dev.uk/');
+  await expect(devCard).toHaveAttribute('target', '_blank');
+  await expect(devCard).toHaveAttribute('rel', 'noreferrer');
+  await expect(page.locator('a[href*="leeno7786-coder/Omega3.0"]')).toHaveCount(0);
+  await expect(page.locator('a[href*="omega-memory-mcp"]')).toHaveCount(0);
+});
+
+test('proof page keeps private repositories internal and public repositories external', async ({ page }) => {
+  await page.goto('/omega-3/');
+
+  for (const link of [
+    page.getByRole('link', { name: /Private engineering repository Omega 3\.0/ }),
+    page.getByRole('link', { name: /Private engineering repository Omega Memory MCP/ }),
+  ]) {
+    await expect(link).toHaveAttribute('href', '/#project-inquiry');
+    await expect(link).not.toHaveAttribute('target');
+    await expect(link).not.toHaveAttribute('rel');
+  }
+
+  for (const link of [
+    page.getByRole('link', { name: /Public repository NanoAgent/ }),
+    page.getByRole('link', { name: /Public repository Omega NPU Runtime/ }),
+  ]) {
+    await expect(link).toHaveAttribute('target', '_blank');
+    await expect(link).toHaveAttribute('rel', 'noreferrer');
+  }
+
+  await expect(page.locator('a[href*="leeno7786-coder/Omega3.0"]')).toHaveCount(0);
+  await expect(page.locator('a[href*="leeno7786-coder/omega-memory-mcp"]')).toHaveCount(0);
 });
 
 for (const legalPage of [

@@ -51,16 +51,27 @@ export type SelectedSystemId =
   | 'omega-memory-mcp'
   | 'nanoagent';
 
-export interface SelectedSystem {
+interface SelectedSystemBase {
   id: SelectedSystemId;
   title: string;
   tier: 'featured' | 'supporting';
   status: string;
   summary: string;
   evidence: readonly string[];
-  href: string;
-  linkLabel: 'View source' | 'Open live app';
 }
+
+export type SelectedSystem = SelectedSystemBase & (
+  | {
+      action: 'external';
+      href: `https://${string}`;
+      linkLabel: 'View source' | 'Open live app';
+    }
+  | {
+      action: 'inquiry';
+      href: '#project-inquiry';
+      linkLabel: 'Request a demo' | 'Discuss this system';
+    }
+);
 
 export type ProjectCategory =
   | 'Metacognitive or agentic AI'

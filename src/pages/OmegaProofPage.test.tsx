@@ -31,4 +31,28 @@ describe('OmegaProofPage', () => {
     expect(screen.getByText(/Linux support is available/i)).toBeInTheDocument();
     expect(screen.queryByText(/Linux coming soon/i)).not.toBeInTheDocument();
   });
+
+  it('routes private repositories to inquiry while public repositories remain external', () => {
+    render(<OmegaProofPage />);
+
+    for (const link of [
+      screen.getByRole('link', { name: /Private engineering repository Omega 3\.0/ }),
+      screen.getByRole('link', { name: /Private engineering repository Omega Memory MCP/ }),
+    ]) {
+      expect(link).toHaveAttribute('href', '/#project-inquiry');
+      expect(link).not.toHaveAttribute('target');
+      expect(link).not.toHaveAttribute('rel');
+    }
+
+    for (const link of [
+      screen.getByRole('link', { name: /Public repository NanoAgent/ }),
+      screen.getByRole('link', { name: /Public repository Omega NPU Runtime/ }),
+    ]) {
+      expect(link).toHaveAttribute('target', '_blank');
+      expect(link).toHaveAttribute('rel', 'noreferrer');
+    }
+
+    expect(document.querySelector('a[href*="leeno7786-coder/Omega3.0"]')).not.toBeInTheDocument();
+    expect(document.querySelector('a[href*="leeno7786-coder/omega-memory-mcp"]')).not.toBeInTheDocument();
+  });
 });
