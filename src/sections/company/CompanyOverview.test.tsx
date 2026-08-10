@@ -6,10 +6,11 @@ describe('CompanyOverview', () => {
   it('uses only verified company and founder information', () => {
     render(<CompanyOverview />);
     expect(screen.getByText('Research-minded. Deployment-ready.')).toBeVisible();
-    expect(screen.getByText('Noah Lee')).toBeVisible();
+    expect(screen.getByRole('heading', { name: 'Noah Lee' })).toBeVisible();
+    expect(screen.getByText('Founder & Principal Engineer')).toBeVisible();
     expect(screen.getByText('Mitchell Ray')).toBeVisible();
     expect(screen.getByText('Larone Williamson')).toBeVisible();
-    expect(screen.getAllByText('Co-founder')).toHaveLength(3);
-    expect(screen.queryByText(/CEO|CTO|operations|engineering lead/i)).not.toBeInTheDocument();
+    expect(screen.getAllByText('Co-founder')).toHaveLength(2);
+    expect(screen.queryByText(/CEO|CTO|operations lead/i)).not.toBeInTheDocument();
   });
 });

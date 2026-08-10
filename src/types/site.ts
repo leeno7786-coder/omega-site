@@ -22,12 +22,6 @@ export interface ProcessStep {
   description: string;
 }
 
-export interface Founder {
-  name: 'Noah Lee' | 'Mitchell Ray' | 'Larone Williamson';
-  role: 'Co-founder';
-  initials: 'NL' | 'MR' | 'LW';
-}
-
 export interface ProfileLink {
   label: 'LinkedIn' | 'GitHub';
   href: string;

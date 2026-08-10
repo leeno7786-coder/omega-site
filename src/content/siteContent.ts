@@ -1,7 +1,6 @@
 import type {
   Capability,
   CoFounder,
-  Founder,
   FounderProfile,
   NavigationItem,
   ProcessStep,
@@ -142,12 +141,6 @@ export const PROCESS_STEPS = [
     description: 'Launch, document, train, optimize, and support the finished system.',
   },
 ] as const satisfies readonly ProcessStep[];
-
-export const FOUNDERS = [
-  { name: 'Noah Lee', role: 'Co-founder', initials: 'NL' },
-  { name: 'Mitchell Ray', role: 'Co-founder', initials: 'MR' },
-  { name: 'Larone Williamson', role: 'Co-founder', initials: 'LW' },
-] as const satisfies readonly Founder[];
 
 export const FOUNDER_PROFILE = {
   id: 'noah-lee',
