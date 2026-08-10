@@ -15,6 +15,28 @@ for (const width of [320, 375, 390, 768, 1024, 1440]) {
   });
 }
 
+test('featured systems share a row on desktop and stack on mobile', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto('/');
+  const browserAgent = page.locator('[data-featured-system="omega-browser-agent"]');
+  const devcard = page.locator('[data-featured-system="devcard-ai"]');
+  const desktopBrowserBox = await browserAgent.boundingBox();
+  const desktopDevcardBox = await devcard.boundingBox();
+  expect(desktopBrowserBox).not.toBeNull();
+  expect(desktopDevcardBox).not.toBeNull();
+  expect(Math.abs((desktopBrowserBox?.y ?? 0) - (desktopDevcardBox?.y ?? 0))).toBeLessThan(4);
+  expect(desktopBrowserBox?.x).not.toBe(desktopDevcardBox?.x);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.reload();
+  const mobileBrowserBox = await browserAgent.boundingBox();
+  const mobileDevcardBox = await devcard.boundingBox();
+  expect(mobileBrowserBox).not.toBeNull();
+  expect(mobileDevcardBox).not.toBeNull();
+  expect(Math.abs((mobileBrowserBox?.x ?? 0) - (mobileDevcardBox?.x ?? 0))).toBeLessThan(4);
+  expect((mobileDevcardBox?.y ?? 0)).toBeGreaterThan((mobileBrowserBox?.y ?? 0));
+});
+
 for (const path of ['/', '/omega-3/']) {
   test(`${path} has no detectable accessibility violations`, async ({ page }) => {
     await page.goto(path);
