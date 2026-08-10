@@ -1,6 +1,6 @@
 # Omega AI Founder and Selected Systems Expansion
 
-**Status:** Awaiting written-spec approval  
+**Status:** Approved design
 **Date:** 2026-08-09  
 **Project:** `omega-site`
 
@@ -328,4 +328,3 @@ The expansion is ready when:
 - Mitchell Ray and Larone Williamson remain visibly credited as co-founders.
 - Public claims stay within verified source boundaries.
 - The page remains responsive, accessible, performant, and free of horizontal overflow.
-
