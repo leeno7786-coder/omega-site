@@ -26,11 +26,13 @@ describe('SelectedSystems', () => {
     expect(memoryInquiry).not.toHaveAttribute('target');
     expect(memoryInquiry).not.toHaveAttribute('rel');
 
-    for (const link of [
-      screen.getByRole('link', { name: 'Open live app: DevCard AI' }),
-      screen.getByRole('link', { name: 'View source: Omega Runtime' }),
-      screen.getByRole('link', { name: 'View source: NanoAgent' }),
+    for (const { name, href } of [
+      { name: 'Open live app: DevCard AI', href: 'https://www.omega-dev.uk/' },
+      { name: 'View source: Omega Runtime', href: 'https://github.com/leeno7786-coder/Omega-NPU-Runtime' },
+      { name: 'View source: NanoAgent', href: 'https://github.com/leeno7786-coder/nanoagent' },
     ]) {
+      const link = screen.getByRole('link', { name });
+      expect(link).toHaveAttribute('href', href);
       expect(link).toHaveAttribute('target', '_blank');
       expect(link).toHaveAttribute('rel', 'noreferrer');
     }

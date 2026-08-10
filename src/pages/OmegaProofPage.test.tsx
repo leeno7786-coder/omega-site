@@ -44,10 +44,12 @@ describe('OmegaProofPage', () => {
       expect(link).not.toHaveAttribute('rel');
     }
 
-    for (const link of [
-      screen.getByRole('link', { name: /Public repository NanoAgent/ }),
-      screen.getByRole('link', { name: /Public repository Omega NPU Runtime/ }),
+    for (const { name, href } of [
+      { name: /Public repository NanoAgent/, href: 'https://github.com/leeno7786-coder/nanoagent' },
+      { name: /Public repository Omega NPU Runtime/, href: 'https://github.com/leeno7786-coder/Omega-NPU-Runtime' },
     ]) {
+      const link = screen.getByRole('link', { name });
+      expect(link).toHaveAttribute('href', href);
       expect(link).toHaveAttribute('target', '_blank');
       expect(link).toHaveAttribute('rel', 'noreferrer');
     }

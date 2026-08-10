@@ -9,14 +9,15 @@ describe('FounderProfileSection', () => {
     expect(screen.getByText('Founder & Principal Engineer')).toBeVisible();
     expect(screen.getByText(/clients work directly with Noah/i)).toBeVisible();
     expect(screen.getByText(/U.S. Provisional Patent Application No. 63\/965,475/i)).toBeVisible();
-    expect(screen.getByRole('link', { name: 'Noah Lee on LinkedIn' })).toHaveAttribute(
-      'href',
-      'https://www.linkedin.com/in/noah-lee-omegaai/',
-    );
-    expect(screen.getByRole('link', { name: 'Noah Lee on GitHub' })).toHaveAttribute(
-      'href',
-      'https://github.com/leeno7786-coder',
-    );
+    for (const { name, href } of [
+      { name: 'Noah Lee on LinkedIn', href: 'https://www.linkedin.com/in/noah-lee-omegaai/' },
+      { name: 'Noah Lee on GitHub', href: 'https://github.com/leeno7786-coder' },
+    ]) {
+      const link = screen.getByRole('link', { name });
+      expect(link).toHaveAttribute('href', href);
+      expect(link).toHaveAttribute('target', '_blank');
+      expect(link).toHaveAttribute('rel', 'noreferrer');
+    }
   });
 
   it('preserves co-founder credit and omits private résumé details', () => {
