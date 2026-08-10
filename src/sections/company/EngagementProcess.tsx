@@ -10,7 +10,7 @@ export default function EngagementProcess({ steps = PROCESS_STEPS }: EngagementP
     <section className="section-space content-shell process-section" id="process" aria-labelledby="process-title">
       <div className="section-heading-grid">
         <p className="eyebrow">
-          <span aria-hidden="true">04</span>
+          <span aria-hidden="true">05</span>
           How we work
         </p>
         <div>

@@ -1,10 +1,12 @@
 import type {
   Capability,
-  Founder,
+  CoFounder,
+  FounderProfile,
   NavigationItem,
   ProcessStep,
   ProjectCategory,
   ProofMetric,
+  SelectedSystem,
 } from '../types/site';
 
 export const CONTACT_EMAILS = [
@@ -140,11 +142,108 @@ export const PROCESS_STEPS = [
   },
 ] as const satisfies readonly ProcessStep[];
 
-export const FOUNDERS = [
-  { name: 'Noah Lee', role: 'Co-founder', initials: 'NL' },
+export const FOUNDER_PROFILE = {
+  id: 'noah-lee',
+  name: 'Noah Lee',
+  role: 'Founder & Principal Engineer',
+  initials: 'NL',
+  lead: 'Clients work directly with Noah from technical direction and architecture through implementation, testing, deployment, and support.',
+  biography:
+    "Noah architects and builds private, local-first AI systems across cognitive control, persistent memory, model orchestration, APIs, product interfaces, Linux deployment, and hardware-aware inference. He created Omega 2.5 and Omega 3.0 and leads the hands-on engineering behind Omega's runtime, agent, memory, browser automation, and full-stack product work.",
+  credentials: [
+    'End-to-end engineering: intelligence → runtime → application → machine',
+    'Creator of Omega 2.5 and Omega 3.0',
+    'Co-inventor and co-filer of U.S. Provisional Patent Application No. 63/965,475',
+    "Bachelor of Science in Cybersecurity in progress; President's List honoree in 2026",
+  ],
+  links: [
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/noah-lee-omegaai/' },
+    { label: 'GitHub', href: 'https://github.com/leeno7786-coder' },
+  ],
+} as const satisfies FounderProfile;
+
+export const COFOUNDERS = [
   { name: 'Mitchell Ray', role: 'Co-founder', initials: 'MR' },
   { name: 'Larone Williamson', role: 'Co-founder', initials: 'LW' },
-] as const satisfies readonly Founder[];
+] as const satisfies readonly CoFounder[];
+
+export const SELECTED_SYSTEMS = [
+  {
+    id: 'omega-browser-agent',
+    title: 'Omega Browser Agent',
+    tier: 'featured',
+    status: 'Working build · Edge MV3',
+    summary:
+      'A chat-style autonomous browser agent built to operate with a local 4B model. It plans tasks, navigates, clicks, types, reads page structure and screenshots, and can expand to cloud models when greater capability is needed.',
+    evidence: [
+      'Local-first 4B inference',
+      'Optional OpenRouter cloud models',
+      'Autonomous planning and execution',
+      'Navigation, interaction, extraction, screenshots, and OCR',
+      'Isolated multi-tab workspace',
+      'Action confirmation controls',
+    ],
+    action: 'inquiry',
+    href: '#project-inquiry',
+    linkLabel: 'Request a demo',
+  },
+  {
+    id: 'devcard-ai',
+    title: 'DevCard AI',
+    tier: 'featured',
+    status: 'Live SaaS product',
+    summary:
+      'A full-stack AI application that turns GitHub profiles and résumés into customizable developer portfolios, then exports the result as portable web code and profile assets.',
+    evidence: [
+      'Live Vercel deployment',
+      'Next.js application',
+      'Clerk authentication',
+      'Stripe subscription and webhook flow',
+      'AI-assisted profile generation',
+      'Ten visual themes',
+      'HTML, README, and React/Next.js exports',
+    ],
+    action: 'external',
+    href: 'https://www.omega-dev.uk/',
+    linkLabel: 'Open live app',
+  },
+  {
+    id: 'omega-runtime',
+    title: 'Omega Runtime',
+    tier: 'supporting',
+    status: 'Portable AI infrastructure',
+    summary:
+      'Hardware-aware inference infrastructure spanning model discovery, streaming APIs, process supervision, packaged runtimes, and CPU/GPU/NPU execution paths.',
+    evidence: ['Python', 'FastAPI', 'PowerShell', 'ONNX and GGUF'],
+    action: 'external',
+    href: 'https://github.com/leeno7786-coder/Omega-NPU-Runtime',
+    linkLabel: 'View source',
+  },
+  {
+    id: 'omega-memory-mcp',
+    title: 'Omega Memory MCP',
+    tier: 'supporting',
+    status: 'Private memory infrastructure',
+    summary:
+      'Cross-platform persistent-memory infrastructure with typed MCP access, verified recall, graph projections, embeddings, packaging, and acceptance tests.',
+    evidence: ['Python', 'MCP', 'ONNX', 'Verified recall'],
+    action: 'inquiry',
+    href: '#project-inquiry',
+    linkLabel: 'Discuss this system',
+  },
+  {
+    id: 'nanoagent',
+    title: 'NanoAgent',
+    tier: 'supporting',
+    status: 'Local-model coding agent',
+    summary:
+      'A local-model coding agent with a chat/TUI workflow, MCP connectivity, concurrent sub-agents, workspace sandboxing, validation, and npm packaging.',
+    evidence: ['TypeScript', 'React TUI', 'Bun', 'MCP'],
+    action: 'external',
+    href: 'https://github.com/leeno7786-coder/nanoagent',
+    linkLabel: 'View source',
+  },
+] as const satisfies readonly SelectedSystem[];
 
 export const PROJECT_CATEGORIES = [
   'Metacognitive or agentic AI',

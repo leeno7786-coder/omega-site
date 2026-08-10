@@ -1,9 +1,5 @@
-import { COMPANY_CONTENT, FOUNDERS } from '../../content/siteContent';
-import type { Founder } from '../../types/site';
-
-interface CompanyOverviewProps {
-  founders?: readonly Founder[];
-}
+import { COMPANY_CONTENT } from '../../content/siteContent';
+import FounderProfileSection from './FounderProfile';
 
 const principles = [
   {
@@ -20,13 +16,13 @@ const principles = [
   },
 ] as const;
 
-export default function CompanyOverview({ founders = FOUNDERS }: CompanyOverviewProps) {
+export default function CompanyOverview() {
   return (
     <section className="company-section" id="company" aria-labelledby="company-title">
       <div className="content-shell company-section__inner">
         <div className="company-section__statement">
           <p className="eyebrow">
-            <span aria-hidden="true">05</span>
+            <span aria-hidden="true">06</span>
             Company
           </p>
           <p className="company-section__positioning">{COMPANY_CONTENT.eyebrow}</p>
@@ -43,20 +39,7 @@ export default function CompanyOverview({ founders = FOUNDERS }: CompanyOverview
           ))}
         </ul>
 
-        <div className="founder-list" aria-label="Omega AI LLC founders">
-          <p>Founded and led by</p>
-          <ul>
-            {founders.map((founder) => (
-              <li key={founder.name}>
-                <span className="founder-list__initials" aria-hidden="true">{founder.initials}</span>
-                <span>
-                  <strong>{founder.name}</strong>
-                  <small>{founder.role}</small>
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <FounderProfileSection />
       </div>
     </section>
   );

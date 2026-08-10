@@ -27,11 +27,23 @@
       {
         "@context": "https://schema.org",
         "@type": "Organization",
+        "@id": "https://omega2ai.com/#organization",
         "name": "Omega AI LLC",
         "url": "https://omega2ai.com/",
         "email": "noahlee@omega2ai.com",
         "founder": [
-          { "@type": "Person", "name": "Noah Lee" },
+          {
+            "@type": "Person",
+            "@id": "https://omega2ai.com/#noah-lee",
+            "name": "Noah Lee",
+            "jobTitle": "Founder & Principal Engineer",
+            "url": "https://omega2ai.com/#noah-lee",
+            "sameAs": [
+              "https://www.linkedin.com/in/noah-lee-omegaai/",
+              "https://github.com/leeno7786-coder"
+            ],
+            "worksFor": { "@id": "https://omega2ai.com/#organization" }
+          },
           { "@type": "Person", "name": "Mitchell Ray" },
           { "@type": "Person", "name": "Larone Williamson" }
         ]

@@ -22,11 +22,56 @@ export interface ProcessStep {
   description: string;
 }
 
-export interface Founder {
-  name: 'Noah Lee' | 'Mitchell Ray' | 'Larone Williamson';
-  role: 'Co-founder';
-  initials: 'NL' | 'MR' | 'LW';
+export interface ProfileLink {
+  label: 'LinkedIn' | 'GitHub';
+  href: string;
 }
+
+export interface FounderProfile {
+  id: 'noah-lee';
+  name: 'Noah Lee';
+  role: 'Founder & Principal Engineer';
+  initials: 'NL';
+  lead: string;
+  biography: string;
+  credentials: readonly string[];
+  links: readonly ProfileLink[];
+}
+
+export interface CoFounder {
+  name: 'Mitchell Ray' | 'Larone Williamson';
+  role: 'Co-founder';
+  initials: 'MR' | 'LW';
+}
+
+export type SelectedSystemId =
+  | 'omega-browser-agent'
+  | 'devcard-ai'
+  | 'omega-runtime'
+  | 'omega-memory-mcp'
+  | 'nanoagent';
+
+interface SelectedSystemBase {
+  id: SelectedSystemId;
+  title: string;
+  tier: 'featured' | 'supporting';
+  status: string;
+  summary: string;
+  evidence: readonly string[];
+}
+
+export type SelectedSystem = SelectedSystemBase & (
+  | {
+      action: 'external';
+      href: `https://${string}`;
+      linkLabel: 'View source' | 'Open live app';
+    }
+  | {
+      action: 'inquiry';
+      href: '#project-inquiry';
+      linkLabel: 'Request a demo' | 'Discuss this system';
+    }
+);
 
 export type ProjectCategory =
   | 'Metacognitive or agentic AI'
