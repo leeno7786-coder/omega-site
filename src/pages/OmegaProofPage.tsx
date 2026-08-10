@@ -362,7 +362,7 @@ export default function OmegaProofPage() {
           <ProofDisclosure
             id="repositories"
             title="Repositories"
-            summary="Inspect the flagship system and related runtime, memory, agent, and hardware work"
+            summary="Review available source and discuss the private flagship and memory systems."
             defaultOpen
           >
             <div className="repository-grid">

@@ -32,6 +32,13 @@ describe('OmegaProofPage', () => {
     expect(screen.queryByText(/Linux coming soon/i)).not.toBeInTheDocument();
   });
 
+  it('distinguishes available source from private systems in the repository summary', () => {
+    render(<OmegaProofPage />);
+    expect(
+      screen.getByText('Review available source and discuss the private flagship and memory systems.'),
+    ).toBeVisible();
+  });
+
   it('routes private repositories to inquiry while public repositories remain external', () => {
     render(<OmegaProofPage />);
 
