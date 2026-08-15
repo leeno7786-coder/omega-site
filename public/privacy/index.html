@@ -47,7 +47,7 @@
     </header>
     <main>
       <h1>Privacy Policy</h1>
-      <p class="meta">Omega AI LLC · Last updated: August 7, 2026</p>
+      <p class="meta">Omega AI LLC · Last updated: August 14, 2026</p>
       <p>
         This policy covers <strong>omega2ai.com</strong>, contact with Omega AI LLC, and
         <strong>Sign in with Google / Google Workspace</strong> used by the Omega 3.0 runtime.
@@ -81,76 +81,94 @@
 
       <h2>3. Google Sign-In and Google Workspace (Omega 3.0)</h2>
       <p>
-        When you use <strong>Sign in with Google</strong> from an Omega 3.0 installation,
-        Omega requests only the OAuth scopes required for the product ceiling:
+        The Omega 3.0 Google Workspace connection is an installed desktop integration. It connects
+        only when you start the connection and approve Google's consent screen.
       </p>
+
+      <h3>Authorization and requested scopes</h3>
+      <p>
+        Omega uses the OAuth 2.0 Authorization Code flow with PKCE, an independent one-time state
+        value, and a loopback callback on your device. The desktop integration does not use or accept a Google OAuth client secret.
+      </p>
+      <p>Omega requests these scopes:</p>
       <ul>
-        <li>OpenID identity (<code>openid</code>, <code>email</code>)</li>
-        <li>Gmail (<code>gmail.modify</code>) — read and bounded changes; no permanent-delete scope</li>
-        <li>Calendar, Tasks, and Drive — as enabled in your connection settings</li>
+        <li><code>openid</code></li>
+        <li><code>https://www.googleapis.com/auth/userinfo.email</code></li>
+        <li><code>https://www.googleapis.com/auth/gmail.modify</code></li>
+        <li><code>https://www.googleapis.com/auth/calendar</code></li>
+        <li><code>https://www.googleapis.com/auth/tasks</code></li>
+        <li><code>https://www.googleapis.com/auth/drive</code></li>
       </ul>
 
-      <h3>What Omega stores, and where</h3>
+      <h3>Data processing and storage</h3>
       <table>
         <tr>
           <th>Data</th>
-          <th>Storage</th>
+          <th>How it is handled</th>
         </tr>
         <tr>
-          <td>Google OAuth client secret (owner-configured once)</td>
-          <td>AES-256-GCM connector vault on the Omega host</td>
+          <td>OAuth client ID</td>
+          <td>A public desktop-application identifier included in the installed provider</td>
         </tr>
         <tr>
-          <td>Refresh / access tokens</td>
-          <td>AES-256-GCM connector vault, bound to your connection passphrase</td>
+          <td>Access and refresh credentials</td>
+          <td>Credentials are held only in memory by the local provider process for the active connection</td>
         </tr>
         <tr>
-          <td>Connection contract (capabilities, authority, retention)</td>
-          <td>Local guardian state — configuration only, no message bodies</td>
+          <td>Google Workspace content</td>
+          <td>Requested from Google only for the tool operation you invoke and returned locally to Omega</td>
         </tr>
         <tr>
-          <td>Raw Workspace observations on intake</td>
-          <td>Local SourceLedger (plaintext before Guardian screening)</td>
-        </tr>
-        <tr>
-          <td>Derived memory after screening</td>
-          <td>Local Omega memory (episode SRAM → DeepSleep → filesystem/graph)</td>
-        </tr>
-        <tr>
-          <td>Action / sync operational state</td>
-          <td>Local ledgers: IDs, revisions, cursors, counts, digests — not Workspace payload content</td>
+          <td>Operational state</td>
+          <td>Bounded non-secret status, revision, cursor, and action state kept by the local process as needed to complete or reconcile an operation</td>
         </tr>
       </table>
       <p>
-        Google Workspace payloads and secrets are not placed in application logs, test output,
-        Git, provider cursor state, or HUD progress labels.
+        The provider sends authorized Workspace requests directly from your device to Google's HTTPS API endpoints.
+        Omega AI LLC does not operate an intermediary server for this connection. The provider does not
+        persist Google credentials or Workspace payloads to its package, command-line arguments,
+        environment, Git repository, logs, or provider files.
       </p>
 
       <h3>How Omega uses Workspace data</h3>
       <ol>
-        <li>Ingest selected mail, calendar, tasks, and files into <em>local</em> memory.</li>
-        <li>Align standing work after you approve a package.</li>
-        <li>
-          Act only inside the connection contract and, for autonomous standing work, an exact
-          approved grant. Send-class Gmail operations require send authority and revision-bound
-          approval when configured that way.
-        </li>
+        <li>Confirm the connected Google identity and connection status.</li>
+        <li>Read or change Gmail, Calendar, Tasks, Drive, or Docs data only when you invoke or approve the corresponding local tool.</li>
+        <li>Return the result to the local Omega runtime for the user-requested task.</li>
       </ol>
-      <p>Omega does not sell Workspace data or use it to advertise to third parties.</p>
+      <p>
+        Omega may retain a user-visible result or derived local memory on the same user-controlled
+        installation only when you invoke or approve that product behavior. Google user data is not
+        sold or used for advertising. It is not used to train shared or generalized AI models.
+      </p>
+      <p>
+        Omega's use and transfer of information received from Google APIs adheres to the
+        <a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener noreferrer"
+          >Google API Services User Data Policy</a
+        >, including the Limited Use requirements.
+      </p>
 
       <h3>Sharing</h3>
       <p>
-        Omega does not transmit your Workspace content to Google beyond the API calls you
-        authorize, and does not share that content with other product vendors as part of this
-        connection.
+        Workspace content travels between your local installation and Google's APIs for the
+        operation you request. Results remain on your local installation unless you deliberately
+        send or share them using a Google Workspace action. Omega AI LLC does not disclose this
+        data to advertising platforms, data brokers, or unrelated third parties.
       </p>
 
       <h3>Retention and deletion</h3>
       <ul>
-        <li>Retention follows the connection contract you set in Omega.</li>
         <li>
-          Disconnect revokes Omega’s Google authority, then clears local credentials and
-          connector state according to that contract.
+          The Google Workspace provider does not persist OAuth credentials or Workspace payloads
+          after its local process ends.
+        </li>
+        <li>
+          Disconnect makes a bounded best-effort request to revoke Google's credential grant,
+          then destroys the local in-memory credential session. Shutdown also destroys the local session.
+        </li>
+        <li>
+          You control any user-approved results or derived memory retained by the local Omega
+          installation and may remove that local data using Omega's local data controls.
         </li>
         <li>
           You can also remove Omega from
