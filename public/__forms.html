@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Project inquiry form registration</title>
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <p>This page registers the project inquiry form for Netlify form detection.</p>
+    <form name="project-inquiry" method="POST" action="/" data-netlify="true" netlify netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="project-inquiry" />
+      <input name="name" />
+      <input name="email" type="email" />
+      <input name="company" />
+      <select name="category">
+        <option>Metacognitive or agentic AI</option>
+        <option>Custom AI runtime, local AI, or edge AI</option>
+        <option>Website, web application, or Android application</option>
+        <option>Custom computer, Linux, or hardware integration</option>
+        <option>Autonomous systems and drone robotics</option>
+        <option>Unsure or another type of project</option>
+      </select>
+      <textarea name="description"></textarea>
+      <input name="bot-field" />
+      <button type="submit">Send</button>
+    </form>
+  </body>
+</html>
