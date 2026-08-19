@@ -21,6 +21,7 @@ export default defineConfig({
       input: {
         home: path.resolve(__dirname, 'index.html'),
         omega3: path.resolve(__dirname, 'omega-3/index.html'),
+        autonomousSystems: path.resolve(__dirname, 'autonomous-systems/index.html'),
       },
     },
   },

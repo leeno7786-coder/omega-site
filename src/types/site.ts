@@ -4,10 +4,11 @@ export interface NavigationItem {
 }
 
 export interface Capability {
-  id: 'metacognitive-ai' | 'custom-runtimes' | 'digital-products' | 'computers-integrations';
+  id: 'metacognitive-ai' | 'custom-runtimes' | 'digital-products' | 'computers-integrations' | 'autonomous-systems';
   title: string;
   description: string;
   tags: readonly string[];
+  href?: '/autonomous-systems/';
 }
 
 export interface ProofMetric {
@@ -78,6 +79,7 @@ export type ProjectCategory =
   | 'Custom AI runtime, local AI, or edge AI'
   | 'Website, web application, or Android application'
   | 'Custom computer, Linux, or hardware integration'
+  | 'Autonomous systems and drone robotics'
   | 'Unsure or another type of project';
 
 export interface ProjectInquiryPayload {

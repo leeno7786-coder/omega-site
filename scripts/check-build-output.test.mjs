@@ -19,6 +19,7 @@ async function createFixture({ homeHtml, homeJs = 'console.log("home")' } = {}) 
     mkdir(path.join(distDir, '.vite'), { recursive: true }),
     mkdir(path.join(distDir, 'assets'), { recursive: true }),
     mkdir(path.join(distDir, 'omega-3'), { recursive: true }),
+    mkdir(path.join(distDir, 'autonomous-systems'), { recursive: true }),
     mkdir(path.join(distDir, 'privacy'), { recursive: true }),
     mkdir(path.join(distDir, 'terms'), { recursive: true }),
   ]);
@@ -36,6 +37,7 @@ async function createFixture({ homeHtml, homeJs = 'console.log("home")' } = {}) 
   await Promise.all([
     writeFile(path.join(distDir, 'index.html'), homeHtml ?? validHome),
     writeFile(path.join(distDir, 'omega-3', 'index.html'), '<!doctype html><title>Omega 3.0</title>'),
+    writeFile(path.join(distDir, 'autonomous-systems', 'index.html'), '<!doctype html><title>Autonomous Systems</title>'),
     writeFile(path.join(distDir, 'privacy', 'index.html'), '<!doctype html><title>Privacy</title>'),
     writeFile(path.join(distDir, 'terms', 'index.html'), '<!doctype html><title>Terms</title>'),
     writeFile(path.join(distDir, 'sitemap.xml'), '<urlset><url><loc>https://omega2ai.com/</loc></url></urlset>'),

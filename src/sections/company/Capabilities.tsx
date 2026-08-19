@@ -24,7 +24,10 @@ export default function Capabilities({ items = CAPABILITIES }: CapabilitiesProps
 
       <div className="capability-grid">
         {items.map((item, index) => (
-          <article className="capability-card" key={item.id}>
+          <article
+            className={item.href ? 'capability-card capability-card--wide' : 'capability-card'}
+            key={item.id}
+          >
             <div className="capability-card__meta">
               <span>C-{String(index + 1).padStart(2, '0')}</span>
               <span>{item.tags.length} disciplines</span>
@@ -34,6 +37,11 @@ export default function Capabilities({ items = CAPABILITIES }: CapabilitiesProps
             <ul>
               {item.tags.map((tag) => <li key={tag}>{tag}</li>)}
             </ul>
+            {item.href ? (
+              <a className="capability-card__action" href={item.href}>
+                View capability
+              </a>
+            ) : null}
           </article>
         ))}
       </div>

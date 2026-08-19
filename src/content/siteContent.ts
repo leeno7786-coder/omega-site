@@ -87,6 +87,21 @@ export const CAPABILITIES = [
       'Software-to-hardware integration',
     ],
   },
+  {
+    id: 'autonomous-systems',
+    title: 'Autonomous Systems & Drone Robotics',
+    description:
+      'Planning, coordination, and decision systems for drones and robotic fleets operating across changing missions, constrained hardware, and unreliable communications.',
+    tags: [
+      'Autonomous mission planning',
+      'Dynamic replanning',
+      'Swarm and fleet coordination',
+      'Degraded-network operation',
+      'Simulation and digital twins',
+      'Edge AI integration',
+    ],
+    href: '/autonomous-systems/',
+  },
 ] as const satisfies readonly Capability[];
 
 export const CAPABILITY_FLOW = [
@@ -250,8 +265,48 @@ export const PROJECT_CATEGORIES = [
   'Custom AI runtime, local AI, or edge AI',
   'Website, web application, or Android application',
   'Custom computer, Linux, or hardware integration',
+  'Autonomous systems and drone robotics',
   'Unsure or another type of project',
 ] as const satisfies readonly ProjectCategory[];
+
+export const AUTONOMOUS_SYSTEMS_PAGE = {
+  path: '/autonomous-systems/',
+  title: 'Autonomous Systems & Drone Robotics',
+  copy:
+    'Planning, coordination, and decision systems for drones and robotic fleets operating across changing missions, constrained hardware, and unreliable communications.',
+  disciplines: [
+    {
+      title: 'Autonomous mission planning',
+      body: 'Generate and sequence multi-agent mission plans as objectives, constraints, and available assets change.',
+    },
+    {
+      title: 'Dynamic replanning',
+      body: 'Recalculate tasking when the environment, the fleet, or the communications picture shifts mid-mission.',
+    },
+    {
+      title: 'Swarm and fleet coordination',
+      body: 'Keep many agents aligned on shared intent without depending on a single control node.',
+    },
+    {
+      title: 'Degraded-network operation',
+      body: 'Preserve useful planning and coordination when links are delayed, lossy, or unavailable.',
+    },
+    {
+      title: 'Simulation and digital twins',
+      body: 'Exercise plans against modeled conditions before and during operations.',
+    },
+    {
+      title: 'Edge AI integration',
+      body: 'Run decision systems on constrained, local hardware rather than distant cloud services.',
+    },
+  ],
+  sbirStatus: 'Proposal submitted',
+  sbirYear: '2026',
+  sbirStatement:
+    'In 2026, Omega AI LLC submitted an SBIR proposal addressing autonomous planning for a 200-agent UAS swarm operating under degraded conditions.',
+  sbirNote:
+    'This page is limited to cleared, nonproprietary information. It describes a submitted SBIR proposal and does not represent a government award or official endorsement.',
+} as const;
 
 export const OMEGA_PROOF_CONTENT = {
   heading: 'One system. Multiple disciplines proven.',

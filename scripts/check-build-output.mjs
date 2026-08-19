@@ -3,7 +3,7 @@ import { readFile, readdir, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const REQUIRED_ROUTES = ['index.html', 'omega-3/index.html', 'privacy/index.html', 'terms/index.html'];
+const REQUIRED_ROUTES = ['index.html', 'omega-3/index.html', 'autonomous-systems/index.html', 'privacy/index.html', 'terms/index.html'];
 const METADATA = {
   description: /<meta[^>]+name=["']description["'][^>]*>/i,
   canonical: /<link[^>]+rel=["']canonical["'][^>]*>/i,

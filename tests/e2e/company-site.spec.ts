@@ -7,11 +7,12 @@ test('visitor can understand the company and reach the inquiry form', async ({ p
   await expect(page.getByRole('heading', { name: 'What are you trying to build?' })).toBeInViewport();
 });
 
-test('technical visitor can open the proof page', async ({ page }) => {
+test('visitor can open the autonomous systems capability page', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('link', { name: 'See Omega 3.0 proof' }).click();
-  await expect(page).toHaveURL(/\/omega-3\/$/);
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText(/Omega 3.0 technical proof/i);
+  await page.getByRole('link', { name: 'View capability' }).click();
+  await expect(page).toHaveURL(/\/autonomous-systems\/$/);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(/Autonomous Systems & Drone Robotics/i);
+  await expect(page.getByText(/submitted an SBIR proposal/i)).toBeVisible();
 });
 
 test('visitor can inspect Noah and the selected systems', async ({ page }) => {

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { SITE_NAV } from '../../content/siteContent';
 
 interface SiteHeaderProps {
-  currentPage: 'home' | 'omega-3';
+  currentPage: 'home' | 'omega-3' | 'autonomous-systems';
 }
 
 export default function SiteHeader({ currentPage }: SiteHeaderProps) {
@@ -53,7 +53,12 @@ export default function SiteHeader({ currentPage }: SiteHeaderProps) {
               <a
                 key={item.href}
                 href={item.href}
-                aria-current={currentPage === 'omega-3' && item.href === '/omega-3/' ? 'page' : undefined}
+                aria-current={
+                  (currentPage === 'omega-3' && item.href === '/omega-3/')
+                  || (currentPage === 'autonomous-systems' && item.href === '/#capabilities')
+                    ? 'page'
+                    : undefined
+                }
                 onClick={() => setIsOpen(false)}
               >
                 {item.label}

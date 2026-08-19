@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  AUTONOMOUS_SYSTEMS_PAGE,
   CAPABILITIES,
   COFOUNDERS,
   FOUNDER_PROFILE,
@@ -17,6 +18,7 @@ describe('site content contract', () => {
       'custom-runtimes',
       'digital-products',
       'computers-integrations',
+      'autonomous-systems',
     ]);
     expect(HOME_PROOF_METRICS.map((item) => item.value)).toEqual([
       '13',
@@ -72,5 +74,16 @@ describe('site content contract', () => {
   it('exposes real destinations and inquiry categories', () => {
     expect(SITE_NAV.some((item) => item.href === '/omega-3/')).toBe(true);
     expect(PROJECT_CATEGORIES).toContain('Unsure or another type of project');
+    expect(PROJECT_CATEGORIES).toContain('Autonomous systems and drone robotics');
+    expect(CAPABILITIES.find((item) => item.id === 'autonomous-systems')).toMatchObject({
+      href: '/autonomous-systems/',
+    });
+    expect(AUTONOMOUS_SYSTEMS_PAGE.sbirStatement).toBe(
+      'In 2026, Omega AI LLC submitted an SBIR proposal addressing autonomous planning for a 200-agent UAS swarm operating under degraded conditions.',
+    );
+    expect(AUTONOMOUS_SYSTEMS_PAGE.sbirStatus).toBe('Proposal submitted');
+    expect(JSON.stringify(AUTONOMOUS_SYSTEMS_PAGE)).not.toMatch(/government-backed|validated by the DoW/i);
+    expect(JSON.stringify(AUTONOMOUS_SYSTEMS_PAGE)).not.toMatch(/\bcontracted\b/i);
+    expect(JSON.stringify(AUTONOMOUS_SYSTEMS_PAGE)).not.toMatch(/\bselected\b/i);
   });
 });

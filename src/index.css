@@ -691,6 +691,28 @@ a {
   line-height: 1.25;
 }
 
+.capability-card--wide {
+  grid-column: 1 / -1;
+}
+
+.capability-card--wide h3 {
+  max-width: 28ch;
+}
+
+.capability-card__action {
+  display: inline-block;
+  margin-top: 28px;
+  color: var(--teal);
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.capability-card__action:hover {
+  color: var(--ice);
+}
+
 .capability-flow {
   display: grid;
   grid-template-columns: 0.7fr 1.8fr 0.7fr;
@@ -716,6 +738,83 @@ a {
 
 .capability-flow > span:last-child {
   text-align: right;
+}
+
+.discipline-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: clamp(48px, 6vw, 72px);
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+}
+
+.discipline-grid article {
+  min-height: 220px;
+  padding: 24px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: rgba(10, 22, 33, 0.45);
+}
+
+.discipline-grid article > span {
+  color: #5b7480;
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.54rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.discipline-grid h3 {
+  max-width: 18ch;
+  margin: 42px 0 0;
+  color: var(--ice);
+  font-size: 1.05rem;
+  font-weight: 560;
+  letter-spacing: -0.02em;
+}
+
+.discipline-grid p {
+  margin: 16px 0 0;
+  color: #758d98;
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.sbir-panel {
+  padding-block: clamp(72px, 9vw, 120px);
+}
+
+.sbir-panel__status {
+  margin: 22px 0 0;
+  color: var(--teal);
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sbir-panel h2 {
+  max-width: 18ch;
+  margin: 18px 0 0;
+  color: var(--ice);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 520;
+  letter-spacing: -0.04em;
+}
+
+.sbir-panel__statement {
+  max-width: 68ch;
+  margin: 28px 0 0;
+  color: var(--ice);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.sbir-panel__note {
+  max-width: 68ch;
+  margin: 18px 0 0;
+  color: #8da3ae;
+  line-height: 1.65;
 }
 
 .proof-preview {
@@ -2205,7 +2304,8 @@ a {
   }
 
   .architecture-cascade,
-  .behavior-grid {
+  .behavior-grid,
+  .discipline-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -2501,6 +2601,10 @@ a {
   }
 
   .capability-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .discipline-grid {
     grid-template-columns: 1fr;
   }
 
