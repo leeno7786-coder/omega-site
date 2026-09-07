@@ -2,6 +2,20 @@
 command = "npm run build"
 publish = "dist"
 
+# Omega OAuth callback relay (added 2026-09-06).
+# Vendors such as Slack refuse plain-HTTP loopback redirect URLs, so Omega
+# registers https://plugins.omega2ai.com/oauth/<profile_id>/callback with each
+# provider and this rule hands the browser straight back to the desktop app's
+# loopback listener, query string intact (Netlify forwards it by default).
+# Nothing is stored or logged here: the authorization code that passes through
+# is bound to that device's PKCE verifier and state, and the token exchange
+# never touches this site.
+[[redirects]]
+from = "/oauth/:profile_id/callback"
+to = "http://127.0.0.1:13310/oauth/:profile_id/callback"
+status = 302
+force = true
+
 [[redirects]]
 from = "/privacy.html"
 to = "/privacy/"
@@ -20,3 +34,9 @@ for = "/*"
 X-Content-Type-Options = "nosniff"
 Referrer-Policy = "strict-origin-when-cross-origin"
 Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+for = "/oauth/*"
+[headers.values]
+Referrer-Policy = "no-referrer"
+Cache-Control = "no-store"
