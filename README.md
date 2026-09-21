@@ -42,7 +42,6 @@ To enable:
 ## Contact
 
 - Noah Lee: [noahlee@omega2ai.com](mailto:noahlee@omega2ai.com)
-- Mitchell Ray: [mitchellray@omega2ai.com](mailto:mitchellray@omega2ai.com)
 
 ---
 

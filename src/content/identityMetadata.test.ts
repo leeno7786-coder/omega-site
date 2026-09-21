@@ -27,7 +27,6 @@ describe('homepage identity metadata', () => {
     });
     expect(schema.founder.map((founder) => founder.name)).toEqual([
       'Noah Lee',
-      'Mitchell Ray',
       'Larone Williamson',
     ]);
     expect(schema.founder.find((founder) => founder.name === 'Noah Lee')).toMatchObject({

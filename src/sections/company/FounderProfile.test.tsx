@@ -22,9 +22,8 @@ describe('FounderProfileSection', () => {
 
   it('preserves co-founder credit and omits private résumé details', () => {
     render(<FounderProfileSection />);
-    expect(screen.getByText('Mitchell Ray')).toBeVisible();
     expect(screen.getByText('Larone Williamson')).toBeVisible();
-    expect(screen.getAllByText('Co-founder')).toHaveLength(2);
+    expect(screen.getAllByText('Co-founder')).toHaveLength(1);
     expect(screen.queryByText(/337-396-5510|DeRidder, Louisiana/i)).not.toBeInTheDocument();
     expect(screen.queryByRole('link', { name: /resume/i })).not.toBeInTheDocument();
   });

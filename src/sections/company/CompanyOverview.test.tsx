@@ -8,9 +8,8 @@ describe('CompanyOverview', () => {
     expect(screen.getByText('Research-minded. Deployment-ready.')).toBeVisible();
     expect(screen.getByRole('heading', { name: 'Noah Lee' })).toBeVisible();
     expect(screen.getByText('Founder & Principal Engineer')).toBeVisible();
-    expect(screen.getByText('Mitchell Ray')).toBeVisible();
     expect(screen.getByText('Larone Williamson')).toBeVisible();
-    expect(screen.getAllByText('Co-founder')).toHaveLength(2);
+    expect(screen.getAllByText('Co-founder')).toHaveLength(1);
     expect(screen.queryByText(/CEO|CTO|operations lead/i)).not.toBeInTheDocument();
   });
 });

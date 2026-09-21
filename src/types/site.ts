@@ -40,9 +40,9 @@ export interface FounderProfile {
 }
 
 export interface CoFounder {
-  name: 'Mitchell Ray' | 'Larone Williamson';
+  name: 'Larone Williamson';
   role: 'Co-founder';
-  initials: 'MR' | 'LW';
+  initials: 'LW';
 }
 
 export type SelectedSystemId =

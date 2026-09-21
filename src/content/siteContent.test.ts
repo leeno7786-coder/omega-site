@@ -40,7 +40,6 @@ describe('site content contract', () => {
       { label: 'GitHub', href: 'https://github.com/leeno7786-coder' },
     ]);
     expect(COFOUNDERS.map((founder) => founder.name)).toEqual([
-      'Mitchell Ray',
       'Larone Williamson',
     ]);
     expect(SELECTED_SYSTEMS.map((system) => system.id)).toEqual([

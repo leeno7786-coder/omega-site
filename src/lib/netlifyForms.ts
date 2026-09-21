@@ -16,7 +16,7 @@ function encodeFormSubmitInquiry(payload: ProjectInquiryPayload) {
     message: payload.description,
     _replyto: payload.email,
     _subject: `Omega AI inquiry: ${payload.category || 'General'}`,
-    _cc: CONTACT_EMAILS[1],
+
     _template: 'table',
     _captcha: 'false',
   });

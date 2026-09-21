@@ -75,6 +75,6 @@ describe('ProjectInquiryForm', () => {
     expect(screen.getByLabelText('Project description')).toHaveValue(
       'Build a private autonomous research system.',
     );
-    expect(screen.getAllByRole('link', { name: /@omega2ai\.com/ })).toHaveLength(2);
+    expect(screen.getAllByRole('link', { name: /@omega2ai\.com/ })).toHaveLength(1);
   });
 });

@@ -11,7 +11,6 @@ import type {
 
 export const CONTACT_EMAILS = [
   'noahlee@omega2ai.com',
-  'mitchellray@omega2ai.com',
 ] as const;
 
 export const SITE_NAV = [
@@ -178,7 +177,6 @@ export const FOUNDER_PROFILE = {
 } as const satisfies FounderProfile;
 
 export const COFOUNDERS = [
-  { name: 'Mitchell Ray', role: 'Co-founder', initials: 'MR' },
   { name: 'Larone Williamson', role: 'Co-founder', initials: 'LW' },
 ] as const satisfies readonly CoFounder[];
 
