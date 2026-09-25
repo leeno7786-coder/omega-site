@@ -68,7 +68,11 @@ const SLACK_TOKEN_ERRORS: Readonly<Record<string, string>> = {
   invalid_client_id: 'invalid_client',
 };
 /** The token-response fields passed through to the unit, and nothing else. */
-const TOKEN_FIELDS = ['access_token', 'refresh_token', 'token_type', 'scope', 'expires_in'] as const;
+// resource/audience/aud are relayed so the unit validates the token against its resource,
+// exactly as it validates a direct token response.
+const TOKEN_FIELDS = [
+  'access_token', 'refresh_token', 'token_type', 'scope', 'expires_in', 'resource', 'audience', 'aud',
+] as const;
 
 const STATE_DIGEST = /^[0-9a-f]{64}$/;
 const PKCE_CHALLENGE = /^[A-Za-z0-9_-]{43,128}$/;

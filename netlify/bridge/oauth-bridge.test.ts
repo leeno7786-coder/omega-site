@@ -712,3 +712,24 @@ describe('review hardening', () => {
     },
   );
 });
+
+describe('audience pass-through', () => {
+  it('relays resource, audience and aud so the unit can hold the token to its resource', async () => {
+    const provider = {
+      ok: true, access_token: 'xoxp', token_type: 'Bearer',
+      resource: 'https://mcp.slack.com', audience: 'https://mcp.slack.com', aud: 'https://mcp.slack.com',
+      team: { id: 'T1' },
+    };
+    const fetchImpl = vi.fn<typeof fetch>().mockResolvedValue(jsonResponse(provider));
+    const { handler } = makeHandler({ fetchImpl });
+    const handle = await callbackHandle(handler);
+    const response = await handler(
+      post(`/bridge/v1/${SLACK}/redeem`, { completion_handle: handle, state_digest: STATE, pkce_verifier: VERIFIER }),
+    );
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({
+      access_token: 'xoxp', token_type: 'Bearer',
+      resource: 'https://mcp.slack.com', audience: 'https://mcp.slack.com', aud: 'https://mcp.slack.com',
+    });
+  });
+});
