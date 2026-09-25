@@ -733,3 +733,18 @@ describe('audience pass-through', () => {
     });
   });
 });
+
+describe('provider response hygiene', () => {
+  it('releases the body of a 5xx it does not read', async () => {
+    const cancel = vi.fn();
+    const stream = new ReadableStream({ pull() {}, cancel });
+    const fetchImpl = vi.fn<typeof fetch>().mockResolvedValue(new Response(stream, { status: 503 }));
+    const { handler } = makeHandler({ fetchImpl });
+    const handle = await callbackHandle(handler);
+    const response = await handler(
+      post(`/bridge/v1/${SLACK}/redeem`, { completion_handle: handle, state_digest: STATE, pkce_verifier: VERIFIER }),
+    );
+    expect(response.status).toBe(502);
+    expect(cancel).toHaveBeenCalled();
+  });
+});

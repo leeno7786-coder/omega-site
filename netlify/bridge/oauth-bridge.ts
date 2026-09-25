@@ -298,6 +298,8 @@ async function tokenRequest(
   }
   if (providerResponse.status >= 500) {
     // An outage is "could not run", whatever the body says; never an OAuth refusal.
+    // The body is not read, so release it rather than hold the connection open.
+    await providerResponse.body?.cancel().catch(() => undefined);
     return failure(502, 'provider_unavailable');
   }
   let body: unknown;
