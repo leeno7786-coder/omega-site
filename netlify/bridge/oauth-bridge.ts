@@ -284,10 +284,16 @@ async function tokenRequest(
   try {
     providerResponse = await fetchImpl(profile.tokenEndpoint, {
       method: 'POST',
+      // The body carries the client secret: a provider-side redirect must never forward it.
+      redirect: 'error',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json' },
       body: new URLSearchParams(form).toString(),
     });
   } catch {
+    return failure(502, 'provider_unavailable');
+  }
+  if (providerResponse.status >= 500) {
+    // An outage is "could not run", whatever the body says; never an OAuth refusal.
     return failure(502, 'provider_unavailable');
   }
   let body: unknown;
@@ -310,7 +316,7 @@ async function tokenRequest(
     const raw = typeof body.error === 'string' ? body.error : '';
     const code = RFC6749_TOKEN_ERRORS.has(raw)
       ? raw
-      : (SLACK_TOKEN_ERRORS[raw] ?? 'oauth_provider_rejected');
+      : (Object.hasOwn(SLACK_TOKEN_ERRORS, raw) ? SLACK_TOKEN_ERRORS[raw] : 'oauth_provider_rejected');
     return failure(400, code);
   }
   const passed: Record<string, unknown> = {};
@@ -415,6 +421,7 @@ export function createBridgeHandler(options: BridgeOptions): (req: Request) => P
         try {
           await fetchImpl(profile.revocationEndpoint, {
             method: 'POST',
+            redirect: 'error',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: new URLSearchParams({
               client_id: profile.clientId,
