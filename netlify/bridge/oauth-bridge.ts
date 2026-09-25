@@ -68,7 +68,11 @@ const SLACK_TOKEN_ERRORS: Readonly<Record<string, string>> = {
   invalid_client_id: 'invalid_client',
 };
 /** The token-response fields passed through to the unit, and nothing else. */
-const TOKEN_FIELDS = ['access_token', 'refresh_token', 'token_type', 'scope', 'expires_in'] as const;
+// resource/audience/aud are relayed so the unit validates the token against its resource,
+// exactly as it validates a direct token response.
+const TOKEN_FIELDS = [
+  'access_token', 'refresh_token', 'token_type', 'scope', 'expires_in', 'resource', 'audience', 'aud',
+] as const;
 
 const STATE_DIGEST = /^[0-9a-f]{64}$/;
 const PKCE_CHALLENGE = /^[A-Za-z0-9_-]{43,128}$/;
@@ -284,10 +288,18 @@ async function tokenRequest(
   try {
     providerResponse = await fetchImpl(profile.tokenEndpoint, {
       method: 'POST',
+      // The body carries the client secret: a provider-side redirect must never forward it.
+      redirect: 'error',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json' },
       body: new URLSearchParams(form).toString(),
     });
   } catch {
+    return failure(502, 'provider_unavailable');
+  }
+  if (providerResponse.status >= 500) {
+    // An outage is "could not run", whatever the body says; never an OAuth refusal.
+    // The body is not read, so release it rather than hold the connection open.
+    await providerResponse.body?.cancel().catch(() => undefined);
     return failure(502, 'provider_unavailable');
   }
   let body: unknown;
@@ -310,7 +322,7 @@ async function tokenRequest(
     const raw = typeof body.error === 'string' ? body.error : '';
     const code = RFC6749_TOKEN_ERRORS.has(raw)
       ? raw
-      : (SLACK_TOKEN_ERRORS[raw] ?? 'oauth_provider_rejected');
+      : (Object.hasOwn(SLACK_TOKEN_ERRORS, raw) ? SLACK_TOKEN_ERRORS[raw] : 'oauth_provider_rejected');
     return failure(400, code);
   }
   const passed: Record<string, unknown> = {};
@@ -415,6 +427,7 @@ export function createBridgeHandler(options: BridgeOptions): (req: Request) => P
         try {
           await fetchImpl(profile.revocationEndpoint, {
             method: 'POST',
+            redirect: 'error',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: new URLSearchParams({
               client_id: profile.clientId,

@@ -667,3 +667,84 @@ describe('host scoping and routing', () => {
     for (const spy of spies) expect(spy).not.toHaveBeenCalled();
   });
 });
+
+describe('review hardening', () => {
+  it.each([500, 502, 503])(
+    'reports a JSON %i from the token endpoint as provider_unavailable, never as a refusal',
+    async (status) => {
+      const fetchImpl = vi.fn<typeof fetch>().mockResolvedValue(jsonResponse({ error: 'server_error' }, status));
+      const { handler } = makeHandler({ fetchImpl });
+      const handle = await callbackHandle(handler);
+      const response = await handler(
+        post(`/bridge/v1/${SLACK}/redeem`, { completion_handle: handle, state_digest: STATE, pkce_verifier: VERIFIER }),
+      );
+      expect(response.status).toBe(502);
+      expect(await response.json()).toEqual({ error: 'provider_unavailable' });
+    },
+  );
+
+  it('never follows a redirect on a request that carries the client secret', async () => {
+    const fetchImpl = vi.fn<typeof fetch>().mockResolvedValue(new Response(null, { status: 200 }));
+    const { handler } = makeHandler({ fetchImpl, withTestProfile: true });
+    const handle = await callbackHandle(handler);
+    await handler(
+      post(`/bridge/v1/${SLACK}/redeem`, { completion_handle: handle, state_digest: STATE, pkce_verifier: VERIFIER }),
+    );
+    await handler(post(`/bridge/v1/${SLACK}/refresh`, { refresh_token: 'r', state_digest: STATE }));
+    await handler(post(`/bridge/v1/${TEST_PROFILE.id}/revoke`, { refresh_token: 'r', state_digest: STATE }));
+    expect(fetchImpl).toHaveBeenCalledTimes(3);
+    for (const [, init] of fetchImpl.mock.calls) {
+      expect(init?.redirect).toBe('error');
+    }
+  });
+
+  it.each(['toString', 'constructor', '__proto__', 'hasOwnProperty'])(
+    'maps the inherited-key error %s to the generic refusal',
+    async (providerError) => {
+      const fetchImpl = vi.fn<typeof fetch>().mockResolvedValue(jsonResponse({ ok: false, error: providerError }));
+      const { handler } = makeHandler({ fetchImpl });
+      const handle = await callbackHandle(handler);
+      const response = await handler(
+        post(`/bridge/v1/${SLACK}/redeem`, { completion_handle: handle, state_digest: STATE, pkce_verifier: VERIFIER }),
+      );
+      expect(response.status).toBe(400);
+      expect(await response.json()).toEqual({ error: 'oauth_provider_rejected' });
+    },
+  );
+});
+
+describe('audience pass-through', () => {
+  it('relays resource, audience and aud so the unit can hold the token to its resource', async () => {
+    const provider = {
+      ok: true, access_token: 'xoxp', token_type: 'Bearer',
+      resource: 'https://mcp.slack.com', audience: 'https://mcp.slack.com', aud: 'https://mcp.slack.com',
+      team: { id: 'T1' },
+    };
+    const fetchImpl = vi.fn<typeof fetch>().mockResolvedValue(jsonResponse(provider));
+    const { handler } = makeHandler({ fetchImpl });
+    const handle = await callbackHandle(handler);
+    const response = await handler(
+      post(`/bridge/v1/${SLACK}/redeem`, { completion_handle: handle, state_digest: STATE, pkce_verifier: VERIFIER }),
+    );
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({
+      access_token: 'xoxp', token_type: 'Bearer',
+      resource: 'https://mcp.slack.com', audience: 'https://mcp.slack.com', aud: 'https://mcp.slack.com',
+    });
+  });
+});
+
+describe('provider response hygiene', () => {
+  it('releases the body of a 5xx it does not read', async () => {
+    const cancel = vi.fn();
+    const stream = new ReadableStream({ pull() {}, cancel });
+    const fetchImpl = vi.fn<typeof fetch>().mockResolvedValue(new Response(stream, { status: 503 }));
+    const { handler } = makeHandler({ fetchImpl });
+    const handle = await callbackHandle(handler);
+    const response = await handler(
+      post(`/bridge/v1/${SLACK}/redeem`, { completion_handle: handle, state_digest: STATE, pkce_verifier: VERIFIER }),
+    );
+    expect(response.status).toBe(502);
+    expect(cancel).toHaveBeenCalled();
+  });
+});
