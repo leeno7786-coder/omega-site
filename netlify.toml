@@ -2,15 +2,42 @@
 command = "npm run build"
 publish = "dist"
 
-# Omega OAuth callback relay (added 2026-09-06), scoped to the plugins
-# subdomain so the marketing domain carries no OAuth surface at all.
-# Vendors such as Slack refuse plain-HTTP loopback redirect URLs, so Omega
-# registers https://plugins.omega2ai.com/oauth/<profile_id>/callback with each
-# provider and this rule hands the browser straight back to the desktop app's
-# loopback listener, query string intact (Netlify forwards it by default).
-# Nothing is stored or logged here: the authorization code that passes through
-# is bound to that device's PKCE verifier and state, and the token exchange
-# never touches this site.
+# Omega OAuth callbacks, scoped to the plugins subdomain so the marketing
+# domain carries no OAuth surface at all. Vendors such as Slack refuse
+# plain-HTTP loopback redirect URLs, so Omega registers
+# https://plugins.omega2ai.com/oauth/<profile_id>/callback with each provider.
+# The first matching rule wins, so every hosted-bridge rule must stay ABOVE the
+# generic relay.
+#
+# 1. Hosted-bridge profiles (client_mode: hosted_bridge; today only
+#    slack.desktop). The provider accepts only a confidential client, so the
+#    client secret lives in this site's environment and the token exchange
+#    DOES run on this site, in netlify/functions/oauth-bridge.ts (contract:
+#    Omega3.0 docs/plugin-hosted-oauth-bridge.md). The callback is rewritten
+#    (200, not a redirect) to that function, which seals the authorization
+#    code into an encrypted 10-minute completion handle and 302s the browser
+#    to the desktop loopback listener with state, the handle and iss -- the
+#    code itself never appears in the loopback URL. The unit then calls
+#    POST /bridge/v1/<profile_id>/redeem|refresh|revoke on this host, and the
+#    function posts to the provider's token endpoint with the client secret.
+#    The bridge is stateless: no code, token, handle, secret or verifier is
+#    stored or logged. Secrets come only from the environment variables
+#    OMEGA_BRIDGE_HANDLE_KEY and OMEGA_BRIDGE_SLACK_CLIENT_SECRET; if either
+#    is missing every bridge endpoint answers 503 bridge_unconfigured. The
+#    function claims /bridge/v1/* in code and answers 404 on any host other
+#    than plugins.omega2ai.com.
+[[redirects]]
+from = "https://plugins.omega2ai.com/oauth/slack.desktop/callback"
+to = "/bridge/v1/slack.desktop/callback"
+status = 200
+force = true
+
+# 2. Every other profile (public PKCE clients): this rule hands the browser
+#    straight back to the desktop app's loopback listener, query string intact
+#    (Netlify forwards it by default). Nothing is stored or logged here: the
+#    authorization code that passes through is bound to that device's PKCE
+#    verifier and state, and these profiles' token exchange never touches
+#    this site.
 [[redirects]]
 from = "https://plugins.omega2ai.com/oauth/*"
 to = "http://127.0.0.1:13310/oauth/:splat"
