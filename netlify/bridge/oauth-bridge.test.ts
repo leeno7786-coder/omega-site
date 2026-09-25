@@ -370,8 +370,16 @@ describe('POST /bridge/v1/{profile}/redeem', () => {
     ['unauthorized_client', 'unauthorized_client'],
     ['unsupported_grant_type', 'unsupported_grant_type'],
     ['invalid_scope', 'invalid_scope'],
-    ['invalid_code', 'oauth_provider_rejected'],
-    ['bad_redirect_uri', 'oauth_provider_rejected'],
+    // Slack's own codes carry the RFC 6749 s5.2 meaning, so the unit can tell a bad
+    // grant from a misconfigured client secret.
+    ['invalid_code', 'invalid_grant'],
+    ['code_already_used', 'invalid_grant'],
+    ['code_expired', 'invalid_grant'],
+    ['invalid_refresh_token', 'invalid_grant'],
+    ['bad_redirect_uri', 'invalid_grant'],
+    ['bad_client_secret', 'invalid_client'],
+    ['invalid_client_id', 'invalid_client'],
+    ['something_unexpected', 'oauth_provider_rejected'],
   ])('maps Slack ok:false error %s to %s', async (providerError, mapped) => {
     const fetchImpl = vi.fn<typeof fetch>().mockResolvedValue(jsonResponse({ ok: false, error: providerError }));
     const { handler } = makeHandler({ fetchImpl });
@@ -525,7 +533,11 @@ describe('POST /bridge/v1/{profile}/refresh', () => {
   });
 
   it('maps a refusal to its RFC code, else oauth_provider_rejected', async () => {
-    for (const [providerError, mapped] of [['invalid_grant', 'invalid_grant'], ['invalid_refresh_token', 'oauth_provider_rejected']]) {
+    for (const [providerError, mapped] of [
+      ['invalid_grant', 'invalid_grant'],
+      ['invalid_refresh_token', 'invalid_grant'],
+      ['something_unexpected', 'oauth_provider_rejected'],
+    ]) {
       const fetchImpl = vi.fn<typeof fetch>().mockResolvedValue(jsonResponse({ ok: false, error: providerError }));
       const { handler } = makeHandler({ fetchImpl });
       const response = await handler(post(`/bridge/v1/${SLACK}/refresh`, { refresh_token: 'r', state_digest: STATE }));

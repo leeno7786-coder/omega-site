@@ -53,6 +53,20 @@ const RFC6749_TOKEN_ERRORS = new Set([
   'invalid_request', 'invalid_client', 'invalid_grant', 'unauthorized_client',
   'unsupported_grant_type', 'invalid_scope',
 ]);
+/**
+ * Slack's Web API error codes that carry an RFC 6749 s5.2 meaning. Mapping them lets the
+ * unit tell a bad or used grant from a misconfigured client secret; anything else stays
+ * the generic refusal, so no provider-authored text reaches the unit.
+ */
+const SLACK_TOKEN_ERRORS: Readonly<Record<string, string>> = {
+  invalid_code: 'invalid_grant',
+  code_already_used: 'invalid_grant',
+  code_expired: 'invalid_grant',
+  invalid_refresh_token: 'invalid_grant',
+  bad_redirect_uri: 'invalid_grant',
+  bad_client_secret: 'invalid_client',
+  invalid_client_id: 'invalid_client',
+};
 /** The token-response fields passed through to the unit, and nothing else. */
 const TOKEN_FIELDS = ['access_token', 'refresh_token', 'token_type', 'scope', 'expires_in'] as const;
 
@@ -293,9 +307,10 @@ async function tokenRequest(
   // Slack's Web API reports refusals as HTTP 200 with "ok": false.
   const refused = !providerResponse.ok || body.ok === false || !nonEmptyString(body.access_token);
   if (refused) {
-    const code = typeof body.error === 'string' && RFC6749_TOKEN_ERRORS.has(body.error)
-      ? body.error
-      : 'oauth_provider_rejected';
+    const raw = typeof body.error === 'string' ? body.error : '';
+    const code = RFC6749_TOKEN_ERRORS.has(raw)
+      ? raw
+      : (SLACK_TOKEN_ERRORS[raw] ?? 'oauth_provider_rejected');
     return failure(400, code);
   }
   const passed: Record<string, unknown> = {};
