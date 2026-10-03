@@ -6,8 +6,8 @@ publish = "dist"
 # domain carries no OAuth surface at all. Vendors such as Slack refuse
 # plain-HTTP loopback redirect URLs, so Omega registers
 # https://plugins.omega2ai.com/oauth/<profile_id>/callback with each provider.
-# The first matching rule wins, so every hosted-bridge rule must stay ABOVE the
-# generic relay.
+# The first matching rule wins, so every hosted-bridge rule and the plugin-hub
+# relay must stay ABOVE the generic relay.
 #
 # 1. Hosted-bridge profiles (client_mode: hosted_bridge; today only
 #    slack.desktop). The provider accepts only a confidential client, so the
@@ -32,7 +32,21 @@ to = "/bridge/v1/slack.desktop/callback"
 status = 200
 force = true
 
-# 2. Every other profile (public PKCE clients): this rule hands the browser
+# 2. plugin-hub (the local plugin/MCP hub, loopback port 7420). The hub serves
+#    one callback path for all of its plugins on its own port, so it gets its
+#    own relay instead of the generic one below (which targets 13310). Slack is
+#    why it exists: the hub sends this HTTPS URL as redirect_uri (its
+#    SLACK_REDIRECT_URL key) and this rule hands the browser back to the hub,
+#    query string intact. Nothing is stored or logged here; the authorization
+#    code is bound to the hub's PKCE verifier and state, and the token exchange
+#    runs in the hub, never on this site.
+[[redirects]]
+from = "https://plugins.omega2ai.com/oauth/plugin-hub/callback"
+to = "http://127.0.0.1:7420/oauth/callback"
+status = 302
+force = true
+
+# 3. Every other profile (public PKCE clients): this rule hands the browser
 #    straight back to the desktop app's loopback listener, query string intact
 #    (Netlify forwards it by default). Nothing is stored or logged here: the
 #    authorization code that passes through is bound to that device's PKCE
