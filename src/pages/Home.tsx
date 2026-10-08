@@ -1,4 +1,5 @@
 import SiteHeader from '../components/layout/SiteHeader';
+import useInitialHashNavigation from '../lib/useInitialHashNavigation';
 import Capabilities from '../sections/company/Capabilities';
 import CompanyOverview from '../sections/company/CompanyOverview';
 import EngagementProcess from '../sections/company/EngagementProcess';
@@ -9,6 +10,8 @@ import ProjectInquiryForm from '../sections/company/ProjectInquiryForm';
 import SelectedSystems from '../sections/company/SelectedSystems';
 
 export default function Home() {
+  useInitialHashNavigation();
+
   return (
     <div className="site-frame">
       <SiteHeader currentPage="home" />

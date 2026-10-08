@@ -1,5 +1,6 @@
 import { SELECTED_SYSTEMS } from '../../content/siteContent';
 import type { SelectedSystem } from '../../types/site';
+import NanoAiPreview from './NanoAiPreview';
 
 interface SelectedSystemsProps {
   systems?: readonly SelectedSystem[];
@@ -35,6 +36,8 @@ export default function SelectedSystems({ systems = SELECTED_SYSTEMS }: Selected
             <p>Created by Noah Lee, these systems span autonomous agents, local inference, persistent memory, and production software.</p>
           </div>
         </div>
+
+        <NanoAiPreview />
 
         <div className="selected-systems__featured">
           {featured.map((system) => (

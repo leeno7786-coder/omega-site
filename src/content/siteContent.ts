@@ -16,6 +16,7 @@ export const CONTACT_EMAILS = [
 export const SITE_NAV = [
   { label: 'Capabilities', href: '/#capabilities' },
   { label: 'Omega 3.0', href: '/omega-3/' },
+  { label: 'NanoAI', href: '/nanoai/' },
   { label: 'How we work', href: '/#process' },
   { label: 'Company', href: '/#company' },
 ] as const satisfies readonly NavigationItem[];

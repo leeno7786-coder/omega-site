@@ -111,6 +111,11 @@ test('confirmed form response shows success and clears the draft', async ({ page
 });
 
 test('failed form response keeps every visitor-entered value', async ({ page }) => {
+  await page.route('https://formsubmit.co/ajax/**', route => route.fulfill({
+    status: 503,
+    contentType: 'application/json',
+    body: JSON.stringify({ success: false }),
+  }));
   await page.route('**/', async (route) => {
     if (route.request().method() === 'POST') {
       await route.fulfill({ status: 503, body: 'unavailable' });
