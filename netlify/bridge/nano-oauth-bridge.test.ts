@@ -45,6 +45,8 @@ describe('NanoAI bridge deployment contract', () => {
     expect(authorize.searchParams.get('code_challenge_method')).toBe('S256');
     const rawCode = crypto.randomUUID();
     const callback = await handler(new Request(`${origin}/nano/bridge/v1/nano.slack/callback?${new URLSearchParams({ state, code: rawCode, iss: 'https://mcp.slack.com' })}`));
+    const originalCallbackPath = await handler(new Request(`${origin}/oauth/nano.slack/callback?${new URLSearchParams({ state, code: rawCode, iss: 'https://mcp.slack.com' })}`));
+    expect(originalCallbackPath.status).toBe(302);
     const local = new URL(callback.headers.get('location')!);
     expect(local.origin + local.pathname).toBe('http://127.0.0.1:7420/oauth/callback');
     expect(local.searchParams.get('code')).toBeNull();

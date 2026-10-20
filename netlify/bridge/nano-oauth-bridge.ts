@@ -26,9 +26,11 @@ export function createNanoBridgeHandler(options: Omit<BridgeOptions, 'profiles'>
   return async (req: Request): Promise<Response> => {
     const url = new URL(req.url);
     const match = /^\/nano\/bridge\/v1\/(nano\.[a-z]+)\/(begin|redeem|refresh|revoke|callback)$/.exec(url.pathname);
+    // Netlify can preserve the original request URL on a 200 rewrite.
+    const callback = /^\/oauth\/(nano\.[a-z]+)\/callback$/.exec(url.pathname);
     const fail = (status: number, error: string) => new Response(JSON.stringify({ error }), { status, headers: { 'content-type': 'application/json', 'cache-control': 'no-store' } });
-    if (url.hostname !== BRIDGE_HOST || !match) return fail(404, 'not_found');
-    const id = match[1] as keyof typeof providers;
+    if (url.hostname !== BRIDGE_HOST || (!match && !callback)) return fail(404, 'not_found');
+    const id = (match?.[1] ?? callback![1]) as keyof typeof providers;
     const provider = Object.hasOwn(providers, id) ? providers[id] : undefined;
     if (!provider) return fail(404, 'unknown_profile');
     const clientId = options.env[provider.clientIdEnv];
@@ -43,7 +45,7 @@ export function createNanoBridgeHandler(options: Omit<BridgeOptions, 'profiles'>
     };
     // Load only this Nano profile. An unconfigured HubSpot app must not disable Slack or Omega.
     const handler = createBridgeHandler({ ...options, env: { ...options.env, OMEGA_BRIDGE_HANDLE_KEY: options.env.NANO_BRIDGE_HANDLE_KEY }, profiles: { [id]: profile } });
-    url.pathname = `/bridge/v1/${id}/${match[2]}`;
+    url.pathname = `/bridge/v1/${id}/${match?.[2] ?? 'callback'}`;
     return handler(new Request(url, req));
   };
 }
