@@ -1,7 +1,9 @@
 import { BRIDGE_HOST, createBridgeHandler, type BridgeOptions, type BridgeProfile } from './oauth-bridge';
+import { remainingNanoProviders, type NanoPublisherProvider } from './nano-publisher-profiles';
 
 /** Separate NanoAI profiles: do not reuse Omega's app identity, secrets or desktop callback. */
-const providers = {
+const providers: Readonly<Record<string, NanoPublisherProvider>> = {
+  ...remainingNanoProviders,
   'nano.slack': {
     clientIdEnv: 'NANO_BRIDGE_SLACK_CLIENT_ID',
     clientSecretEnv: 'NANO_BRIDGE_SLACK_CLIENT_SECRET',
@@ -25,12 +27,12 @@ const providers = {
 export function createNanoBridgeHandler(options: Omit<BridgeOptions, 'profiles'>) {
   return async (req: Request): Promise<Response> => {
     const url = new URL(req.url);
-    const match = /^\/nano\/bridge\/v1\/(nano\.[a-z]+)\/(begin|redeem|refresh|revoke|callback)$/.exec(url.pathname);
+    const match = /^\/nano\/bridge\/v1\/(nano\.[a-z][a-z-]*)\/(begin|redeem|refresh|revoke|callback)$/.exec(url.pathname);
     // Netlify can preserve the original request URL on a 200 rewrite.
-    const callback = /^\/oauth\/(nano\.[a-z]+)\/callback$/.exec(url.pathname);
+    const callback = /^\/oauth\/(nano\.[a-z][a-z-]*)\/callback$/.exec(url.pathname);
     const fail = (status: number, error: string) => new Response(JSON.stringify({ error }), { status, headers: { 'content-type': 'application/json', 'cache-control': 'no-store' } });
     if (url.hostname !== BRIDGE_HOST || (!match && !callback)) return fail(404, 'not_found');
-    const id = (match?.[1] ?? callback![1]) as keyof typeof providers;
+    const id = match?.[1] ?? callback![1];
     const provider = Object.hasOwn(providers, id) ? providers[id] : undefined;
     if (!provider) return fail(404, 'unknown_profile');
     const clientId = options.env[provider.clientIdEnv];
@@ -39,6 +41,7 @@ export function createNanoBridgeHandler(options: Omit<BridgeOptions, 'profiles'>
       id, clientId, clientSecretEnv: provider.clientSecretEnv, issuer: provider.issuer,
       authorizeEndpoint: provider.authorizeEndpoint, tokenEndpoint: provider.tokenEndpoint,
       resource: provider.resource, allowedScopes: provider.allowedScopes,
+      authorizationParams: provider.authorizationParams,
       revocationEndpoint: null,
       redirectUri: `https://${BRIDGE_HOST}/oauth/${id}/callback`,
       loopbackRedirectUri: 'http://127.0.0.1:7420/oauth/callback',

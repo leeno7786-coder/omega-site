@@ -93,4 +93,81 @@ describe('NanoAI bridge deployment contract', () => {
     expect((await handler(post('nano.hubspot', 'redeem', { state_digest: state, pkce_verifier: verifier, completion_handle: handle }))).status).toBe(200);
     expect(fetchImpl.mock.calls[0][0]).toBe('https://mcp.hubspot.com/oauth/v3/token');
   });
+
+  it('prepares existing publisher families without exposing their secrets or accepting another resource', async () => {
+    const fixtures = [
+      { profile: 'nano.github', family: 'GITHUB', issuer: 'https://github.com/login/oauth', authorize: 'https://github.com/login/oauth/authorize', token: 'https://github.com/login/oauth/access_token', resource: 'https://api.githubcopilot.com/mcp', scopes: ['repo', 'read:org', 'read:user', 'user:email', 'notifications', 'gist'] },
+      { profile: 'nano.asana', family: 'ASANA', issuer: 'https://app.asana.com', authorize: 'https://app.asana.com/-/oauth_authorize', token: 'https://app.asana.com/-/oauth_token', resource: 'https://mcp.asana.com/v2/mcp', scopes: [] },
+      { profile: 'nano.box', family: 'BOX', issuer: 'https://api.box.com', authorize: 'https://account.box.com/api/oauth2/authorize', token: 'https://api.box.com/oauth2/token', resource: 'https://mcp.box.com/', scopes: [] },
+      { profile: 'nano.google-drive', family: 'GOOGLE_WEB', issuer: 'https://accounts.google.com', authorize: 'https://accounts.google.com/o/oauth2/v2/auth', token: 'https://oauth2.googleapis.com/token', resource: 'https://drivemcp.googleapis.com/mcp/v1', scopes: ['https://www.googleapis.com/auth/drive'] },
+    ];
+    for (const entry of fixtures) {
+      const secret = crypto.randomUUID();
+      const fetchImpl = vi.fn<typeof fetch>().mockResolvedValue(new Response(JSON.stringify({ access_token: 'fixture-access', token_type: 'Bearer' })));
+      const handler = createNanoBridgeHandler({ env: { ...env, [`NANO_BRIDGE_${entry.family}_CLIENT_ID`]: `fixture-${entry.family}`, [`NANO_BRIDGE_${entry.family}_CLIENT_SECRET`]: secret }, fetch: fetchImpl });
+      const response = await handler(post(entry.profile, 'begin', { ...begin, scopes: entry.scopes, resource: 'https://attacker.invalid', authorization_params: { redirect_uri: 'https://attacker.invalid' } }));
+      expect(response.status).toBe(200);
+      const body = await response.text();
+      expect(body).not.toContain(secret);
+      const auth = new URL(JSON.parse(body).authorization_url);
+      expect(auth.origin + auth.pathname).toBe(entry.authorize);
+      expect(auth.searchParams.get('resource')).toBe(entry.resource);
+      expect(auth.searchParams.get('redirect_uri')).toBe(`${origin}/oauth/${entry.profile}/callback`);
+      expect(auth.searchParams.get('code_challenge')).toBe(challenge);
+      expect(auth.searchParams.get('scope') ?? '').toBe([...entry.scopes].sort().join(' '));
+      if (entry.family === 'GOOGLE_WEB') {
+        expect(auth.searchParams.get('access_type')).toBe('offline');
+        expect(auth.searchParams.get('prompt')).toBe('consent');
+      }
+      expect((await handler(post(entry.profile, 'begin', { ...begin, scopes: ['unapproved:scope'] }))).status).toBe(400);
+      const callback = await handler(new Request(`${origin}/oauth/${entry.profile}/callback?${new URLSearchParams({ state, code: 'fixture-code', iss: entry.issuer })}`));
+      expect(callback.status).toBe(302);
+      const local = new URL(callback.headers.get('location')!);
+      expect(local.origin).toBe('http://127.0.0.1:7420');
+      const handle = local.searchParams.get('completion_handle');
+      expect((await handler(post(entry.profile, 'redeem', { state_digest: state, pkce_verifier: verifier, completion_handle: handle }))).status).toBe(200);
+      expect(fetchImpl.mock.calls[0][0]).toBe(entry.token);
+      const form = new URLSearchParams(String(fetchImpl.mock.calls[0][1]?.body));
+      expect(form.get('client_secret')).toBe(secret);
+      expect(form.get('resource')).toBe(entry.resource);
+      const crossProfile = createNanoBridgeHandler({ env: { ...env, NANO_BRIDGE_HUBSPOT_CLIENT_ID: 'hubspot', NANO_BRIDGE_HUBSPOT_CLIENT_SECRET: crypto.randomUUID() }, fetch: fetchImpl });
+      expect((await crossProfile(post('nano.hubspot', 'redeem', { state_digest: state, pkce_verifier: verifier, completion_handle: handle }))).status).toBe(400);
+      expect(fetchImpl).toHaveBeenCalledTimes(1);
+    }
+  });
+
+  it('keeps Google connector scopes and resources separate, without a catch-all cloud grant', async () => {
+    const entries = [
+      ['bigquery', 'bigquery.googleapis.com/mcp', ['bigquery']],
+      ['gmail', 'gmailmcp.googleapis.com/mcp/v1', ['gmail.modify']],
+      ['google-calendar', 'calendarmcp.googleapis.com/mcp/v1', ['calendar']],
+      ['google-chat', 'chatmcp.googleapis.com/mcp/v1', ['chat.messages', 'chat.spaces.readonly', 'chat.memberships.readonly']],
+      ['google-compute', 'compute.googleapis.com/mcp', ['compute']],
+      ['google-docs', 'docsmcp.googleapis.com/mcp/v1', ['documents', 'drive.readonly']],
+      ['google-drive', 'drivemcp.googleapis.com/mcp/v1', ['drive']],
+      ['google-gke', 'container.googleapis.com/mcp', ['container']],
+      ['google-maps', 'mapstools.googleapis.com/mcp', ['maps-platform.mapstools']],
+      ['google-sheets', 'sheetsmcp.googleapis.com/mcp/v1', ['spreadsheets', 'drive.readonly']],
+      ['google-slides', 'slidesmcp.googleapis.com/mcp/v1', ['presentations', 'drive.readonly']],
+    ] as const;
+    const handler = createNanoBridgeHandler({ env: { ...env, NANO_BRIDGE_GOOGLE_WEB_CLIENT_ID: 'google-web-fixture', NANO_BRIDGE_GOOGLE_WEB_CLIENT_SECRET: crypto.randomUUID() } });
+    const toml = readFileSync(new URL('../../netlify.toml', import.meta.url), 'utf8');
+    for (const [id, resource, shortScopes] of entries) {
+      const scopes = shortScopes.map(scope => `https://www.googleapis.com/auth/${scope}`);
+      const response = await handler(post(`nano.${id}`, 'begin', { ...begin, scopes }));
+      expect(response.status).toBe(200);
+      const auth = new URL((await response.json()).authorization_url);
+      expect(auth.searchParams.get('resource')).toBe(`https://${resource}`);
+      expect(auth.searchParams.get('scope')).toBe([...scopes].sort().join(' '));
+      expect(auth.searchParams.get('access_type')).toBe('offline');
+      expect(auth.searchParams.get('prompt')).toBe('consent');
+      const route = `from = "${origin}/oauth/nano.${id}/callback"`;
+      expect(toml).toContain(route);
+      expect(toml.indexOf(route)).toBeLessThan(toml.indexOf('from = "https://plugins.omega2ai.com/oauth/*"'));
+      expect((await handler(post(`nano.${id}`, 'begin', { ...begin, scopes: ['https://www.googleapis.com/auth/cloud-platform'] }))).status).toBe(400);
+    }
+    // A desktop app identity must not silently stand in for a web publisher registration.
+    const desktopOnly = createNanoBridgeHandler({ env: { ...env, GOOGLE_OAUTH_CLIENT_ID: 'desktop', GOOGLE_OAUTH_CLIENT_SECRET: 'desktop-secret' } });
+    expect((await desktopOnly(post('nano.google-drive', 'begin', { ...begin, scopes: ['https://www.googleapis.com/auth/drive'] }))).status).toBe(503);
+  });
 });

@@ -30,6 +30,8 @@ export interface BridgeProfile {
   allowedScopes: readonly string[];
   /** A server-configured callback for another desktop product; never supplied by the caller. */
   loopbackRedirectUri?: string;
+  /** Publisher-controlled provider options. Request JSON cannot override these or OAuth bindings. */
+  authorizationParams?: Readonly<Record<string, string>>;
 }
 
 export const PROFILES: Readonly<Record<string, BridgeProfile>> = Object.freeze({
@@ -379,6 +381,7 @@ export function createBridgeHandler(options: BridgeOptions): (req: Request) => P
         if (new Set(scopes).size !== scopes.length) return failure(400, 'invalid_request');
         if (!scopes.every((scope) => profile.allowedScopes.includes(scope))) return failure(400, 'invalid_request');
         const query = new URLSearchParams({
+          ...profile.authorizationParams,
           client_id: profile.clientId,
           code_challenge: challenge,
           code_challenge_method: 'S256',

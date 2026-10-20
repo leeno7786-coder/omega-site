@@ -53,6 +53,90 @@ status = 200
 force = true
 
 [[redirects]]
+from = "https://plugins.omega2ai.com/oauth/nano.github/callback"
+to = "/nano/bridge/v1/nano.github/callback"
+status = 200
+force = true
+
+[[redirects]]
+from = "https://plugins.omega2ai.com/oauth/nano.asana/callback"
+to = "/nano/bridge/v1/nano.asana/callback"
+status = 200
+force = true
+
+[[redirects]]
+from = "https://plugins.omega2ai.com/oauth/nano.box/callback"
+to = "/nano/bridge/v1/nano.box/callback"
+status = 200
+force = true
+
+[[redirects]]
+from = "https://plugins.omega2ai.com/oauth/nano.bigquery/callback"
+to = "/nano/bridge/v1/nano.bigquery/callback"
+status = 200
+force = true
+
+[[redirects]]
+from = "https://plugins.omega2ai.com/oauth/nano.gmail/callback"
+to = "/nano/bridge/v1/nano.gmail/callback"
+status = 200
+force = true
+
+[[redirects]]
+from = "https://plugins.omega2ai.com/oauth/nano.google-calendar/callback"
+to = "/nano/bridge/v1/nano.google-calendar/callback"
+status = 200
+force = true
+
+[[redirects]]
+from = "https://plugins.omega2ai.com/oauth/nano.google-chat/callback"
+to = "/nano/bridge/v1/nano.google-chat/callback"
+status = 200
+force = true
+
+[[redirects]]
+from = "https://plugins.omega2ai.com/oauth/nano.google-compute/callback"
+to = "/nano/bridge/v1/nano.google-compute/callback"
+status = 200
+force = true
+
+[[redirects]]
+from = "https://plugins.omega2ai.com/oauth/nano.google-docs/callback"
+to = "/nano/bridge/v1/nano.google-docs/callback"
+status = 200
+force = true
+
+[[redirects]]
+from = "https://plugins.omega2ai.com/oauth/nano.google-drive/callback"
+to = "/nano/bridge/v1/nano.google-drive/callback"
+status = 200
+force = true
+
+[[redirects]]
+from = "https://plugins.omega2ai.com/oauth/nano.google-gke/callback"
+to = "/nano/bridge/v1/nano.google-gke/callback"
+status = 200
+force = true
+
+[[redirects]]
+from = "https://plugins.omega2ai.com/oauth/nano.google-maps/callback"
+to = "/nano/bridge/v1/nano.google-maps/callback"
+status = 200
+force = true
+
+[[redirects]]
+from = "https://plugins.omega2ai.com/oauth/nano.google-sheets/callback"
+to = "/nano/bridge/v1/nano.google-sheets/callback"
+status = 200
+force = true
+
+[[redirects]]
+from = "https://plugins.omega2ai.com/oauth/nano.google-slides/callback"
+to = "/nano/bridge/v1/nano.google-slides/callback"
+status = 200
+force = true
+
+[[redirects]]
 from = "https://plugins.omega2ai.com/oauth/plugin-hub/callback"
 to = "http://127.0.0.1:7420/oauth/callback"
 status = 302

@@ -1,6 +1,6 @@
 # NanoAI plugin sign-in service
 
-Prepared 2026-10-20. The owner approved deployment and configuration of the existing NanoAI Slack app. Its ID, secret and a fresh Nano handle key are configured for production in Netlify; sensitive values are marked secret and are not committed. Production deployment and acceptance are recorded separately.
+Prepared 2026-10-20. The owner approved deployment and configuration of the existing NanoAI Slack app, followed by creation of the NanoAI HubSpot MCP connector and private production credential hosting. Their IDs/secrets and a fresh Nano handle key are configured in Netlify; sensitive values are marked secret and are not committed. Production deployment and acceptance are recorded separately.
 
 The existing Netlify site hosts `plugins.omega2ai.com`. The new function claims `/nano/bridge/v1/*`, separate from Omega's `/bridge/v1/*`. Existing Omega callbacks and Nano's legacy `/oauth/plugin-hub/callback` relay remain compatible. Unknown profiles and non-plugin hosts are refused.
 
@@ -17,6 +17,23 @@ Configure sensitive values in the Netlify function environment, not committed fi
 | `NANO_BRIDGE_HUBSPOT_CLIENT_SECRET` | That connector's secret. |
 
 Only the selected profile's configuration is loaded. Missing HubSpot credentials do not disable Slack or Omega. Missing configuration returns `503 bridge_unconfigured`; it never falls back to another identity or sends users to a different app.
+
+### Remaining prepared profiles (not configured)
+
+Source now prepares `nano.github`, `nano.asana`, `nano.box` and eleven Google connector profiles. Each binds an exact resource and a scope allowlist; caller JSON cannot choose endpoints, callbacks, authorization options or another resource. Google requests offline access and consent from publisher-controlled configuration. The existing Omega profile keeps its previous defaults.
+
+The GitHub, Asana and Box families use `NANO_BRIDGE_{GITHUB|ASANA|BOX}_CLIENT_ID` and matching `_CLIENT_SECRET` variables. Register `https://plugins.omega2ai.com/oauth/nano.{github|asana|box}/callback` with the corresponding application before enabling a preset. Preserve the currently working desktop registrations. GitHub OAuth apps support one callback: prepare a separate hosted publisher app if the existing callback is still needed by installed direct clients.
+
+Google uses **a web application registration**, with `NANO_BRIDGE_GOOGLE_WEB_CLIENT_ID` and `_CLIENT_SECRET`. Do not substitute the existing desktop client, which does not register these HTTPS redirects. Add these exact paths on `https://plugins.omega2ai.com`, all ending in `/callback`:
+
+- `/oauth/nano.bigquery`, `/oauth/nano.gmail`
+- `/oauth/nano.google-calendar`, `/oauth/nano.google-chat`, `/oauth/nano.google-compute`
+- `/oauth/nano.google-docs`, `/oauth/nano.google-drive`, `/oauth/nano.google-gke`
+- `/oauth/nano.google-maps`, `/oauth/nano.google-sheets`, `/oauth/nano.google-slides`
+
+Keep the OAuth audience, project APIs, requested scopes and any required Google verification aligned with the product. These profiles do not implement the separate local Google Analytics CLI flow. No family becomes active just because its handler exists: publisher registration, owner-approved secret hosting, deployment and accountless preparation precede catalog promotion. Individual account/tool tests remain deferred to beta.
+
+Provider metadata was read afresh on 2026-10-20; the Nano repository records the sanitized receipt in `docs/releases/plugin-publisher-preparation-2026-10-20.json`. Asana and Box preserve the working scope-omission behavior, with permissions determined by their app registration. Google's four cloud connectors use their declared resource-specific scopes, not a blanket cloud-platform grant.
 
 Register these additional exact callback URLs with the corresponding publisher apps before activation:
 
