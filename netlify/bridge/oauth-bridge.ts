@@ -28,6 +28,8 @@ export interface BridgeProfile {
   redirectUri: string;
   resource: string;
   allowedScopes: readonly string[];
+  /** A server-configured callback for another desktop product; never supplied by the caller. */
+  loopbackRedirectUri?: string;
 }
 
 export const PROFILES: Readonly<Record<string, BridgeProfile>> = Object.freeze({
@@ -372,7 +374,7 @@ export function createBridgeHandler(options: BridgeOptions): (req: Request) => P
       case 'begin': {
         const { pkce_challenge: challenge, scopes } = body;
         if (typeof challenge !== 'string' || !PKCE_CHALLENGE.test(challenge)) return failure(400, 'invalid_request');
-        if (!Array.isArray(scopes) || scopes.length === 0) return failure(400, 'invalid_request');
+        if (!Array.isArray(scopes) || (scopes.length === 0 && profile.allowedScopes.length !== 0)) return failure(400, 'invalid_request');
         if (!scopes.every((scope): scope is string => typeof scope === 'string')) return failure(400, 'invalid_request');
         if (new Set(scopes).size !== scopes.length) return failure(400, 'invalid_request');
         if (!scopes.every((scope) => profile.allowedScopes.includes(scope))) return failure(400, 'invalid_request');
@@ -386,6 +388,7 @@ export function createBridgeHandler(options: BridgeOptions): (req: Request) => P
           scope: [...scopes].sort().join(' '),
           state: stateDigest,
         });
+        if (scopes.length === 0) query.delete('scope');
         return json(200, { authorization_url: `${profile.authorizeEndpoint}?${query.toString()}` });
       }
       case 'redeem': {
@@ -455,7 +458,9 @@ async function callback(
   const error = singleParam(params, 'error');
   const state = singleParam(params, 'state');
   if (code === null || error === null || !state || !STATE_DIGEST.test(state)) return failure(400, 'invalid_request');
-  const loopback = `${LOOPBACK_ORIGIN}/oauth/${encodeURIComponent(profile.id)}/callback`;
+  const issuer = singleParam(params, 'iss');
+  if (issuer === null || (issuer !== undefined && issuer !== profile.issuer)) return failure(400, 'invalid_request');
+  const loopback = profile.loopbackRedirectUri ?? `${LOOPBACK_ORIGIN}/oauth/${encodeURIComponent(profile.id)}/callback`;
 
   if (code !== undefined && error === undefined) {
     const handle = await sealHandle(handleKey, {

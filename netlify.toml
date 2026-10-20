@@ -41,6 +41,18 @@ force = true
 #    code is bound to the hub's PKCE verifier and state, and the token exchange
 #    runs in the hub, never on this site.
 [[redirects]]
+from = "https://plugins.omega2ai.com/oauth/nano.slack/callback"
+to = "/nano/bridge/v1/nano.slack/callback"
+status = 200
+force = true
+
+[[redirects]]
+from = "https://plugins.omega2ai.com/oauth/nano.hubspot/callback"
+to = "/nano/bridge/v1/nano.hubspot/callback"
+status = 200
+force = true
+
+[[redirects]]
 from = "https://plugins.omega2ai.com/oauth/plugin-hub/callback"
 to = "http://127.0.0.1:7420/oauth/callback"
 status = 302
