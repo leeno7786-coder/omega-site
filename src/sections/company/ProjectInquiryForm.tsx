@@ -38,6 +38,13 @@ export default function ProjectInquiryForm({ submit = submitProjectInquiry }: Pr
       await submit(inquiry);
       setInquiry({ ...EMPTY_INQUIRY });
       setDeliveryState('success');
+      if (!inquiry['bot-field']) {
+        try {
+          window.gtag_report_conversion?.();
+        } catch {
+          // Tracking must not affect the delivery confirmation.
+        }
+      }
     } catch {
       setDeliveryState('error');
     }

@@ -9,6 +9,21 @@
       gtag('js', new Date());
       gtag('config', 'AW-18531956530');
     </script>
+    <!-- Event snippet for Submit lead form conversion. Called after successful inquiry delivery. -->
+    <script>
+      function gtag_report_conversion(url) {
+        var callback = function () {
+          if (typeof(url) != 'undefined') {
+            window.location = url;
+          }
+        };
+        gtag('event', 'conversion', {
+          'send_to': 'AW-18531956530/R2gmCPy1qaYdELLu3IRF',
+          'event_callback': callback
+        });
+        return false;
+      }
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Omega AI LLC — Metacognitive AI &amp; Custom Technology Engineering</title>
