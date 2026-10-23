@@ -45,6 +45,7 @@ describe('site content contract', () => {
     expect(SELECTED_SYSTEMS.map((system) => system.id)).toEqual([
       'omega-browser-agent',
       'devcard-ai',
+      'odin',
       'omega-runtime',
       'omega-memory-mcp',
       'nanoagent',

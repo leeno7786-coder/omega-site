@@ -46,6 +46,7 @@ export interface CoFounder {
 }
 
 export type SelectedSystemId =
+  | 'odin'
   | 'omega-browser-agent'
   | 'devcard-ai'
   | 'omega-runtime'

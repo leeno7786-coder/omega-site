@@ -62,7 +62,7 @@ export default function SelectedSystems({ systems = SELECTED_SYSTEMS }: Selected
 
         <div className="supporting-systems" aria-label="Supporting systems">
           {supporting.map((system, index) => (
-            <article className="supporting-system" key={system.id}>
+            <article className="supporting-system" id={system.id} key={system.id}>
               <div className="supporting-system__index">0{index + 1}</div>
               <p className="supporting-system__status">{system.status}</p>
               <h3>{system.title}</h3>

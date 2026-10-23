@@ -6,13 +6,18 @@ test('visitor discovers NanoAI, inspects real Work evidence and reaches the exis
   await page.getByRole('link', { name: 'Explore NanoAI', exact: true }).click();
   await expect(page).toHaveURL(/\/nanoai\/$/);
   await expect(page).toHaveTitle(/NanoAI.*Omega AI LLC/);
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText(/NanoAI.*Your AI workspace.*Your models.*Your machine/);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(/NanoAI.*Bring your PC.*to life/);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://omega2ai.com/nanoai/');
-  await expect(page.locator('.nanoai-hero__art figcaption')).toContainText('Illustrative AI-generated artwork');
+  await expect(page.locator('.nanoai-hero__art figcaption')).toContainText('Actual Windows companion interface');
   const menuToggle = page.getByRole('button', { name: 'Open navigation' });
   if (await menuToggle.isVisible()) await menuToggle.click();
   await expect(page.getByRole('navigation', { name: 'Primary navigation' }).getByRole('link', { name: 'NanoAI' })).toHaveAttribute('aria-current', 'page');
   if (await page.getByRole('button', { name: 'Close navigation' }).isVisible()) await page.keyboard.press('Escape');
+
+  await page.getByRole('navigation', { name: 'NanoAI showcase sections' }).getByRole('link', { name: /Computer use/ }).click();
+  await expect(page.getByRole('heading', { name: 'Use the apps. Check the result.' })).toBeInViewport();
+  await expect(page.getByRole('heading', { name: 'Your Windows PC' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'A separate Ubuntu computer' })).toBeVisible();
 
   await page.getByRole('navigation', { name: 'NanoAI showcase sections' }).getByRole('link', { name: /Actual screenshots/ }).click();
   const enlarge = page.getByRole('button', { name: 'Enlarge Autonomous Work', exact: true });
@@ -32,7 +37,7 @@ test('visitor discovers NanoAI, inspects real Work evidence and reaches the exis
   await expect(dialog).not.toBeVisible();
   await expect(enlarge).toBeFocused();
 
-  await page.locator('summary').filter({ hasText: 'Does the 35B model run on the Android phone?' }).click();
+  await page.locator('summary').filter({ hasText: 'How does Android access work?' }).click();
   await expect(page.locator('details[open]')).toContainText('Inference and saved Work files remain on the host');
   await page.getByRole('link', { name: 'Discuss a custom AI system', exact: true }).last().click();
   await expect(page).toHaveURL(/\/#project-inquiry$/);
@@ -77,5 +82,5 @@ test('NanoAI preview preserves navigation to the existing Omega proof', async ({
 
 test('NanoAI screenshot entry opens the proof section directly', async ({ page }) => {
   await page.goto('/nanoai/#proof');
-  await expect(page.getByRole('heading', { name: 'From one request to a saved report.' })).toBeInViewport();
+  await expect(page.getByRole('heading', { name: 'See the working interfaces.' })).toBeInViewport();
 });

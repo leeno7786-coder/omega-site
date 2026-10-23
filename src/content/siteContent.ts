@@ -222,6 +222,18 @@ export const SELECTED_SYSTEMS = [
     linkLabel: 'Open live app',
   },
   {
+    id: 'odin',
+    title: 'Odin',
+    tier: 'supporting',
+    status: 'Odin V1 · Research prototype',
+    summary:
+      'A persistent local cognitive research system with associative and episodic memory, hypothesis and prediction tracking, bounded public-source research, and replay-based consolidation. Its chat interface and mind monitor expose the working system; learning endurance and release acceptance remain in progress.',
+    evidence: ['Persistent cognitive memory', 'Evidence and prediction tracking', 'Bounded public research', 'Replay and consolidation'],
+    action: 'inquiry',
+    href: '#project-inquiry',
+    linkLabel: 'Discuss this system',
+  },
+  {
     id: 'omega-runtime',
     title: 'Omega Runtime',
     tier: 'supporting',

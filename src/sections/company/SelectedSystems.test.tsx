@@ -21,10 +21,12 @@ describe('SelectedSystems', () => {
     expect(browserDemo).not.toHaveAttribute('target');
     expect(browserDemo).not.toHaveAttribute('rel');
 
-    const memoryInquiry = screen.getByRole('link', { name: 'Discuss this system: Omega Memory MCP' });
-    expect(memoryInquiry).toHaveAttribute('href', '#project-inquiry');
-    expect(memoryInquiry).not.toHaveAttribute('target');
-    expect(memoryInquiry).not.toHaveAttribute('rel');
+    for (const title of ['Odin', 'Omega Memory MCP']) {
+      const inquiry = screen.getByRole('link', { name: `Discuss this system: ${title}` });
+      expect(inquiry).toHaveAttribute('href', '#project-inquiry');
+      expect(inquiry).not.toHaveAttribute('target');
+      expect(inquiry).not.toHaveAttribute('rel');
+    }
 
     for (const { name, href } of [
       { name: 'Open live app: DevCard AI', href: 'https://www.omega-dev.uk/' },

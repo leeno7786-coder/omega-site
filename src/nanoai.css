@@ -26,6 +26,8 @@
 .nanoai-hero__art { margin: 0; border: 1px solid var(--border-bright); background: var(--graphite); }
 .nanoai-hero__art img { display: block; width: 100%; height: auto; }
 .nanoai-hero__art figcaption { padding: 16px 20px; color: #a9bbc4; font-size: 0.72rem; line-height: 1.65; }
+.nanoai-hero__art--companion { display: grid; justify-items: center; padding-top: 28px; }
+.nanoai-hero__art--companion img { width: min(calc(100% - 48px), 380px); }
 
 .nanoai-evidence dl { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; border-block: 1px solid var(--border-bright); }
 .nanoai-evidence dl > div { display: flex; flex-direction: column-reverse; justify-content: end; gap: 12px; padding: 28px 24px; border-right: 1px solid var(--border); }
@@ -62,6 +64,8 @@
 .nanoai-deployment { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
 .nanoai-deployment h3 { margin-top: 40px; }
 .nanoai-deployment p + p { margin-top: 16px; }
+.nanoai-computers { border-top: 1px solid var(--border-bright); }
+.nanoai-scope-note { margin: 32px 0 0; max-width: 90ch; color: #a9bbc4; font-size: 0.8rem; line-height: 1.7; }
 
 .nanoai-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
 .nanoai-gallery__item { min-width: 0; margin: 0; }
@@ -69,7 +73,7 @@
 .nanoai-gallery__image { position: relative; display: grid; place-items: center; width: 100%; aspect-ratio: 16 / 10; padding: 16px; border: 1px solid var(--border-bright); background: #080c13; cursor: zoom-in; }
 .nanoai-gallery__image:hover { border-color: var(--teal); }
 .nanoai-gallery__image img { position: absolute; top: 16px; left: 16px; display: block; width: calc(100% - 32px); height: calc(100% - 32px); object-fit: contain; }
-.nanoai-gallery__item--lead .nanoai-gallery__image { aspect-ratio: 1700 / 807; padding: 0; }
+.nanoai-gallery__item--lead .nanoai-gallery__image { aspect-ratio: 3 / 2; padding: 0; }
 .nanoai-gallery__item--lead img { inset: 0; width: 100%; height: 100%; }
 .nanoai-gallery__zoom { position: absolute; bottom: 14px; right: 14px; padding: 8px 12px; border: 1px solid var(--border-bright); color: var(--ice); background: var(--obsidian); font-family: 'Geist Mono', monospace; font-size: 0.65rem; }
 .nanoai-gallery figcaption { padding-top: 18px; }

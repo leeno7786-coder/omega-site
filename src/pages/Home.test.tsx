@@ -17,7 +17,7 @@ describe('Home', () => {
 
   it('shows the expanded section numbering', () => {
     render(<Home />);
-    expect(within(document.querySelector('#selected-systems') as HTMLElement).getByText('04')).toBeVisible();
+    expect(within(document.querySelector('#selected-systems .eyebrow') as HTMLElement).getByText('04')).toBeVisible();
     expect(within(document.querySelector('#process') as HTMLElement).getByText('05')).toBeVisible();
     expect(within(document.querySelector('#company') as HTMLElement).getByText('06')).toBeVisible();
     expect(within(document.querySelector('#project-inquiry') as HTMLElement).getByText('07')).toBeVisible();
