@@ -1027,7 +1027,7 @@ a {
     var(--graphite);
 }
 
-.system-dossier--devcard-ai {
+.system-dossier--nano-apps {
   background:
     linear-gradient(135deg, rgba(125, 211, 252, 0.06), transparent 46%),
     #09141e;
@@ -2705,3 +2705,47 @@ a {
 .nanoai-preview img { display: block; width: 100%; height: auto; }
 .nanoai-preview figcaption { margin-top: 14px; color: #a9bbc4; font-size: 0.72rem; line-height: 1.6; }
 @media (max-width: 900px) { .nanoai-preview { grid-template-columns: 1fr; } }
+
+/* Nano: the Android app builder, announced in the hero and featured right after the proof rail. */
+.hero__announcement {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  padding: 6px 12px 6px 6px;
+  border: 1px solid var(--border-bright);
+  color: var(--ice);
+  font-size: 0.82rem;
+  text-decoration: none;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+.hero__announcement:hover { border-color: var(--teal); background: rgba(94, 234, 212, 0.06); }
+.hero__announcement-tag { padding: 3px 7px; background: var(--teal); color: var(--obsidian); font-family: 'Geist Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+.nano-apps {
+  position: relative;
+  padding: clamp(72px, 9vw, 128px) 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background:
+    radial-gradient(ellipse at 85% 20%, rgba(94, 234, 212, 0.08), transparent 55%),
+    var(--graphite);
+}
+.nano-apps__inner { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); gap: clamp(36px, 5vw, 72px); align-items: center; }
+.nano-apps__eyebrow { color: var(--teal); }
+.nano-apps h2 { margin: 20px 0 0; color: var(--ice); font-size: clamp(2.2rem, 4.2vw, 3.6rem); font-weight: 500; letter-spacing: -0.05em; line-height: 1.02; }
+.nano-apps__lede { margin: 22px 0 0; color: #a9bbc4; font-size: 1.05rem; line-height: 1.7; }
+.nano-apps__steps { display: grid; gap: 14px; margin: 32px 0 0; padding: 0; list-style: none; }
+.nano-apps__steps li { display: grid; grid-template-columns: 34px 1fr; gap: 12px; color: #a9bbc4; line-height: 1.55; }
+.nano-apps__steps strong { display: block; color: var(--ice); font-weight: 600; }
+.nano-apps__step-index { padding-top: 2px; color: var(--teal); font-family: 'Geist Mono', monospace; font-size: 0.72rem; }
+.nano-apps__offer { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 28px; margin-top: 36px; }
+.nano-apps__price { margin: 0; color: var(--ice); font-size: 1.35rem; font-weight: 600; }
+.nano-apps__price span { display: block; margin-top: 4px; color: var(--steel); font-size: 0.82rem; font-weight: 400; }
+.nano-apps__media { margin: 0; min-width: 0; }
+.nano-apps__media video { display: block; width: 100%; height: auto; border: 1px solid var(--border-bright); background: var(--obsidian); }
+.nano-apps__media figcaption { margin-top: 14px; color: #a9bbc4; font-size: 0.75rem; line-height: 1.6; }
+@media (max-width: 900px) {
+  .nano-apps__inner { grid-template-columns: 1fr; }
+  .nano-apps__media { order: -1; }
+}

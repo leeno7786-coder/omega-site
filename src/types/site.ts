@@ -48,7 +48,7 @@ export interface CoFounder {
 export type SelectedSystemId =
   | 'odin'
   | 'omega-browser-agent'
-  | 'devcard-ai'
+  | 'nano-apps'
   | 'omega-runtime'
   | 'omega-memory-mcp'
   | 'nanoagent';

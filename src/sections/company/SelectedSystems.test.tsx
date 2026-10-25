@@ -10,8 +10,8 @@ describe('SelectedSystems', () => {
     expect(within(region).getByRole('heading', { name: 'Omega Browser Agent' })).toBeVisible();
     expect(within(region).getByText('Working build · Edge MV3')).toBeVisible();
     expect(within(region).getByText(/local 4B model/i)).toBeVisible();
-    expect(within(region).getByRole('heading', { name: 'DevCard AI' })).toBeVisible();
-    expect(within(region).getByText('Live SaaS product')).toBeVisible();
+    expect(within(region).getByRole('heading', { name: 'Nano' })).toBeVisible();
+    expect(within(region).getByText('Android app builder')).toBeVisible();
   });
 
   it('keeps private-system inquiries in the current tab and public destinations external', () => {
@@ -29,7 +29,7 @@ describe('SelectedSystems', () => {
     }
 
     for (const { name, href } of [
-      { name: 'Open live app: DevCard AI', href: 'https://www.omega-dev.uk/' },
+      { name: 'Open live app: Nano', href: 'https://omega-dev.uk/' },
       { name: 'View source: Omega Runtime', href: 'https://github.com/leeno7786-coder/Omega-NPU-Runtime' },
       { name: 'View source: NanoAgent', href: 'https://github.com/leeno7786-coder/nanoagent' },
     ]) {

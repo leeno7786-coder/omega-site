@@ -4,6 +4,7 @@ import Capabilities from '../sections/company/Capabilities';
 import CompanyOverview from '../sections/company/CompanyOverview';
 import EngagementProcess from '../sections/company/EngagementProcess';
 import Hero from '../sections/company/Hero';
+import NanoAppsSpotlight from '../sections/company/NanoAppsSpotlight';
 import OmegaProofPreview from '../sections/company/OmegaProofPreview';
 import ProofRail from '../sections/company/ProofRail';
 import ProjectInquiryForm from '../sections/company/ProjectInquiryForm';
@@ -18,6 +19,7 @@ export default function Home() {
       <main id="main-content" tabIndex={-1}>
         <Hero />
         <ProofRail />
+        <NanoAppsSpotlight />
         <Capabilities />
         <OmegaProofPreview />
         <SelectedSystems />
