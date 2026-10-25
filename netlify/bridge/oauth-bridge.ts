@@ -387,7 +387,7 @@ export function createBridgeHandler(options: BridgeOptions): (req: Request) => P
         if (!scopes.every((scope): scope is string => typeof scope === 'string')) return failure(400, 'invalid_request');
         if (new Set(scopes).size !== scopes.length) return failure(400, 'invalid_request');
         if (!scopes.every((scope) => profile.allowedScopes.includes(scope))) return failure(400, 'invalid_request');
-        if (target !== undefined && (!profile.callbackScopes?.[target as string] || !scopes.includes('public_repo') || !scopes.every(scope => profile.callbackScopes![target as string].includes(scope)))) return failure(400, 'invalid_request');
+        if (target !== undefined && (!profile.callbackScopes?.[target as string] || !scopes.includes(profile.callbackScopes[target as string].includes('repo') ? 'repo' : 'public_repo') || !scopes.every(scope => profile.callbackScopes![target as string].includes(scope)))) return failure(400, 'invalid_request');
         const query = new URLSearchParams({
           ...profile.authorizationParams,
           client_id: profile.clientId,

@@ -45,7 +45,7 @@ export function createNanoBridgeHandler(options: Omit<BridgeOptions, 'profiles'>
       revocationEndpoint: null,
       redirectUri: `https://${BRIDGE_HOST}/oauth/${id}/callback`,
       loopbackRedirectUri: 'http://127.0.0.1:7420/oauth/callback',
-      ...(id === 'nano.github' ? { callbackTargets: { 'contractops-7421': 'http://127.0.0.1:7421/oauth/callback' }, callbackScopes: { 'contractops-7421': ['public_repo', 'read:user'] } } : {}),
+      ...(id === 'nano.github' ? { callbackTargets: { 'contractops-7421': 'http://127.0.0.1:7421/oauth/callback', 'contractops-7421-repository-read': 'http://127.0.0.1:7421/oauth/callback' }, callbackScopes: { 'contractops-7421': ['public_repo', 'read:user'], 'contractops-7421-repository-read': ['repo', 'read:user'] } } : {}),
     };
     if (match?.[2] === 'capabilities') {
       if (req.method !== 'GET') return fail(405, 'method_not_allowed');
