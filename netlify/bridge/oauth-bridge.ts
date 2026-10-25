@@ -30,6 +30,9 @@ export interface BridgeProfile {
   allowedScopes: readonly string[];
   /** A server-configured callback for another desktop product; never supplied by the caller. */
   loopbackRedirectUri?: string;
+  /** Explicit publisher-owned loopback routes, sealed into state; never caller URLs. */
+  callbackTargets?: Readonly<Record<string, string>>;
+  callbackScopes?: Readonly<Record<string, readonly string[]>>;
   /** Publisher-controlled provider options. Request JSON cannot override these or OAuth bindings. */
   authorizationParams?: Readonly<Record<string, string>>;
 }
@@ -372,6 +375,10 @@ export function createBridgeHandler(options: BridgeOptions): (req: Request) => P
     const stateDigest = body.state_digest;
     if (typeof stateDigest !== 'string' || !STATE_DIGEST.test(stateDigest)) return failure(400, 'invalid_request');
 
+    const target = body.callback_target;
+    if (target !== undefined && (typeof target !== 'string' || !profile.callbackTargets || !Object.hasOwn(profile.callbackTargets, target))) return failure(400, 'invalid_request');
+    const binding = target === undefined ? profile.id : `${profile.id}#${target}`;
+
     switch (route.action) {
       case 'begin': {
         const { pkce_challenge: challenge, scopes } = body;
@@ -380,6 +387,7 @@ export function createBridgeHandler(options: BridgeOptions): (req: Request) => P
         if (!scopes.every((scope): scope is string => typeof scope === 'string')) return failure(400, 'invalid_request');
         if (new Set(scopes).size !== scopes.length) return failure(400, 'invalid_request');
         if (!scopes.every((scope) => profile.allowedScopes.includes(scope))) return failure(400, 'invalid_request');
+        if (target !== undefined && (!profile.callbackScopes?.[target as string] || !scopes.includes('public_repo') || !scopes.every(scope => profile.callbackScopes![target as string].includes(scope)))) return failure(400, 'invalid_request');
         const query = new URLSearchParams({
           ...profile.authorizationParams,
           client_id: profile.clientId,
@@ -389,18 +397,18 @@ export function createBridgeHandler(options: BridgeOptions): (req: Request) => P
           resource: profile.resource,
           response_type: 'code',
           scope: [...scopes].sort().join(' '),
-          state: stateDigest,
+          state: target === undefined ? stateDigest : 'ct1.' + await sealHandle(secrets.handleKey, { p: `${profile.id}#callback-state`, c: target as string, s: stateDigest, e: Math.floor(now() / 1000) + HANDLE_TTL_SECONDS }),
         });
         if (scopes.length === 0) query.delete('scope');
-        return json(200, { authorization_url: `${profile.authorizeEndpoint}?${query.toString()}` });
+        return json(200, { authorization_url: `${profile.authorizeEndpoint}?${query.toString()}`, ...(target === undefined ? {} : { callback_target: target, state_digest: stateDigest, authorization_state: query.get('state') }) });
       }
       case 'redeem': {
         const { completion_handle: handle, pkce_verifier: verifier } = body;
         if (!nonEmptyString(handle)) return failure(400, 'invalid_request');
         if (typeof verifier !== 'string' || !PKCE_VERIFIER.test(verifier)) return failure(400, 'invalid_request');
-        const payload = await openHandle(secrets.handleKey, handle, profile.id);
+        const payload = await openHandle(secrets.handleKey, handle, binding);
         const nowSeconds = Math.floor(now() / 1000);
-        if (!payload || payload.p !== profile.id || payload.s !== stateDigest || !(nowSeconds < payload.e)) {
+        if (!payload || payload.p !== binding || payload.s !== stateDigest || !(nowSeconds < payload.e)) {
           return failure(400, 'invalid_grant');
         }
         return tokenRequest(fetchImpl, profile, {
@@ -459,18 +467,25 @@ async function callback(
 ): Promise<Response> {
   const code = singleParam(params, 'code');
   const error = singleParam(params, 'error');
-  const state = singleParam(params, 'state');
+  let state = singleParam(params, 'state');
+  let target: string | undefined;
+  let stateExpiry: number | undefined;
+  if (state?.startsWith('ct1.')) {
+    const payload = await openHandle(handleKey, state.slice(4), `${profile.id}#callback-state`);
+    if (!payload || payload.p !== `${profile.id}#callback-state` || !STATE_DIGEST.test(payload.s) || !(Math.floor(now() / 1000) < payload.e) || !profile.callbackTargets || !Object.hasOwn(profile.callbackTargets, payload.c)) return failure(400, 'invalid_request');
+    target = payload.c; stateExpiry = payload.e; state = payload.s;
+  }
   if (code === null || error === null || !state || !STATE_DIGEST.test(state)) return failure(400, 'invalid_request');
   const issuer = singleParam(params, 'iss');
   if (issuer === null || (issuer !== undefined && issuer !== profile.issuer)) return failure(400, 'invalid_request');
-  const loopback = profile.loopbackRedirectUri ?? `${LOOPBACK_ORIGIN}/oauth/${encodeURIComponent(profile.id)}/callback`;
+  const loopback = target === undefined ? (profile.loopbackRedirectUri ?? `${LOOPBACK_ORIGIN}/oauth/${encodeURIComponent(profile.id)}/callback`) : profile.callbackTargets![target];
 
   if (code !== undefined && error === undefined) {
     const handle = await sealHandle(handleKey, {
-      p: profile.id,
+      p: target === undefined ? profile.id : `${profile.id}#${target}`,
       c: code,
       s: state,
-      e: Math.floor(now() / 1000) + HANDLE_TTL_SECONDS,
+      e: Math.min(stateExpiry ?? Infinity, Math.floor(now() / 1000) + HANDLE_TTL_SECONDS),
     });
     if (handle.length > HANDLE_MAX_BYTES) return failure(400, 'invalid_request');
     const query = new URLSearchParams({ state, completion_handle: handle, iss: profile.issuer });

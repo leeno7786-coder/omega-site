@@ -31,7 +31,7 @@ export const remainingNanoProviders: Readonly<Record<string, NanoPublisherProvid
     issuer: 'https://github.com/login/oauth',
     authorizeEndpoint: 'https://github.com/login/oauth/authorize', tokenEndpoint: 'https://github.com/login/oauth/access_token',
     resource: 'https://api.githubcopilot.com/mcp',
-    allowedScopes: ['repo', 'read:org', 'read:user', 'user:email', 'notifications', 'gist'],
+    allowedScopes: ['public_repo', 'repo', 'read:org', 'read:user', 'user:email', 'notifications', 'gist'],
   },
   'nano.asana': {
     clientIdEnv: 'NANO_BRIDGE_ASANA_CLIENT_ID', clientSecretEnv: 'NANO_BRIDGE_ASANA_CLIENT_SECRET',

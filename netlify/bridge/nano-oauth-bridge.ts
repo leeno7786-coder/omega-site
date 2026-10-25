@@ -27,7 +27,7 @@ const providers: Readonly<Record<string, NanoPublisherProvider>> = {
 export function createNanoBridgeHandler(options: Omit<BridgeOptions, 'profiles'>) {
   return async (req: Request): Promise<Response> => {
     const url = new URL(req.url);
-    const match = /^\/nano\/bridge\/v1\/(nano\.[a-z][a-z-]*)\/(begin|redeem|refresh|revoke|callback)$/.exec(url.pathname);
+    const match = /^\/nano\/bridge\/v1\/(nano\.[a-z][a-z-]*)\/(begin|redeem|refresh|revoke|callback|capabilities)$/.exec(url.pathname);
     // Netlify can preserve the original request URL on a 200 rewrite.
     const callback = /^\/oauth\/(nano\.[a-z][a-z-]*)\/callback$/.exec(url.pathname);
     const fail = (status: number, error: string) => new Response(JSON.stringify({ error }), { status, headers: { 'content-type': 'application/json', 'cache-control': 'no-store' } });
@@ -45,7 +45,13 @@ export function createNanoBridgeHandler(options: Omit<BridgeOptions, 'profiles'>
       revocationEndpoint: null,
       redirectUri: `https://${BRIDGE_HOST}/oauth/${id}/callback`,
       loopbackRedirectUri: 'http://127.0.0.1:7420/oauth/callback',
+      ...(id === 'nano.github' ? { callbackTargets: { 'contractops-7421': 'http://127.0.0.1:7421/oauth/callback' }, callbackScopes: { 'contractops-7421': ['public_repo', 'read:user'] } } : {}),
     };
+    if (match?.[2] === 'capabilities') {
+      if (req.method !== 'GET') return fail(405, 'method_not_allowed');
+      if (!options.env[provider.clientSecretEnv] || !options.env.NANO_BRIDGE_HANDLE_KEY) return fail(503, 'bridge_unconfigured');
+      return new Response(JSON.stringify({ protocol: 2, profile: id, default_loopback_port: 7420, callback_targets: Object.keys(profile.callbackTargets ?? {}), callback_scopes: profile.callbackScopes ?? {} }), { status: 200, headers: { 'content-type': 'application/json', 'cache-control': 'no-store' } });
+    }
     // Load only this Nano profile. An unconfigured HubSpot app must not disable Slack or Omega.
     const handler = createBridgeHandler({ ...options, env: { ...options.env, OMEGA_BRIDGE_HANDLE_KEY: options.env.NANO_BRIDGE_HANDLE_KEY }, profiles: { [id]: profile } });
     url.pathname = `/bridge/v1/${id}/${match?.[2] ?? 'callback'}`;
