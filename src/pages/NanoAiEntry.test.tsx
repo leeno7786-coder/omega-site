@@ -10,6 +10,6 @@ it('features NanoAI computer use and preserves the existing Omega showcase', () 
   expect(within(systems).getByRole('img', { name: /recorded Windows application actions/ })).toBeVisible();
   expect(screen.getByRole('link', { name: 'Explore the technical proof' })).toHaveAttribute('href', '/omega-3/');
   expect(within(systems).getByRole('heading', { name: 'Omega Browser Agent' })).toBeVisible();
-  expect(within(systems).getByRole('heading', { name: 'DevCard AI' })).toBeVisible();
+  expect(within(systems).getByRole('heading', { name: 'Nano' })).toBeVisible();
   expect(within(systems).getByRole('heading', { name: 'Odin' })).toBeVisible();
 });
