@@ -30,7 +30,7 @@ export default function NanoAiPage() {
         </div>
 
         <nav className="nanoai-index content-shell" aria-label="NanoAI showcase sections">
-          {[['Capabilities', '#features'], ['Computer use', '#computer-use'], ['Architecture', '#architecture'], ['Actual screenshots', '#proof'], ['Questions', '#questions']].map(([label, href], index) => <a key={href} href={href}><span>0{index + 1}</span>{label}<span aria-hidden="true">↓</span></a>)}
+          {[['Capabilities', '#features'], ['Computer use', '#computer-use'], ['Architecture', '#architecture'], ['Actual screenshots', '#proof'], ['Your data', '#your-data'], ['Questions', '#questions']].map(([label, href], index) => <a key={href} href={href}><span>0{index + 1}</span>{label}<span aria-hidden="true">↓</span></a>)}
         </nav>
 
         <section className="nanoai-section content-shell" id="features" aria-labelledby="nanoai-features-title">
@@ -67,8 +67,17 @@ export default function NanoAiPage() {
           <NanoAiGallery />
         </section>
 
+        <section className="nanoai-section content-shell" id="your-data" aria-labelledby="nanoai-data-title">
+          <p className="eyebrow">05 / Your data</p>
+          <div className="nanoai-section__intro"><h2 id="nanoai-data-title">Your accounts.<br />Your data.</h2><p>Connect Gmail, Google Calendar, Drive, Docs, Sheets, Slides and Chat from NanoAI’s Plugins. You sign in on Google’s own consent screen, and each plugin asks only for the access its tools need.</p></div>
+          <div className="nanoai-deployment">
+            <article><h3>What stays on your PC</h3><p>Conversations, memory, tasks and files live in NanoAI’s data folder on your PC, along with the sign-in tokens for accounts you connect.</p><p>NanoAI reads your data when a request or a task you set up needs it. It asks before it sends, changes or deletes anything.</p></article>
+            <article><h3>What leaves it</h3><p>With the hosted model, the content a request needs goes through Nano Cloud to generate the reply. Nano Cloud stores none of it, and none of it is used to train AI models.</p><p>Google data is used only for the features you use. It’s never sold or used for advertising. <a href="/nanoai/privacy/">Read the NanoAI privacy policy</a>.</p></article>
+          </div>
+        </section>
+
         <section className="nanoai-section nanoai-questions content-shell" id="questions" aria-labelledby="nanoai-questions-title">
-          <p className="eyebrow">05 / Questions</p>
+          <p className="eyebrow">06 / Questions</p>
           <h2 id="nanoai-questions-title">Running NanoAI.</h2>
           <div>{NANOAI_FAQ.map((faq) => <details key={faq.question}><summary>{faq.question}<span aria-hidden="true">+</span></summary><p>{faq.answer}</p></details>)}</div>
         </section>

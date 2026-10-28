@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NanoAI Privacy Policy — Omega AI LLC</title>
+    <meta
+      name="description"
+      content="How NanoAI handles your conversations, files and the Google account data you connect, including Limited Use of Google user data."
+    />
+    <link rel="canonical" href="https://omega2ai.com/nanoai/privacy/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <style>
+      :root { color-scheme: dark; font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif; }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: #071019; color: #dffbff; }
+      header, footer { border-bottom: 1px solid #193a4b; }
+      footer { border-top: 1px solid #193a4b; border-bottom: 0; }
+      .shell { width: min(calc(100% - 40px), 980px); margin: 0 auto; }
+      header .shell, footer .shell { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 72px; }
+      nav { display: flex; flex-wrap: wrap; gap: 20px; }
+      main { max-width: 780px; margin: 0 auto; padding: 4.5rem 1.25rem 5rem; line-height: 1.65; }
+      a { color: #5eead4; }
+      a:hover { color: #dffbff; }
+      h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); line-height: 0.98; margin: 0 0 1rem; letter-spacing: -0.055em; }
+      h2 { margin-top: 2rem; font-size: 1.2rem; }
+      h3 { margin-top: 1.25rem; font-size: 1.05rem; }
+      p, li { color: #a9bbc4; }
+      code { color: #dffbff; font-size: 0.88em; overflow-wrap: anywhere; }
+      table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
+      td, th { border: 1px solid #193a4b; padding: 0.65rem 0.75rem; vertical-align: top; text-align: left; }
+      th { color: #dffbff; }
+      td { color: #a9bbc4; }
+      .brand { color: #dffbff; font-weight: 700; letter-spacing: 0.12em; text-decoration: none; }
+      .meta { color: #8098a8; font-size: 0.92rem; }
+      .summary { border: 1px solid #193a4b; border-radius: 12px; padding: 0.25rem 1.25rem; margin: 1.5rem 0; }
+      @media (max-width: 560px) { header .shell, footer .shell { align-items: flex-start; flex-direction: column; padding-block: 20px; } table { display: block; overflow-x: auto; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="shell">
+        <a class="brand" href="/">OMEGA AI</a>
+        <nav aria-label="Site navigation"><a href="/nanoai/">NanoAI</a><a href="/">Company</a><a href="/terms/">Terms</a></nav>
+      </div>
+    </header>
+    <main>
+      <h1>NanoAI Privacy Policy</h1>
+      <p class="meta">Omega AI LLC · Last updated: October 28, 2026</p>
+      <p>
+        This policy explains how <strong>NanoAI</strong>, the AI assistant app made by Omega AI LLC, handles your
+        information, including data from Google accounts you connect to it. For our website and other products, see the
+        <a href="/privacy/">Omega AI privacy policy</a>.
+      </p>
+
+      <div class="summary">
+        <p><strong>In short:</strong></p>
+        <ul>
+          <li>NanoAI runs on your own Windows PC. Your conversations, memory, tasks and files are stored there.</li>
+          <li>To answer you, NanoAI sends the content each request needs to an AI model, either through Nano Cloud (our hosted service) or to a model running on your PC.</li>
+          <li>Nano Cloud doesn't store what you send. Our AI provider doesn't use it to train models.</li>
+          <li>Google data is used only to do what you ask. It's never sold, used for ads, or used to train general-purpose AI models.</li>
+        </ul>
+      </div>
+
+      <h2 id="what-nanoai-is">1. How NanoAI works</h2>
+      <p>
+        NanoAI is a Windows app that holds conversations, remembers what you tell it, runs tasks, and works with your
+        apps and accounts. It stores its data in a NanoAI data folder on your PC, which it restricts to your Windows
+        account. Speech recognition, spoken replies and voice matching run on your PC.
+      </p>
+      <p>To generate replies, NanoAI uses one of these:</p>
+      <ul>
+        <li>
+          <strong>Nano Cloud</strong>, Omega AI's hosted AI service. NanoAI sends it the content a request needs, and Nano
+          Cloud passes that to Microsoft Azure to produce the reply.
+        </li>
+        <li><strong>A local model</strong> you choose. With a local model, that processing stays on your PC.</li>
+      </ul>
+
+      <h2 id="information">2. Information NanoAI handles</h2>
+      <table>
+        <tr><th>Information</th><th>Where it goes</th></tr>
+        <tr>
+          <td>Your messages, conversation history, saved memory, tasks, schedules, agents, settings and files you attach or NanoAI creates</td>
+          <td>Stored on your PC. When you use Nano Cloud, the parts a request needs are sent for processing; see section 3.</td>
+        </tr>
+        <tr>
+          <td>Content from apps you connect, such as an email or calendar event NanoAI reads for you</td>
+          <td>Fetched from the app's provider to your PC. It's included in a request to the AI model when needed to answer you, and kept on your PC in your conversation or task results.</td>
+        </tr>
+        <tr>
+          <td>Sign-in tokens for connected apps</td>
+          <td>Stored in NanoAI's data folder on your PC. Omega AI's servers don't keep them (see section 4).</td>
+        </tr>
+        <tr>
+          <td>Voice profile, if you set up voice matching</td>
+          <td>Stored encrypted on your PC. Never sent to Omega AI.</td>
+        </tr>
+        <tr>
+          <td>Nano Cloud account and usage</td>
+          <td>Your account's email address, and how much of the hosted model each account uses per day, kept by Omega AI for metering and billing.</td>
+        </tr>
+        <tr>
+          <td>Web research, when you turn it on</td>
+          <td>Search queries and page requests go to the websites and search services NanoAI looks up for you.</td>
+        </tr>
+      </table>
+
+      <h2 id="ai-processing">3. AI processing through Nano Cloud</h2>
+      <p>When you use the hosted model, each request carries what's needed to answer it. That can include:</p>
+      <ul>
+        <li>your message and relevant earlier conversation;</li>
+        <li>saved memory;</li>
+        <li>screenshots of the computer NanoAI is working on;</li>
+        <li>results from tools, such as the contents of an email NanoAI read for you.</li>
+      </ul>
+      <ul>
+        <li>
+          <strong>Nano Cloud stores no request content.</strong> It checks your account, counts the tokens used, and
+          forwards the request to Microsoft Azure. Every request asks Azure not to keep the response.
+        </li>
+        <li>
+          <strong>Microsoft Azure</strong> generates the reply. Under Microsoft's
+          <a href="https://learn.microsoft.com/azure/ai-foundry/responsible-ai/openai/data-privacy" rel="noopener noreferrer">data, privacy and security terms</a>,
+          prompts and replies aren't used to train models and aren't available to other customers or to the model's
+          developer. Microsoft may keep a sample of flagged requests for abuse review, as those terms describe.
+        </li>
+        <li>NanoAI doesn't use your content to train AI models, and neither does Omega AI.</li>
+      </ul>
+
+      <h2 id="google">4. Google user data</h2>
+      <p>
+        You can connect Google services to NanoAI from its Plugins: Gmail, Google Calendar, Drive, Docs, Sheets, Slides,
+        Chat, and some Google Cloud services. Nothing connects until you start a connection and approve Google's consent
+        screen.
+      </p>
+
+      <h3>What NanoAI accesses and why</h3>
+      <table>
+        <tr><th>Service</th><th>Scopes requested</th><th>What NanoAI does with them</th></tr>
+        <tr>
+          <td>Gmail</td>
+          <td><code>https://www.googleapis.com/auth/gmail.modify</code></td>
+          <td>Searches and reads your mail and threads, writes drafts for you to review, and applies or removes labels, archives, trashes or marks spam when you ask. It doesn't send email.</td>
+        </tr>
+        <tr>
+          <td>Google Calendar</td>
+          <td><code>https://www.googleapis.com/auth/calendar.events</code><br /><code>https://www.googleapis.com/auth/calendar.calendarlist.readonly</code><br /><code>https://www.googleapis.com/auth/calendar.events.freebusy</code></td>
+          <td>Lists your calendars, reads events and finds free time, and creates, updates, deletes or responds to events when you ask.</td>
+        </tr>
+        <tr>
+          <td>Google Drive</td>
+          <td><code>https://www.googleapis.com/auth/drive.readonly</code><br /><code>https://www.googleapis.com/auth/drive.file</code></td>
+          <td>Searches and reads files you can access, shows who a file is shared with, and creates or copies files when you ask. It can change only files it created or you opened with it.</td>
+        </tr>
+        <tr>
+          <td>Google Docs</td>
+          <td><code>https://www.googleapis.com/auth/documents</code><br /><code>https://www.googleapis.com/auth/documents.readonly</code><br /><code>https://www.googleapis.com/auth/drive.readonly</code><br /><code>https://www.googleapis.com/auth/drive.file</code></td>
+          <td>Reads documents and makes the edits you ask for.</td>
+        </tr>
+        <tr>
+          <td>Google Sheets</td>
+          <td><code>https://www.googleapis.com/auth/spreadsheets</code><br /><code>https://www.googleapis.com/auth/spreadsheets.readonly</code><br /><code>https://www.googleapis.com/auth/drive.readonly</code><br /><code>https://www.googleapis.com/auth/drive.file</code></td>
+          <td>Reads spreadsheet values and updates cells, rows and formulas when you ask.</td>
+        </tr>
+        <tr>
+          <td>Google Slides</td>
+          <td><code>https://www.googleapis.com/auth/presentations</code><br /><code>https://www.googleapis.com/auth/presentations.readonly</code><br /><code>https://www.googleapis.com/auth/drive.readonly</code><br /><code>https://www.googleapis.com/auth/drive.file</code></td>
+          <td>Reads presentations and edits slides when you ask.</td>
+        </tr>
+        <tr>
+          <td>Google Chat</td>
+          <td><code>https://www.googleapis.com/auth/chat.spaces.readonly</code><br /><code>https://www.googleapis.com/auth/chat.memberships.readonly</code><br /><code>https://www.googleapis.com/auth/chat.messages.readonly</code><br /><code>https://www.googleapis.com/auth/chat.messages.create</code><br /><code>https://www.googleapis.com/auth/chat.users.readstate</code><br /><code>https://www.googleapis.com/auth/chat.users.spacesettings</code></td>
+          <td>Searches and reads your conversations and members, sends messages you ask it to, marks conversations read or unread, and reads or changes notification settings.</td>
+        </tr>
+        <tr>
+          <td>Google Cloud</td>
+          <td><code>https://www.googleapis.com/auth/bigquery</code><br /><code>https://www.googleapis.com/auth/compute</code><br /><code>https://www.googleapis.com/auth/container</code><br /><code>https://www.googleapis.com/auth/maps-platform.mapstools</code></td>
+          <td>Each scope is requested only by its own plugin. Nano queries BigQuery data, inspects or manages Compute Engine and Kubernetes Engine resources, and uses Maps tools, all in projects you choose and only when you ask.</td>
+        </tr>
+      </table>
+      <p>
+        Each plugin asks only for its own scopes, and only when you connect it. NanoAI reads data when your request, or a
+        task you scheduled, needs it. By default, anything that would send, change or delete something asks you to
+        approve it first.
+      </p>
+
+      <h3>How Google data moves</h3>
+      <ul>
+        <li>
+          <strong>Signing in.</strong> Google sign-in goes through Omega AI's sign-in service at
+          <code>plugins.omega2ai.com</code>. It holds NanoAI's Google app secret, exchanges the one-time authorization
+          code for tokens and refreshes them, then returns the tokens to your PC. It doesn't store or log authorization
+          codes or tokens.
+        </li>
+        <li>
+          <strong>Using the data.</strong> NanoAI sends requests to Google from your PC using your tokens. Google's replies
+          come back to your PC.
+        </li>
+        <li>
+          <strong>Answering you.</strong> When you use Nano Cloud, the Google data a request needs (for example the emails
+          you asked NanoAI to summarize) is sent through Nano Cloud to Microsoft Azure to produce the answer, as described
+          in section 3. Nano Cloud doesn't store it.
+        </li>
+        <li>
+          <strong>On your PC.</strong> Results are saved in your conversation or task results. If automatic memory is on,
+          or you ask NanoAI to remember something, a short fact may be saved to NanoAI's memory on your PC. You can review
+          and delete memories in Settings.
+        </li>
+      </ul>
+
+      <h3>Limited Use</h3>
+      <p>
+        NanoAI's use and transfer of information received from Google APIs to any other app will adhere to the
+        <a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener noreferrer">Google API Services User Data Policy</a>,
+        including the Limited Use requirements. In particular:
+      </p>
+      <ul>
+        <li>We use Google user data only to provide and improve the user-facing features you use in NanoAI.</li>
+        <li>
+          We transfer it only as needed to provide those features (the AI processing in section 3), for security, to
+          comply with law, or with your consent.
+        </li>
+        <li>We don't sell it, and we don't use it for advertising, retargeting or credit decisions.</li>
+        <li>
+          No person at Omega AI reads it, unless you ask us to, it's needed for security or to comply with law, or it's
+          aggregated and anonymized for internal operations.
+        </li>
+        <li>
+          NanoAI does not use Google Workspace data to develop, improve, or train generalized or non-personalized AI or
+          machine-learning models. When it sends Google data to its AI provider to answer your request, that provider
+          doesn't use it to train models either.
+        </li>
+      </ul>
+
+      <h3>Disconnecting and deleting</h3>
+      <ul>
+        <li>Remove a Google plugin in NanoAI's Plugins to delete its saved tokens from your PC.</li>
+        <li>
+          You can also revoke NanoAI's access at
+          <a href="https://myaccount.google.com/connections" rel="noopener noreferrer">Google Account → Third-party connections</a>.
+        </li>
+        <li>
+          Delete conversations, tasks and memories in NanoAI, or delete NanoAI's data folder to remove everything it
+          stored on your PC.
+        </li>
+      </ul>
+
+      <h2 id="sharing">5. Who else processes data</h2>
+      <ul>
+        <li><strong>Microsoft Azure</strong> generates replies for Nano Cloud (section 3).</li>
+        <li><strong>Netlify</strong> hosts Omega AI's website and the sign-in service.</li>
+        <li><strong>Cloudflare</strong> carries encrypted traffic to Nano Cloud.</li>
+        <li><strong>Apps you connect</strong>, such as Google, receive the requests NanoAI makes for you, under their own privacy policies.</li>
+        <li>
+          <strong>Phone access</strong>, if you turn it on, connects your phone to NanoAI on your PC through your own
+          private Tailscale network.
+        </li>
+      </ul>
+      <p>We don't sell personal information or share it with advertisers or data brokers.</p>
+
+      <h2 id="retention">6. Keeping and deleting data</h2>
+      <ul>
+        <li>Data on your PC stays until you delete it in NanoAI or delete NanoAI's data folder.</li>
+        <li>Nano Cloud keeps your account email and daily usage counts, not what you sent.</li>
+        <li>The sign-in service keeps nothing.</li>
+        <li>Microsoft's handling is set out in its terms linked in section 3.</li>
+        <li>
+          To close a Nano Cloud account or ask about your data, email
+          <a href="mailto:noahlee@omega2ai.com">noahlee@omega2ai.com</a>.
+        </li>
+      </ul>
+
+      <h2 id="security">7. Security</h2>
+      <ul>
+        <li>NanoAI's connections to Nano Cloud, the sign-in service and Google use encrypted HTTPS.</li>
+        <li>App secrets stay on Omega AI's servers and are never shipped in NanoAI.</li>
+        <li>NanoAI's data folder on your PC is restricted to your Windows account.</li>
+      </ul>
+
+      <h2 id="children">8. Children</h2>
+      <p>NanoAI isn't directed at children under 13 (or the equivalent minimum age where you live).</p>
+
+      <h2 id="changes">9. Changes</h2>
+      <p>
+        When this policy changes, we'll update the date at the top. If a change affects how NanoAI uses data you've
+        already given it, we'll tell you in the app or by email first.
+      </p>
+
+      <h2 id="contact">10. Contact</h2>
+      <p>
+        Omega AI LLC · Privacy questions:
+        <a href="mailto:noahlee@omega2ai.com">noahlee@omega2ai.com</a> ·
+        <a href="https://omega2ai.com/nanoai/">omega2ai.com/nanoai</a>
+      </p>
+      <p><a href="/nanoai/">Back to NanoAI</a></p>
+    </main>
+    <footer><div class="shell"><span>© 2026 Omega AI LLC</span><nav aria-label="Legal navigation"><a href="/nanoai/privacy/">NanoAI Privacy</a><a href="/privacy/">Omega AI Privacy</a><a href="/terms/">Terms</a></nav></div></footer>
+  </body>
+</html>
