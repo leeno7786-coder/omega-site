@@ -99,7 +99,7 @@ describe('NanoAI bridge deployment contract', () => {
       { profile: 'nano.github', family: 'GITHUB', issuer: 'https://github.com/login/oauth', authorize: 'https://github.com/login/oauth/authorize', token: 'https://github.com/login/oauth/access_token', resource: 'https://api.githubcopilot.com/mcp', scopes: ['repo', 'read:org', 'read:user', 'user:email', 'notifications', 'gist'] },
       { profile: 'nano.asana', family: 'ASANA', issuer: 'https://app.asana.com', authorize: 'https://app.asana.com/-/oauth_authorize', token: 'https://app.asana.com/-/oauth_token', resource: 'https://mcp.asana.com/v2/mcp', scopes: [] },
       { profile: 'nano.box', family: 'BOX', issuer: 'https://api.box.com', authorize: 'https://account.box.com/api/oauth2/authorize', token: 'https://api.box.com/oauth2/token', resource: 'https://mcp.box.com/', scopes: [] },
-      { profile: 'nano.google-drive', family: 'GOOGLE_WEB', issuer: 'https://accounts.google.com', authorize: 'https://accounts.google.com/o/oauth2/v2/auth', token: 'https://oauth2.googleapis.com/token', resource: 'https://drivemcp.googleapis.com/mcp/v1', scopes: ['https://www.googleapis.com/auth/drive'] },
+      { profile: 'nano.google-drive', family: 'GOOGLE_WEB', issuer: 'https://accounts.google.com', authorize: 'https://accounts.google.com/o/oauth2/v2/auth', token: 'https://oauth2.googleapis.com/token', resource: 'https://drivemcp.googleapis.com/mcp/v1', scopes: ['https://www.googleapis.com/auth/drive.readonly', 'https://www.googleapis.com/auth/drive.file'] },
     ];
     for (const entry of fixtures) {
       const secret = crypto.randomUUID();
@@ -140,16 +140,18 @@ describe('NanoAI bridge deployment contract', () => {
     const entries = [
       ['bigquery', 'bigquery.googleapis.com/mcp', ['bigquery']],
       ['gmail', 'gmailmcp.googleapis.com/mcp/v1', ['gmail.modify']],
-      ['google-calendar', 'calendarmcp.googleapis.com/mcp/v1', ['calendar']],
-      ['google-chat', 'chatmcp.googleapis.com/mcp/v1', ['chat.messages', 'chat.spaces.readonly', 'chat.memberships.readonly']],
+      ['google-calendar', 'calendarmcp.googleapis.com/mcp/v1', ['calendar.events', 'calendar.calendarlist.readonly', 'calendar.events.freebusy']],
+      ['google-chat', 'chatmcp.googleapis.com/mcp/v1', ['chat.spaces.readonly', 'chat.memberships.readonly', 'chat.messages.readonly', 'chat.messages.create', 'chat.users.readstate', 'chat.users.spacesettings']],
       ['google-compute', 'compute.googleapis.com/mcp', ['compute']],
-      ['google-docs', 'docsmcp.googleapis.com/mcp/v1', ['documents', 'drive.readonly']],
-      ['google-drive', 'drivemcp.googleapis.com/mcp/v1', ['drive']],
+      ['google-docs', 'docsmcp.googleapis.com/mcp/v1', ['documents', 'documents.readonly', 'drive.readonly', 'drive.file']],
+      ['google-drive', 'drivemcp.googleapis.com/mcp/v1', ['drive.readonly', 'drive.file']],
       ['google-gke', 'container.googleapis.com/mcp', ['container']],
       ['google-maps', 'mapstools.googleapis.com/mcp', ['maps-platform.mapstools']],
-      ['google-sheets', 'sheetsmcp.googleapis.com/mcp/v1', ['spreadsheets', 'drive.readonly']],
-      ['google-slides', 'slidesmcp.googleapis.com/mcp/v1', ['presentations', 'drive.readonly']],
+      ['google-sheets', 'sheetsmcp.googleapis.com/mcp/v1', ['spreadsheets', 'spreadsheets.readonly', 'drive.readonly', 'drive.file']],
+      ['google-slides', 'slidesmcp.googleapis.com/mcp/v1', ['presentations', 'presentations.readonly', 'drive.readonly', 'drive.file']],
     ] as const;
+    // The broader scopes these connectors used to request are no longer declared by NanoAI's Google project.
+    const retired = { 'google-calendar': 'calendar', 'google-chat': 'chat.messages', 'google-drive': 'drive' } as Record<string, string>;
     const handler = createNanoBridgeHandler({ env: { ...env, NANO_BRIDGE_GOOGLE_WEB_CLIENT_ID: 'google-web-fixture', NANO_BRIDGE_GOOGLE_WEB_CLIENT_SECRET: crypto.randomUUID() } });
     const toml = readFileSync(new URL('../../netlify.toml', import.meta.url), 'utf8');
     for (const [id, resource, shortScopes] of entries) {
@@ -165,9 +167,10 @@ describe('NanoAI bridge deployment contract', () => {
       expect(toml).toContain(route);
       expect(toml.indexOf(route)).toBeLessThan(toml.indexOf('from = "https://plugins.omega2ai.com/oauth/*"'));
       expect((await handler(post(`nano.${id}`, 'begin', { ...begin, scopes: ['https://www.googleapis.com/auth/cloud-platform'] }))).status).toBe(400);
+      if (retired[id]) expect((await handler(post(`nano.${id}`, 'begin', { ...begin, scopes: [`https://www.googleapis.com/auth/${retired[id]}`] }))).status).toBe(400);
     }
     // A desktop app identity must not silently stand in for a web publisher registration.
     const desktopOnly = createNanoBridgeHandler({ env: { ...env, GOOGLE_OAUTH_CLIENT_ID: 'desktop', GOOGLE_OAUTH_CLIENT_SECRET: 'desktop-secret' } });
-    expect((await desktopOnly(post('nano.google-drive', 'begin', { ...begin, scopes: ['https://www.googleapis.com/auth/drive'] }))).status).toBe(503);
+    expect((await desktopOnly(post('nano.google-drive', 'begin', { ...begin, scopes: ['https://www.googleapis.com/auth/drive.readonly'] }))).status).toBe(503);
   });
 });
