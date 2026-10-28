@@ -46,14 +46,16 @@ export const remainingNanoProviders: Readonly<Record<string, NanoPublisherProvid
     resource: 'https://mcp.box.com/', allowedScopes: [],
   },
   'nano.bigquery': google('bigquery.googleapis.com/mcp', ['bigquery']),
+  // Workspace scopes are the ones Google's per-tool MCP reference requires (checked 2026-10-28), and match the
+  // NanoAI Google project's Data Access list. Gmail's label tools need gmail.modify; Calendar writes need calendar.events.
   'nano.gmail': google('gmailmcp.googleapis.com/mcp/v1', ['gmail.modify']),
-  'nano.google-calendar': google('calendarmcp.googleapis.com/mcp/v1', ['calendar']),
-  'nano.google-chat': google('chatmcp.googleapis.com/mcp/v1', ['chat.messages', 'chat.spaces.readonly', 'chat.memberships.readonly']),
+  'nano.google-calendar': google('calendarmcp.googleapis.com/mcp/v1', ['calendar.events', 'calendar.calendarlist.readonly', 'calendar.events.freebusy']),
+  'nano.google-chat': google('chatmcp.googleapis.com/mcp/v1', ['chat.spaces.readonly', 'chat.memberships.readonly', 'chat.messages.readonly', 'chat.messages.create', 'chat.users.readstate', 'chat.users.spacesettings']),
   'nano.google-compute': google('compute.googleapis.com/mcp', ['compute']),
-  'nano.google-docs': google('docsmcp.googleapis.com/mcp/v1', ['documents', 'drive.readonly']),
-  'nano.google-drive': google('drivemcp.googleapis.com/mcp/v1', ['drive']),
+  'nano.google-docs': google('docsmcp.googleapis.com/mcp/v1', ['documents', 'documents.readonly', 'drive.readonly', 'drive.file']),
+  'nano.google-drive': google('drivemcp.googleapis.com/mcp/v1', ['drive.readonly', 'drive.file']),
   'nano.google-gke': google('container.googleapis.com/mcp', ['container']),
   'nano.google-maps': google('mapstools.googleapis.com/mcp', ['maps-platform.mapstools']),
-  'nano.google-sheets': google('sheetsmcp.googleapis.com/mcp/v1', ['spreadsheets', 'drive.readonly']),
-  'nano.google-slides': google('slidesmcp.googleapis.com/mcp/v1', ['presentations', 'drive.readonly']),
+  'nano.google-sheets': google('sheetsmcp.googleapis.com/mcp/v1', ['spreadsheets', 'spreadsheets.readonly', 'drive.readonly', 'drive.file']),
+  'nano.google-slides': google('slidesmcp.googleapis.com/mcp/v1', ['presentations', 'presentations.readonly', 'drive.readonly', 'drive.file']),
 });
