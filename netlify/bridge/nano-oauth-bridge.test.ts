@@ -100,10 +100,12 @@ describe('NanoAI bridge deployment contract', () => {
       { profile: 'nano.asana', family: 'ASANA', issuer: 'https://app.asana.com', authorize: 'https://app.asana.com/-/oauth_authorize', token: 'https://app.asana.com/-/oauth_token', resource: 'https://mcp.asana.com/v2/mcp', scopes: [] },
       { profile: 'nano.box', family: 'BOX', issuer: 'https://api.box.com', authorize: 'https://account.box.com/api/oauth2/authorize', token: 'https://api.box.com/oauth2/token', resource: 'https://mcp.box.com/', scopes: [] },
       { profile: 'nano.google-drive', family: 'GOOGLE_WEB', issuer: 'https://accounts.google.com', authorize: 'https://accounts.google.com/o/oauth2/v2/auth', token: 'https://oauth2.googleapis.com/token', resource: 'https://drivemcp.googleapis.com/mcp/v1', scopes: ['https://www.googleapis.com/auth/drive.readonly', 'https://www.googleapis.com/auth/drive.file'] },
+      // Google's REST APIs take no resource indicator, and a caller cannot add one.
+      { profile: 'nano.gmail', family: 'GOOGLE_WEB', issuer: 'https://accounts.google.com', authorize: 'https://accounts.google.com/o/oauth2/v2/auth', token: 'https://oauth2.googleapis.com/token', resource: null, scopes: ['https://www.googleapis.com/auth/gmail.modify'] },
     ];
     for (const entry of fixtures) {
       const secret = crypto.randomUUID();
-      const fetchImpl = vi.fn<typeof fetch>().mockResolvedValue(new Response(JSON.stringify({ access_token: 'fixture-access', token_type: 'Bearer' })));
+      const fetchImpl = vi.fn<typeof fetch>().mockImplementation(async () => new Response(JSON.stringify({ access_token: 'fixture-access', token_type: 'Bearer' })));
       const handler = createNanoBridgeHandler({ env: { ...env, [`NANO_BRIDGE_${entry.family}_CLIENT_ID`]: `fixture-${entry.family}`, [`NANO_BRIDGE_${entry.family}_CLIENT_SECRET`]: secret }, fetch: fetchImpl });
       const response = await handler(post(entry.profile, 'begin', { ...begin, scopes: entry.scopes, resource: 'https://attacker.invalid', authorization_params: { redirect_uri: 'https://attacker.invalid' } }));
       expect(response.status).toBe(200);
@@ -133,14 +135,17 @@ describe('NanoAI bridge deployment contract', () => {
       const crossProfile = createNanoBridgeHandler({ env: { ...env, NANO_BRIDGE_HUBSPOT_CLIENT_ID: 'hubspot', NANO_BRIDGE_HUBSPOT_CLIENT_SECRET: crypto.randomUUID() }, fetch: fetchImpl });
       expect((await crossProfile(post('nano.hubspot', 'redeem', { state_digest: state, pkce_verifier: verifier, completion_handle: handle }))).status).toBe(400);
       expect(fetchImpl).toHaveBeenCalledTimes(1);
+      expect((await handler(post(entry.profile, 'refresh', { state_digest: state, refresh_token: 'fixture-refresh', resource: 'https://attacker.invalid' }))).status).toBe(200);
+      expect(new URLSearchParams(String(fetchImpl.mock.calls[1][1]?.body)).get('resource')).toBe(entry.resource);
     }
   });
 
   it('keeps Google connector scopes and resources separate, without a catch-all cloud grant', async () => {
     const entries = [
       ['bigquery', 'bigquery.googleapis.com/mcp', ['bigquery']],
-      ['gmail', 'gmailmcp.googleapis.com/mcp/v1', ['gmail.modify']],
-      ['google-calendar', 'calendarmcp.googleapis.com/mcp/v1', ['calendar.events', 'calendar.calendarlist.readonly', 'calendar.events.freebusy']],
+      // Gmail and Calendar are served by Nano's own connectors over Google's REST APIs.
+      ['gmail', null, ['gmail.modify']],
+      ['google-calendar', null, ['calendar.events', 'calendar.calendarlist.readonly', 'calendar.events.freebusy']],
       ['google-chat', 'chatmcp.googleapis.com/mcp/v1', ['chat.spaces.readonly', 'chat.memberships.readonly', 'chat.messages.readonly', 'chat.messages.create', 'chat.users.readstate', 'chat.users.spacesettings']],
       ['google-compute', 'compute.googleapis.com/mcp', ['compute']],
       ['google-docs', 'docsmcp.googleapis.com/mcp/v1', ['documents', 'documents.readonly', 'drive.readonly', 'drive.file']],
@@ -159,7 +164,7 @@ describe('NanoAI bridge deployment contract', () => {
       const response = await handler(post(`nano.${id}`, 'begin', { ...begin, scopes }));
       expect(response.status).toBe(200);
       const auth = new URL((await response.json()).authorization_url);
-      expect(auth.searchParams.get('resource')).toBe(`https://${resource}`);
+      expect(auth.searchParams.get('resource')).toBe(resource === null ? null : `https://${resource}`);
       expect(auth.searchParams.get('scope')).toBe([...scopes].sort().join(' '));
       expect(auth.searchParams.get('access_type')).toBe('offline');
       expect(auth.searchParams.get('prompt')).toBe('consent');

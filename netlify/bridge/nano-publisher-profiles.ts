@@ -9,18 +9,19 @@ export type NanoPublisherProvider = {
   issuer: string;
   authorizeEndpoint: string;
   tokenEndpoint: string;
-  resource: string;
+  /** Omitted for Google's REST APIs, which take no resource indicator. */
+  resource?: string;
   allowedScopes: readonly string[];
   authorizationParams?: Readonly<Record<string, string>>;
 };
 
-const google = (resource: string, scopes: readonly string[]): NanoPublisherProvider => ({
+const google = (resource: string | undefined, scopes: readonly string[]): NanoPublisherProvider => ({
   clientIdEnv: 'NANO_BRIDGE_GOOGLE_WEB_CLIENT_ID',
   clientSecretEnv: 'NANO_BRIDGE_GOOGLE_WEB_CLIENT_SECRET',
   issuer: 'https://accounts.google.com',
   authorizeEndpoint: 'https://accounts.google.com/o/oauth2/v2/auth',
   tokenEndpoint: 'https://oauth2.googleapis.com/token',
-  resource: `https://${resource}`,
+  ...(resource === undefined ? {} : { resource: `https://${resource}` }),
   allowedScopes: scopes.map(scope => `https://www.googleapis.com/auth/${scope}`),
   authorizationParams: { access_type: 'offline', prompt: 'consent' },
 });
@@ -48,8 +49,9 @@ export const remainingNanoProviders: Readonly<Record<string, NanoPublisherProvid
   'nano.bigquery': google('bigquery.googleapis.com/mcp', ['bigquery']),
   // Workspace scopes are the ones Google's per-tool MCP reference requires (checked 2026-10-28), and match the
   // NanoAI Google project's Data Access list. Gmail's label tools need gmail.modify; Calendar writes need calendar.events.
-  'nano.gmail': google('gmailmcp.googleapis.com/mcp/v1', ['gmail.modify']),
-  'nano.google-calendar': google('calendarmcp.googleapis.com/mcp/v1', ['calendar.events', 'calendar.calendarlist.readonly', 'calendar.events.freebusy']),
+  // Gmail and Calendar run on Nano's own connectors over Google's REST APIs, not the Workspace MCP preview.
+  'nano.gmail': google(undefined, ['gmail.modify']),
+  'nano.google-calendar': google(undefined, ['calendar.events', 'calendar.calendarlist.readonly', 'calendar.events.freebusy']),
   'nano.google-chat': google('chatmcp.googleapis.com/mcp/v1', ['chat.spaces.readonly', 'chat.memberships.readonly', 'chat.messages.readonly', 'chat.messages.create', 'chat.users.readstate', 'chat.users.spacesettings']),
   'nano.google-compute': google('compute.googleapis.com/mcp', ['compute']),
   'nano.google-docs': google('docsmcp.googleapis.com/mcp/v1', ['documents', 'documents.readonly', 'drive.readonly', 'drive.file']),

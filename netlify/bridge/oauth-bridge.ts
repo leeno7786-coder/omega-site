@@ -26,7 +26,8 @@ export interface BridgeProfile {
   tokenEndpoint: string;
   revocationEndpoint: string | null;
   redirectUri: string;
-  resource: string;
+  /** RFC 8707 resource indicator. Omitted for providers that don't take one, such as Google's REST APIs. */
+  resource?: string;
   allowedScopes: readonly string[];
   /** A server-configured callback for another desktop product; never supplied by the caller. */
   loopbackRedirectUri?: string;
@@ -286,6 +287,8 @@ function singleParam(params: URLSearchParams, name: string): string | null | und
 // Token requests.
 // ---------------------------------------------------------------------------
 
+const resourceParam = (profile: BridgeProfile): Record<string, string> => profile.resource === undefined ? {} : { resource: profile.resource };
+
 async function tokenRequest(
   fetchImpl: typeof fetch,
   profile: BridgeProfile,
@@ -394,7 +397,7 @@ export function createBridgeHandler(options: BridgeOptions): (req: Request) => P
           code_challenge: challenge,
           code_challenge_method: 'S256',
           redirect_uri: profile.redirectUri,
-          resource: profile.resource,
+          ...resourceParam(profile),
           response_type: 'code',
           scope: [...scopes].sort().join(' '),
           state: target === undefined ? stateDigest : 'ct1.' + await sealHandle(secrets.handleKey, { p: `${profile.id}#callback-state`, c: target as string, s: stateDigest, e: Math.floor(now() / 1000) + HANDLE_TTL_SECONDS }),
@@ -418,7 +421,7 @@ export function createBridgeHandler(options: BridgeOptions): (req: Request) => P
           code_verifier: verifier,
           grant_type: 'authorization_code',
           redirect_uri: profile.redirectUri,
-          resource: profile.resource,
+          ...resourceParam(profile),
         });
       }
       case 'refresh': {
@@ -429,7 +432,7 @@ export function createBridgeHandler(options: BridgeOptions): (req: Request) => P
           client_secret: clientSecret,
           grant_type: 'refresh_token',
           refresh_token: refreshToken,
-          resource: profile.resource,
+          ...resourceParam(profile),
         });
       }
       case 'revoke': {
