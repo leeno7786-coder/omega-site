@@ -65,6 +65,8 @@
 .nanoai-deployment h3 { margin-top: 40px; }
 .nanoai-deployment p + p { margin-top: 16px; }
 .nanoai-computers { border-top: 1px solid var(--border-bright); }
+.nanoai-deployment p a { color: var(--teal); text-decoration: underline; text-underline-offset: 4px; }
+.nanoai-deployment p a:hover { color: var(--ice); }
 .nanoai-scope-note { margin: 32px 0 0; max-width: 90ch; color: #a9bbc4; font-size: 0.8rem; line-height: 1.7; }
 
 .nanoai-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
