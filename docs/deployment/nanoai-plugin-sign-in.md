@@ -20,7 +20,7 @@ Only the selected profile's configuration is loaded. Missing HubSpot credentials
 
 ### Remaining prepared profiles (not configured)
 
-Source now prepares `nano.github`, `nano.asana`, `nano.box` and eleven Google connector profiles. Each binds an exact resource and a scope allowlist; caller JSON cannot choose endpoints, callbacks, authorization options or another resource. Google requests offline access and consent from publisher-controlled configuration. The existing Omega profile keeps its previous defaults.
+Source now prepares `nano.github`, `nano.asana`, `nano.box` and eleven Google connector profiles. Each binds a scope allowlist and, where the server takes one, an exact resource. The seven Google Workspace profiles (Gmail, Calendar, Drive, Docs, Sheets, Slides and Chat) bind none, because Nano's built-in connectors call Google's REST APIs instead of the Workspace MCP Developer Preview. Caller JSON cannot choose endpoints, callbacks, authorization options or a resource. Google requests offline access and consent from publisher-controlled configuration. The existing Omega profile keeps its previous defaults.
 
 The GitHub, Asana and Box families use `NANO_BRIDGE_{GITHUB|ASANA|BOX}_CLIENT_ID` and matching `_CLIENT_SECRET` variables. Register `https://plugins.omega2ai.com/oauth/nano.{github|asana|box}/callback` with the corresponding application before enabling a preset. Preserve the currently working desktop registrations. GitHub OAuth apps support one callback: prepare a separate hosted publisher app if the existing callback is still needed by installed direct clients.
 

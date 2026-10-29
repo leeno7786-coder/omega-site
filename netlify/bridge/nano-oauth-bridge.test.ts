@@ -99,7 +99,7 @@ describe('NanoAI bridge deployment contract', () => {
       { profile: 'nano.github', family: 'GITHUB', issuer: 'https://github.com/login/oauth', authorize: 'https://github.com/login/oauth/authorize', token: 'https://github.com/login/oauth/access_token', resource: 'https://api.githubcopilot.com/mcp', scopes: ['repo', 'read:org', 'read:user', 'user:email', 'notifications', 'gist'] },
       { profile: 'nano.asana', family: 'ASANA', issuer: 'https://app.asana.com', authorize: 'https://app.asana.com/-/oauth_authorize', token: 'https://app.asana.com/-/oauth_token', resource: 'https://mcp.asana.com/v2/mcp', scopes: [] },
       { profile: 'nano.box', family: 'BOX', issuer: 'https://api.box.com', authorize: 'https://account.box.com/api/oauth2/authorize', token: 'https://api.box.com/oauth2/token', resource: 'https://mcp.box.com/', scopes: [] },
-      { profile: 'nano.google-drive', family: 'GOOGLE_WEB', issuer: 'https://accounts.google.com', authorize: 'https://accounts.google.com/o/oauth2/v2/auth', token: 'https://oauth2.googleapis.com/token', resource: 'https://drivemcp.googleapis.com/mcp/v1', scopes: ['https://www.googleapis.com/auth/drive.readonly', 'https://www.googleapis.com/auth/drive.file'] },
+      { profile: 'nano.google-drive', family: 'GOOGLE_WEB', issuer: 'https://accounts.google.com', authorize: 'https://accounts.google.com/o/oauth2/v2/auth', token: 'https://oauth2.googleapis.com/token', resource: null, scopes: ['https://www.googleapis.com/auth/drive.readonly', 'https://www.googleapis.com/auth/drive.file'] },
       // Google's REST APIs take no resource indicator, and a caller cannot add one.
       { profile: 'nano.gmail', family: 'GOOGLE_WEB', issuer: 'https://accounts.google.com', authorize: 'https://accounts.google.com/o/oauth2/v2/auth', token: 'https://oauth2.googleapis.com/token', resource: null, scopes: ['https://www.googleapis.com/auth/gmail.modify'] },
     ];
@@ -143,20 +143,23 @@ describe('NanoAI bridge deployment contract', () => {
   it('keeps Google connector scopes and resources separate, without a catch-all cloud grant', async () => {
     const entries = [
       ['bigquery', 'bigquery.googleapis.com/mcp', ['bigquery']],
-      // Gmail and Calendar are served by Nano's own connectors over Google's REST APIs.
+      // Every Workspace plugin is served by Nano's own connectors over Google's REST APIs.
       ['gmail', null, ['gmail.modify']],
       ['google-calendar', null, ['calendar.events', 'calendar.calendarlist.readonly', 'calendar.events.freebusy']],
-      ['google-chat', 'chatmcp.googleapis.com/mcp/v1', ['chat.spaces.readonly', 'chat.memberships.readonly', 'chat.messages.readonly', 'chat.messages.create', 'chat.users.readstate', 'chat.users.spacesettings']],
+      ['google-chat', null, ['chat.spaces.readonly', 'chat.memberships.readonly', 'chat.messages.readonly', 'chat.messages.create']],
       ['google-compute', 'compute.googleapis.com/mcp', ['compute']],
-      ['google-docs', 'docsmcp.googleapis.com/mcp/v1', ['documents', 'documents.readonly', 'drive.readonly', 'drive.file']],
-      ['google-drive', 'drivemcp.googleapis.com/mcp/v1', ['drive.readonly', 'drive.file']],
+      ['google-docs', null, ['documents', 'drive.readonly']],
+      ['google-drive', null, ['drive.readonly', 'drive.file']],
       ['google-gke', 'container.googleapis.com/mcp', ['container']],
       ['google-maps', 'mapstools.googleapis.com/mcp', ['maps-platform.mapstools']],
-      ['google-sheets', 'sheetsmcp.googleapis.com/mcp/v1', ['spreadsheets', 'spreadsheets.readonly', 'drive.readonly', 'drive.file']],
-      ['google-slides', 'slidesmcp.googleapis.com/mcp/v1', ['presentations', 'presentations.readonly', 'drive.readonly', 'drive.file']],
+      ['google-sheets', null, ['spreadsheets', 'drive.readonly']],
+      ['google-slides', null, ['presentations', 'drive.readonly']],
     ] as const;
-    // The broader scopes these connectors used to request are no longer declared by NanoAI's Google project.
-    const retired = { 'google-calendar': 'calendar', 'google-chat': 'chat.messages', 'google-drive': 'drive' } as Record<string, string>;
+    // Scopes these connectors used to request, broader or unused, are no longer allowed.
+    const retired = {
+      'google-calendar': ['calendar'], 'google-chat': ['chat.messages', 'chat.users.readstate', 'chat.users.spacesettings'], 'google-drive': ['drive'],
+      'google-docs': ['documents.readonly', 'drive.file'], 'google-sheets': ['spreadsheets.readonly', 'drive.file'], 'google-slides': ['presentations.readonly', 'drive.file'],
+    } as Record<string, string[]>;
     const handler = createNanoBridgeHandler({ env: { ...env, NANO_BRIDGE_GOOGLE_WEB_CLIENT_ID: 'google-web-fixture', NANO_BRIDGE_GOOGLE_WEB_CLIENT_SECRET: crypto.randomUUID() } });
     const toml = readFileSync(new URL('../../netlify.toml', import.meta.url), 'utf8');
     for (const [id, resource, shortScopes] of entries) {
@@ -172,7 +175,7 @@ describe('NanoAI bridge deployment contract', () => {
       expect(toml).toContain(route);
       expect(toml.indexOf(route)).toBeLessThan(toml.indexOf('from = "https://plugins.omega2ai.com/oauth/*"'));
       expect((await handler(post(`nano.${id}`, 'begin', { ...begin, scopes: ['https://www.googleapis.com/auth/cloud-platform'] }))).status).toBe(400);
-      if (retired[id]) expect((await handler(post(`nano.${id}`, 'begin', { ...begin, scopes: [`https://www.googleapis.com/auth/${retired[id]}`] }))).status).toBe(400);
+      for (const scope of retired[id] ?? []) expect((await handler(post(`nano.${id}`, 'begin', { ...begin, scopes: [`https://www.googleapis.com/auth/${scope}`] }))).status).toBe(400);
     }
     // A desktop app identity must not silently stand in for a web publisher registration.
     const desktopOnly = createNanoBridgeHandler({ env: { ...env, GOOGLE_OAUTH_CLIENT_ID: 'desktop', GOOGLE_OAUTH_CLIENT_SECRET: 'desktop-secret' } });
