@@ -151,7 +151,6 @@ describe('NanoAI bridge deployment contract', () => {
       ['google-docs', null, ['documents', 'drive.readonly']],
       ['google-drive', null, ['drive.readonly', 'drive.file']],
       ['google-gke', 'container.googleapis.com/mcp', ['container']],
-      ['google-maps', 'mapstools.googleapis.com/mcp', ['maps-platform.mapstools']],
       ['google-sheets', null, ['spreadsheets', 'drive.readonly']],
       ['google-slides', null, ['presentations', 'drive.readonly']],
       ['google-analytics', null, ['analytics.readonly']],

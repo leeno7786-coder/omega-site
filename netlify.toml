@@ -119,12 +119,6 @@ status = 200
 force = true
 
 [[redirects]]
-from = "https://plugins.omega2ai.com/oauth/nano.google-maps/callback"
-to = "/nano/bridge/v1/nano.google-maps/callback"
-status = 200
-force = true
-
-[[redirects]]
 from = "https://plugins.omega2ai.com/oauth/nano.google-sheets/callback"
 to = "/nano/bridge/v1/nano.google-sheets/callback"
 status = 200
