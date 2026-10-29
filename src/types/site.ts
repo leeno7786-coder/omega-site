@@ -91,3 +91,18 @@ export interface ProjectInquiryPayload {
   description: string;
   'bot-field': string;
 }
+
+/** A NanoAI beta request: the PC details decide which setup the tester is sent. */
+export interface NanoAiBetaRequest {
+  name: string;
+  email: string;
+  company: string;
+  use: string;
+  windows: string;
+  processor: string;
+  graphics: string;
+  memory: string;
+  disk: string;
+  consent: string;
+  'bot-field': string;
+}

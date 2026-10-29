@@ -1,4 +1,5 @@
 import SiteHeader from '../components/layout/SiteHeader';
+import NanoAiBetaForm from '../components/nanoai/NanoAiBetaForm';
 import NanoAiGallery from '../components/nanoai/NanoAiGallery';
 import useInitialHashNavigation from '../lib/useInitialHashNavigation';
 import { NANOAI_ARCHITECTURE, NANOAI_COMPANION, NANOAI_FAQ, NANOAI_FEATURES, NANOAI_METRICS, nanoAiImageSource, nanoAiImageSrcSet } from '../content/nanoaiContent';
@@ -16,7 +17,7 @@ export default function NanoAiPage() {
             <p className="eyebrow">Conversation, memory and computer use</p>
             <h1 id="nanoai-title"><span>NanoAI</span>{' '}Bring your PC<br />to life.</h1>
             <p className="nanoai-hero__lede">Talk naturally, keep the conversation, and let Nano work in your Windows applications. A compact voice companion brings together spoken replies, persistent memory, connected tools and control of your actual computer.</p>
-            <div className="nanoai-actions"><a className="button button--primary" href="#computer-use">See computer use</a><a className="nanoai-secondary" href="/#project-inquiry">Discuss a custom AI system <span aria-hidden="true">↗</span></a></div>
+            <div className="nanoai-actions"><a className="button button--primary" href="#beta">Join the beta</a><a className="nanoai-secondary" href="#computer-use">See computer use <span aria-hidden="true">↓</span></a><a className="nanoai-secondary" href="/#project-inquiry">Discuss a custom AI system <span aria-hidden="true">↗</span></a></div>
           </div>
           <figure className="nanoai-hero__art nanoai-hero__art--companion">
             <img src={nanoAiImageSource(NANOAI_COMPANION)} srcSet={nanoAiImageSrcSet(NANOAI_COMPANION)} sizes="(max-width: 480px) calc(100vw - 96px), 380px" width={NANOAI_COMPANION.width} height={NANOAI_COMPANION.height} fetchPriority="high" alt={NANOAI_COMPANION.alt} />
@@ -30,7 +31,7 @@ export default function NanoAiPage() {
         </div>
 
         <nav className="nanoai-index content-shell" aria-label="NanoAI showcase sections">
-          {[['Capabilities', '#features'], ['Computer use', '#computer-use'], ['Architecture', '#architecture'], ['Actual screenshots', '#proof'], ['Your data', '#your-data'], ['Questions', '#questions']].map(([label, href], index) => <a key={href} href={href}><span>0{index + 1}</span>{label}<span aria-hidden="true">↓</span></a>)}
+          {[['Capabilities', '#features'], ['Computer use', '#computer-use'], ['Architecture', '#architecture'], ['Actual screenshots', '#proof'], ['Your data', '#your-data'], ['Questions', '#questions'], ['Join the beta', '#beta']].map(([label, href], index) => <a key={href} href={href}><span>0{index + 1}</span>{label}<span aria-hidden="true">↓</span></a>)}
         </nav>
 
         <section className="nanoai-section content-shell" id="features" aria-labelledby="nanoai-features-title">
@@ -81,6 +82,8 @@ export default function NanoAiPage() {
           <h2 id="nanoai-questions-title">Running NanoAI.</h2>
           <div>{NANOAI_FAQ.map((faq) => <details key={faq.question}><summary>{faq.question}<span aria-hidden="true">+</span></summary><p>{faq.answer}</p></details>)}</div>
         </section>
+
+        <NanoAiBetaForm />
 
         <section className="nanoai-cta" aria-labelledby="nanoai-cta-title"><div className="content-shell"><p className="eyebrow">Built by Omega AI LLC</p><h2 id="nanoai-cta-title">Need a private AI system<br />designed for your environment?</h2><p>Omega AI engineers model-integrated applications, workflow automation and local-first intelligent systems. Discuss architecture, deployment and integration requirements with us.</p><a className="button button--primary" href="/#project-inquiry">Discuss a custom AI system</a></div></section>
       </main>

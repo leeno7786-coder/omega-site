@@ -1,5 +1,5 @@
 import { CONTACT_EMAILS } from '../content/siteContent';
-import type { ProjectInquiryPayload } from '../types/site';
+import type { NanoAiBetaRequest, ProjectInquiryPayload } from '../types/site';
 
 const FORMSUBMIT_ENDPOINT = `https://formsubmit.co/ajax/${encodeURIComponent(CONTACT_EMAILS[0])}`;
 
@@ -66,4 +66,20 @@ export async function submitProjectInquiry(
   }
 
   throw new Error('Inquiry delivery failed');
+}
+
+export function encodeNanoAiBetaRequest(payload: NanoAiBetaRequest) {
+  return new URLSearchParams({ 'form-name': 'nanoai-beta', ...payload });
+}
+
+// Beta requests go to Netlify only. Their notification goes to the NanoAI inbox, and the form asks the visitor to
+// email that inbox instead when delivery fails, so there is no third-party fallback holding PC details.
+export async function submitNanoAiBetaRequest(payload: NanoAiBetaRequest, fetcher: typeof fetch = fetch) {
+  if (payload['bot-field']) return;
+  const response = await fetcher('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: encodeNanoAiBetaRequest(payload).toString(),
+  });
+  if (!response.ok) throw new Error('Beta request delivery failed');
 }
