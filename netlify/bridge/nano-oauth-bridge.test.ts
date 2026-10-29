@@ -151,14 +151,14 @@ describe('NanoAI bridge deployment contract', () => {
       ['google-docs', null, ['documents', 'drive.readonly']],
       ['google-drive', null, ['drive.readonly', 'drive.file']],
       ['google-gke', 'container.googleapis.com/mcp', ['container']],
-      ['google-maps', 'mapstools.googleapis.com/mcp', ['maps-platform.mapstools']],
       ['google-sheets', null, ['spreadsheets', 'drive.readonly']],
       ['google-slides', null, ['presentations', 'drive.readonly']],
+      ['google-analytics', null, ['analytics.readonly']],
     ] as const;
     // Scopes these connectors used to request, broader or unused, are no longer allowed.
     const retired = {
       'google-calendar': ['calendar'], 'google-chat': ['chat.messages', 'chat.users.readstate', 'chat.users.spacesettings'], 'google-drive': ['drive'],
-      'google-docs': ['documents.readonly', 'drive.file'], 'google-sheets': ['spreadsheets.readonly', 'drive.file'], 'google-slides': ['presentations.readonly', 'drive.file'],
+      'google-docs': ['documents.readonly', 'drive.file'], 'google-sheets': ['spreadsheets.readonly', 'drive.file'], 'google-slides': ['presentations.readonly', 'drive.file'], 'google-analytics': ['analytics', 'analytics.edit'],
     } as Record<string, string[]>;
     const handler = createNanoBridgeHandler({ env: { ...env, NANO_BRIDGE_GOOGLE_WEB_CLIENT_ID: 'google-web-fixture', NANO_BRIDGE_GOOGLE_WEB_CLIENT_SECRET: crypto.randomUUID() } });
     const toml = readFileSync(new URL('../../netlify.toml', import.meta.url), 'utf8');

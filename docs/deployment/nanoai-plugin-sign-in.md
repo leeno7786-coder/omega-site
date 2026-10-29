@@ -20,7 +20,7 @@ Only the selected profile's configuration is loaded. Missing HubSpot credentials
 
 ### Remaining prepared profiles (not configured)
 
-Source now prepares `nano.github`, `nano.asana`, `nano.box` and eleven Google connector profiles. Each binds a scope allowlist and, where the server takes one, an exact resource. The seven Google Workspace profiles (Gmail, Calendar, Drive, Docs, Sheets, Slides and Chat) bind none, because Nano's built-in connectors call Google's REST APIs instead of the Workspace MCP Developer Preview. Caller JSON cannot choose endpoints, callbacks, authorization options or a resource. Google requests offline access and consent from publisher-controlled configuration. The existing Omega profile keeps its previous defaults.
+Source now prepares `nano.github`, `nano.asana`, `nano.box` and eleven Google connector profiles. Each binds a scope allowlist and, where the server takes one, an exact resource. The seven Google Workspace profiles (Gmail, Calendar, Drive, Docs, Sheets, Slides and Chat) and Google Analytics bind none, because Nano's built-in connectors call Google's REST APIs instead of an MCP server (for Workspace, the MCP Developer Preview). Caller JSON cannot choose endpoints, callbacks, authorization options or a resource. Google requests offline access and consent from publisher-controlled configuration. The existing Omega profile keeps its previous defaults.
 
 The GitHub, Asana and Box families use `NANO_BRIDGE_{GITHUB|ASANA|BOX}_CLIENT_ID` and matching `_CLIENT_SECRET` variables. Register `https://plugins.omega2ai.com/oauth/nano.{github|asana|box}/callback` with the corresponding application before enabling a preset. Preserve the currently working desktop registrations. GitHub OAuth apps support one callback: prepare a separate hosted publisher app if the existing callback is still needed by installed direct clients.
 
@@ -29,9 +29,9 @@ Google uses **a web application registration**, with `NANO_BRIDGE_GOOGLE_WEB_CLI
 - `/oauth/nano.bigquery`, `/oauth/nano.gmail`
 - `/oauth/nano.google-calendar`, `/oauth/nano.google-chat`, `/oauth/nano.google-compute`
 - `/oauth/nano.google-docs`, `/oauth/nano.google-drive`, `/oauth/nano.google-gke`
-- `/oauth/nano.google-maps`, `/oauth/nano.google-sheets`, `/oauth/nano.google-slides`
+- `/oauth/nano.google-sheets`, `/oauth/nano.google-slides`, `/oauth/nano.google-analytics`
 
-Keep the OAuth audience, project APIs, requested scopes and any required Google verification aligned with the product. These profiles do not implement the separate local Google Analytics CLI flow. No family becomes active just because its handler exists: publisher registration, owner-approved secret hosting, deployment and accountless preparation precede catalog promotion. Individual account/tool tests remain deferred to beta.
+Keep the OAuth audience, project APIs, requested scopes and any required Google verification aligned with the product. Google Analytics now signs in through `nano.google-analytics` like the others. Google Maps was removed on 2026-10-28, so `/oauth/nano.google-maps/callback` can come off the client. No family becomes active just because its handler exists: publisher registration, owner-approved secret hosting, deployment and accountless preparation precede catalog promotion. Individual account/tool tests remain deferred to beta.
 
 Provider metadata was read afresh on 2026-10-20; the Nano repository records the sanitized receipt in `docs/releases/plugin-publisher-preparation-2026-10-20.json`. Asana and Box preserve the working scope-omission behavior, with permissions determined by their app registration. Google's four cloud connectors use their declared resource-specific scopes, not a blanket cloud-platform grant.
 
