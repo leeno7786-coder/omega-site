@@ -137,6 +137,12 @@ status = 200
 force = true
 
 [[redirects]]
+from = "https://plugins.omega2ai.com/oauth/nano.google-analytics/callback"
+to = "/nano/bridge/v1/nano.google-analytics/callback"
+status = 200
+force = true
+
+[[redirects]]
 from = "https://plugins.omega2ai.com/oauth/plugin-hub/callback"
 to = "http://127.0.0.1:7420/oauth/callback"
 status = 302

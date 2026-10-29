@@ -61,4 +61,6 @@ export const remainingNanoProviders: Readonly<Record<string, NanoPublisherProvid
   'nano.google-maps': google('mapstools.googleapis.com/mcp', ['maps-platform.mapstools']),
   'nano.google-sheets': google(undefined, ['spreadsheets', 'drive.readonly']),
   'nano.google-slides': google(undefined, ['presentations', 'drive.readonly']),
+  // Analytics reports through Nano's connector over the Admin and Data APIs; it only reads.
+  'nano.google-analytics': google(undefined, ['analytics.readonly']),
 });
