@@ -71,25 +71,12 @@ describe('Netlify beta request adapter', () => {
     processor: 'Intel Core i5-8250U', graphics: 'none', memory: '16 GB', disk: 'Under 20 GB', consent: 'yes', 'bot-field': '',
   };
 
-  it('records the request, then files a copy where the NanoAI inbox is emailed, and fails only when the record fails', async () => {
+  it('posts the nanoai-beta form to the site root and fails on a rejected delivery', async () => {
     expect(encodeNanoAiBetaRequest(request).get('form-name')).toBe('nanoai-beta');
     const fetcher = vi.fn().mockResolvedValue(new Response('', { status: 200 }));
-    await submitNanoAiBetaRequest(request, fetcher, 'ref-1');
-    expect(fetcher).toHaveBeenCalledTimes(2);
-    expect(fetcher.mock.calls[0]).toEqual(['/', expect.objectContaining({ method: 'POST', body: encodeNanoAiBetaRequest(request).toString() })]);
-    const copy = new URLSearchParams(fetcher.mock.calls[1][1].body);
-    expect(copy.get('form-name')).toBe('nanoai-bug-report');
-    expect(copy.get('area')).toBe('Beta request');
-    expect(copy.get('reference')).toBe('ref-1');
-    expect(copy.get('subject')).toBe('NanoAI beta request from Ada Lovelace');
-    for (const detail of ['Email: ada@example.com', 'Windows: Windows 10', 'Processor: Intel Core i5-8250U', 'Graphics: none', 'Memory: 16 GB', 'Free disk space: Under 20 GB', 'Agreed to beta email: yes', 'Inbox'])
-      expect(copy.get('message')).toContain(detail);
-
-    const recordFails = vi.fn().mockResolvedValue(new Response('', { status: 404 }));
-    await expect(submitNanoAiBetaRequest(request, recordFails)).rejects.toThrow();
-    expect(recordFails).toHaveBeenCalledTimes(1);
-    const copyFails = vi.fn().mockResolvedValueOnce(new Response('', { status: 200 })).mockRejectedValueOnce(new Error('offline'));
-    await expect(submitNanoAiBetaRequest(request, copyFails)).resolves.toBeUndefined();
+    await submitNanoAiBetaRequest(request, fetcher);
+    expect(fetcher).toHaveBeenCalledWith('/', expect.objectContaining({ method: 'POST', body: encodeNanoAiBetaRequest(request).toString() }));
+    await expect(submitNanoAiBetaRequest(request, vi.fn().mockResolvedValue(new Response('', { status: 404 })))).rejects.toThrow();
   });
 
   it('drops honeypot submissions without sending them', async () => {
