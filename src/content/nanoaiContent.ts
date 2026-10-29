@@ -29,8 +29,13 @@ export const NANOAI_FAQ = [
   { question: 'Does NanoAI require a cloud AI API?', answer: 'Local inference through LM Studio is the default path. A configured Azure Foundry backend is also supported. When a cloud model is selected, the task context and screenshots needed for its requests go to that provider. Connected online services and public web research also use the network.' },
   { question: 'How does Android access work?', answer: 'The full workspace’s Android interface reaches the host through Tailscale. Inference and saved Work files remain on the host. The PC and required services must be running, with network connectivity. Android access is separate from the new Windows voice companion.' },
   { question: 'How do I stay in control?', answer: 'You set the task and the available access. In the voice companion, the request authorizes necessary steps without a prompt for every click. You can inspect activity, give new direction, or use Stop; Windows desktop control also supports physical Escape. The full workspace retains its configured tool policies. Actual-PC control shares your desktop, pointer and keyboard.' },
-  { question: 'Can I download a finished consumer release?', answer: 'NanoAI is an actively developed working system. The current companion targets Windows x64 and needs prepared model and speech services; a clean-PC consumer installer has not been established. Contact Omega AI to discuss a demonstration or a custom deployment.' },
+  { question: 'Can I download a finished consumer release?', answer: 'Not yet. A Windows beta is being prepared as one download that runs NanoAI, its memory and its voice on your PC, with the model provided through Nano Cloud. Request a beta place below and tell us about your PC. Contact Omega AI to discuss a demonstration or a custom deployment.' },
 ] as const;
+
+// Choices on the beta request form. The PC details decide which setup a tester is sent.
+export const NANOAI_BETA_WINDOWS = ['Windows 11', 'Windows 10', 'Other or not sure'] as const;
+export const NANOAI_BETA_MEMORY = ['8 GB or less', '16 GB', '32 GB', '64 GB or more', 'Not sure'] as const;
+export const NANOAI_BETA_DISK = ['Under 20 GB', '20–50 GB', '50–100 GB', 'Over 100 GB', 'Not sure'] as const;
 
 export interface NanoAiMedia {
   slug: string;

@@ -1556,6 +1556,36 @@ a {
   grid-column: 1 / -1;
 }
 
+/* A consent checkbox sits beside its sentence, which reads as text rather than a field caption. */
+.form-field.form-consent {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.form-field.form-consent input[type='checkbox'] {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0;
+  padding: 0;
+  accent-color: var(--teal);
+}
+
+.form-consent div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field.form-consent label {
+  font-family: inherit;
+  font-size: 0.84rem;
+  letter-spacing: 0;
+  line-height: 1.5;
+  text-transform: none;
+}
+
 .form-field label {
   color: #9eb2bc;
   font-family: 'Geist Mono', monospace;

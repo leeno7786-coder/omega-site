@@ -46,7 +46,7 @@
     </header>
     <main>
       <h1>NanoAI Privacy Policy</h1>
-      <p class="meta">Omega AI LLC · Last updated: October 28, 2026</p>
+      <p class="meta">Omega AI LLC · Last updated: October 29, 2026</p>
       <p>
         This policy explains how <strong>NanoAI</strong>, the AI assistant app made by Omega AI LLC, handles your
         information, including data from Google accounts you connect to it. For our website and other products, see the
@@ -132,7 +132,7 @@
       <h2 id="google">4. Google user data</h2>
       <p>
         You can connect Google services to NanoAI from its Plugins: Gmail, Google Calendar, Drive, Docs, Sheets, Slides,
-        Chat, and some Google Cloud services. Nothing connects until you start a connection and approve Google's consent
+        Chat, Analytics, and some Google Cloud services. Nothing connects until you start a connection and approve Google's consent
         screen.
       </p>
 
@@ -156,28 +156,33 @@
         </tr>
         <tr>
           <td>Google Docs</td>
-          <td><code>https://www.googleapis.com/auth/documents</code><br /><code>https://www.googleapis.com/auth/documents.readonly</code><br /><code>https://www.googleapis.com/auth/drive.readonly</code><br /><code>https://www.googleapis.com/auth/drive.file</code></td>
-          <td>Reads documents and makes the edits you ask for.</td>
+          <td><code>https://www.googleapis.com/auth/documents</code><br /><code>https://www.googleapis.com/auth/drive.readonly</code></td>
+          <td>Finds documents with Drive search, reads them, and makes the edits you ask for.</td>
         </tr>
         <tr>
           <td>Google Sheets</td>
-          <td><code>https://www.googleapis.com/auth/spreadsheets</code><br /><code>https://www.googleapis.com/auth/spreadsheets.readonly</code><br /><code>https://www.googleapis.com/auth/drive.readonly</code><br /><code>https://www.googleapis.com/auth/drive.file</code></td>
-          <td>Reads spreadsheet values and updates cells, rows and formulas when you ask.</td>
+          <td><code>https://www.googleapis.com/auth/spreadsheets</code><br /><code>https://www.googleapis.com/auth/drive.readonly</code></td>
+          <td>Finds spreadsheets with Drive search, reads their values, and updates cells, rows and formulas when you ask.</td>
         </tr>
         <tr>
           <td>Google Slides</td>
-          <td><code>https://www.googleapis.com/auth/presentations</code><br /><code>https://www.googleapis.com/auth/presentations.readonly</code><br /><code>https://www.googleapis.com/auth/drive.readonly</code><br /><code>https://www.googleapis.com/auth/drive.file</code></td>
-          <td>Reads presentations and edits slides when you ask.</td>
+          <td><code>https://www.googleapis.com/auth/presentations</code><br /><code>https://www.googleapis.com/auth/drive.readonly</code></td>
+          <td>Finds presentations with Drive search, reads them, and edits slides when you ask.</td>
         </tr>
         <tr>
           <td>Google Chat</td>
-          <td><code>https://www.googleapis.com/auth/chat.spaces.readonly</code><br /><code>https://www.googleapis.com/auth/chat.memberships.readonly</code><br /><code>https://www.googleapis.com/auth/chat.messages.readonly</code><br /><code>https://www.googleapis.com/auth/chat.messages.create</code><br /><code>https://www.googleapis.com/auth/chat.users.readstate</code><br /><code>https://www.googleapis.com/auth/chat.users.spacesettings</code></td>
-          <td>Searches and reads your conversations and members, sends messages you ask it to, marks conversations read or unread, and reads or changes notification settings.</td>
+          <td><code>https://www.googleapis.com/auth/chat.spaces.readonly</code><br /><code>https://www.googleapis.com/auth/chat.memberships.readonly</code><br /><code>https://www.googleapis.com/auth/chat.messages.readonly</code><br /><code>https://www.googleapis.com/auth/chat.messages.create</code></td>
+          <td>Searches and reads your conversations and members, and sends messages you ask it to.</td>
         </tr>
         <tr>
           <td>Google Cloud</td>
-          <td><code>https://www.googleapis.com/auth/bigquery</code><br /><code>https://www.googleapis.com/auth/compute</code><br /><code>https://www.googleapis.com/auth/container</code><br /><code>https://www.googleapis.com/auth/maps-platform.mapstools</code></td>
-          <td>Each scope is requested only by its own plugin. Nano queries BigQuery data, inspects or manages Compute Engine and Kubernetes Engine resources, and uses Maps tools, all in projects you choose and only when you ask.</td>
+          <td><code>https://www.googleapis.com/auth/bigquery</code><br /><code>https://www.googleapis.com/auth/compute</code><br /><code>https://www.googleapis.com/auth/container</code></td>
+          <td>Each scope is requested only by its own plugin. Nano queries BigQuery data and inspects or manages Compute Engine and Kubernetes Engine resources, in projects you choose and only when you ask.</td>
+        </tr>
+        <tr>
+          <td>Google Analytics</td>
+          <td><code>https://www.googleapis.com/auth/analytics.readonly</code></td>
+          <td>Lists your Analytics accounts and properties and runs the reports you ask for. It can't change Analytics settings or data.</td>
         </tr>
       </table>
       <p>
