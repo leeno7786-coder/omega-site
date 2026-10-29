@@ -72,14 +72,52 @@ export function encodeNanoAiBetaRequest(payload: NanoAiBetaRequest) {
   return new URLSearchParams({ 'form-name': 'nanoai-beta', ...payload });
 }
 
-// Beta requests go to Netlify only. Their notification goes to the NanoAI inbox, and the form asks the visitor to
-// email that inbox instead when delivery fails, so there is no third-party fallback holding PC details.
-export async function submitNanoAiBetaRequest(payload: NanoAiBetaRequest, fetcher: typeof fetch = fetch) {
+// New Netlify form notifications need a paid plan, but the bug-report form already emails nanoai@omega2ai.com. Each
+// beta request is filed there too, as a "Beta request" carrying every detail, so it reaches that inbox.
+export function encodeNanoAiBetaEmail(payload: NanoAiBetaRequest, reference: string) {
+  const message = [
+    `Name: ${payload.name}`,
+    `Email: ${payload.email}`,
+    `Company: ${payload.company || 'Not given'}`,
+    `Windows: ${payload.windows}`,
+    `Processor: ${payload.processor}`,
+    `Graphics: ${payload.graphics}`,
+    `Memory: ${payload.memory}`,
+    `Free disk space: ${payload.disk}`,
+    `Agreed to beta email: ${payload.consent === 'yes' ? 'yes' : 'no'}`,
+    '',
+    'What they would use NanoAI for:',
+    payload.use,
+  ].join('\n');
+  return new URLSearchParams({
+    'form-name': 'nanoai-bug-report',
+    reference,
+    area: 'Beta request',
+    subject: `NanoAI beta request from ${payload.name}`,
+    message,
+    'bot-field': '',
+  });
+}
+
+// Beta requests go to Netlify only; there is no third-party fallback holding PC details. When delivery fails, the form
+// asks the visitor to email the NanoAI inbox instead.
+export async function submitNanoAiBetaRequest(
+  payload: NanoAiBetaRequest,
+  fetcher: typeof fetch = fetch,
+  reference: string = crypto.randomUUID(),
+) {
   if (payload['bot-field']) return;
-  const response = await fetcher('/', {
+  const post = (body: URLSearchParams) => fetcher('/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: encodeNanoAiBetaRequest(payload).toString(),
+    body: body.toString(),
   });
+  const response = await post(encodeNanoAiBetaRequest(payload));
   if (!response.ok) throw new Error('Beta request delivery failed');
+  // The record above is what counts. A failed copy to the inbox must not make the visitor send the request twice.
+  try {
+    await post(encodeNanoAiBetaEmail(payload, reference));
+  } catch {
+    // The request is already recorded in the nanoai-beta form.
+  }
 }
