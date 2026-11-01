@@ -28,13 +28,12 @@ describe('NanoAppsSpotlight', () => {
     expect(video).toHaveAccessibleName(/Nano demo/);
   });
 
-  it('sits right after the proof rail, with an announcement in the hero and a nav entry', () => {
+  it('sits right after the proof rail, with an announcement in the hero', () => {
     const { container } = render(<Home />);
     const spotlight = container.querySelector('#nano-apps');
     const capabilities = container.querySelector('#capabilities');
     expect(spotlight).not.toBeNull();
     expect(spotlight!.compareDocumentPosition(capabilities as Node) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(screen.getByRole('link', { name: /Nano builds Android apps from one sentence/ })).toHaveAttribute('href', '#nano-apps');
-    expect(screen.getByRole('link', { name: 'Nano Apps' })).toHaveAttribute('href', '/#nano-apps');
   });
 });

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 import SiteHeader from './SiteHeader';
@@ -8,8 +8,21 @@ describe('SiteHeader', () => {
     render(<SiteHeader currentPage="home" />);
     await userEvent.click(screen.getByRole('button', { name: 'Open navigation' }));
     expect(screen.getByRole('link', { name: 'Capabilities' })).toHaveAttribute('href', '/#capabilities');
-    expect(screen.getByRole('link', { name: 'Omega 3.0' })).toHaveAttribute('href', '/omega-3/');
+    expect(screen.getByRole('link', { name: 'Projects' })).toHaveAttribute('href', '/projects/');
     expect(screen.getByRole('link', { name: 'Start a project' })).toHaveAttribute('href', '/#project-inquiry');
+  });
+
+  it('lists projects under one Projects tab and marks it on every project page', () => {
+    const { rerender } = render(<SiteHeader currentPage="home" />);
+    const navigation = screen.getByRole('navigation', { name: 'Primary navigation' });
+    for (const name of ['Omega 3.0', 'NanoAI', 'Nano Apps']) {
+      expect(within(navigation).queryByRole('link', { name })).not.toBeInTheDocument();
+    }
+    expect(within(navigation).getByRole('link', { name: 'Projects' })).not.toHaveAttribute('aria-current');
+    for (const page of ['projects', 'nanoai', 'omega-3'] as const) {
+      rerender(<SiteHeader currentPage={page} />);
+      expect(within(navigation).getByRole('link', { name: 'Projects' })).toHaveAttribute('aria-current', 'page');
+    }
   });
 
   it('announces the NanoAI beta above the header and links to its sign-up form', () => {

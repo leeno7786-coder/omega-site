@@ -22,6 +22,7 @@ export default defineConfig({
         home: path.resolve(__dirname, 'index.html'),
         omega3: path.resolve(__dirname, 'omega-3/index.html'),
         nanoai: path.resolve(__dirname, 'nanoai/index.html'),
+        projects: path.resolve(__dirname, 'projects/index.html'),
         autonomousSystems: path.resolve(__dirname, 'autonomous-systems/index.html'),
       },
     },

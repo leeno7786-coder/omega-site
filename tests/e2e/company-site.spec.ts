@@ -21,10 +21,10 @@ test('visitor can inspect Noah and the selected systems', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Nano', exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Noah Lee' })).toBeVisible();
   await expect(page.getByText('Founder & Principal Engineer')).toBeVisible();
-  const browserDemo = page.getByRole('link', { name: 'Request a demo: Omega Browser Agent' });
-  await expect(browserDemo).toHaveAttribute('href', '#project-inquiry');
-  await expect(browserDemo).not.toHaveAttribute('target');
-  await expect(browserDemo).not.toHaveAttribute('rel');
+  const browserAgent = page.getByRole('link', { name: 'Get it on Edge Add-ons: Omega Browser Agent' });
+  await expect(browserAgent).toHaveAttribute('href', /^https:\/\/microsoftedge\.microsoft\.com\/addons\/detail\/omega-browser-agent\//);
+  await expect(browserAgent).toHaveAttribute('target', '_blank');
+  await expect(browserAgent).toHaveAttribute('rel', 'noreferrer');
   const nano = page.getByRole('link', { name: 'Open live app: Nano' });
   await expect(nano).toHaveAttribute('href', 'https://omega-dev.uk/');
   await expect(nano).toHaveAttribute('target', '_blank');

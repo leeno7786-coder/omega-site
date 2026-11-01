@@ -11,7 +11,7 @@ test('visitor discovers NanoAI, inspects real Work evidence and reaches the exis
   await expect(page.locator('.nanoai-hero__art figcaption')).toContainText('Actual Windows companion interface');
   const menuToggle = page.getByRole('button', { name: 'Open navigation' });
   if (await menuToggle.isVisible()) await menuToggle.click();
-  await expect(page.getByRole('navigation', { name: 'Primary navigation' }).getByRole('link', { name: 'NanoAI' })).toHaveAttribute('aria-current', 'page');
+  await expect(page.getByRole('navigation', { name: 'Primary navigation' }).getByRole('link', { name: 'Projects' })).toHaveAttribute('aria-current', 'page');
   if (await page.getByRole('button', { name: 'Close navigation' }).isVisible()) await page.keyboard.press('Escape');
 
   await page.getByRole('navigation', { name: 'NanoAI showcase sections' }).getByRole('link', { name: /Computer use/ }).click();
@@ -70,12 +70,14 @@ for (const width of [375, 768, 1280]) {
   });
 }
 
-test('NanoAI preview preserves navigation to the existing Omega proof', async ({ page }) => {
+test('the Projects tab leads from NanoAI to the Omega proof', async ({ page }) => {
   await page.goto('/nanoai/');
   if (await page.getByRole('button', { name: 'Open navigation' }).isVisible()) {
     await page.getByRole('button', { name: 'Open navigation' }).click();
   }
-  await page.getByRole('navigation', { name: 'Primary navigation' }).getByRole('link', { name: 'Omega 3.0' }).click();
+  await page.getByRole('navigation', { name: 'Primary navigation' }).getByRole('link', { name: 'Projects' }).click();
+  await expect(page).toHaveURL(/\/projects\/$/);
+  await page.getByRole('link', { name: /See the technical proof/ }).click();
   await expect(page).toHaveURL(/\/omega-3\/$/);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Omega 3.0 technical proof');
 });

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { SITE_NAV } from '../../content/siteContent';
 
 interface SiteHeaderProps {
-  currentPage: 'home' | 'omega-3' | 'autonomous-systems' | 'nanoai';
+  currentPage: 'home' | 'omega-3' | 'autonomous-systems' | 'nanoai' | 'projects';
 }
 
 export default function SiteHeader({ currentPage }: SiteHeaderProps) {
@@ -66,8 +66,8 @@ export default function SiteHeader({ currentPage }: SiteHeaderProps) {
                 key={item.href}
                 href={item.href}
                 aria-current={
-                  (currentPage === 'omega-3' && item.href === '/omega-3/')
-                  || (currentPage === 'nanoai' && item.href === '/nanoai/')
+                  // Each project's own page counts as part of Projects.
+                  (['projects', 'omega-3', 'nanoai'].includes(currentPage) && item.href === '/projects/')
                   || (currentPage === 'autonomous-systems' && item.href === '/#capabilities')
                     ? 'page'
                     : undefined
