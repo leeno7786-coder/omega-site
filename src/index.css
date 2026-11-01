@@ -2752,6 +2752,20 @@ a {
 .hero__announcement:hover { border-color: var(--teal); background: rgba(94, 234, 212, 0.06); }
 .hero__announcement-tag { padding: 3px 7px; background: var(--teal); color: var(--obsidian); font-family: 'Geist Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; }
 
+/* NanoAI beta launch: a bar above the header on every page, linking to the beta sign-up form. */
+.launch-bar {
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(90deg, rgba(94, 234, 212, 0.12), rgba(125, 211, 252, 0.04) 70%), var(--graphite);
+}
+.launch-bar__inner { display: flex; min-height: 44px; align-items: center; gap: 10px 16px; padding-block: 8px; font-size: 0.82rem; }
+.launch-bar__tag { flex: 0 0 auto; padding: 3px 7px; background: var(--teal); color: var(--obsidian); font-family: 'Geist Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.launch-bar p { flex: 1 1 auto; min-width: 0; margin: 0; color: #a9bbc4; line-height: 1.45; }
+.launch-bar strong { color: var(--ice); font-weight: 600; }
+.launch-bar__link { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 8px; padding-block: 6px; color: var(--teal); font-weight: 600; white-space: nowrap; transition: color 160ms ease; }
+.launch-bar__link:hover { color: #84f2e1; }
+@media (max-width: 720px) { .launch-bar__detail { display: none; } }
+@media (max-width: 420px) { .launch-bar__tag { display: none; } }
+
 .nano-apps {
   position: relative;
   padding: clamp(72px, 9vw, 128px) 0;

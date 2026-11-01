@@ -25,6 +25,18 @@ export default function SiteHeader({ currentPage }: SiteHeaderProps) {
   return (
     <>
       <a className="skip-link" href="#main-content">Skip to content</a>
+      <aside className="launch-bar" aria-label="NanoAI beta launch">
+        <div className="content-shell launch-bar__inner">
+          <span className="launch-bar__tag">Launch</span>
+          <p>
+            <strong>The NanoAI beta is live.</strong>
+            <span className="launch-bar__detail"> Talk to your PC and let Nano work in your Windows apps.</span>
+          </p>
+          <a className="launch-bar__link" href="/nanoai/#beta">
+            Sign up for the beta <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </aside>
       <header className="site-header">
         <div className="content-shell site-header__inner">
           <a className="brand" href="/" aria-label="Omega AI LLC home">

@@ -12,6 +12,14 @@ describe('SiteHeader', () => {
     expect(screen.getByRole('link', { name: 'Start a project' })).toHaveAttribute('href', '/#project-inquiry');
   });
 
+  it('announces the NanoAI beta above the header and links to its sign-up form', () => {
+    render(<SiteHeader currentPage="home" />);
+    const launch = screen.getByRole('complementary', { name: 'NanoAI beta launch' });
+    expect(launch).toHaveTextContent('The NanoAI beta is live.');
+    expect(screen.getByRole('link', { name: /Sign up for the beta/ })).toHaveAttribute('href', '/nanoai/#beta');
+    expect(launch.compareDocumentPosition(screen.getByRole('banner')) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  });
+
   it('closes an open menu with Escape', async () => {
     render(<SiteHeader currentPage="home" />);
     const toggle = screen.getByRole('button', { name: 'Open navigation' });
