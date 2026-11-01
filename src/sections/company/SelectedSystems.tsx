@@ -6,14 +6,15 @@ interface SelectedSystemsProps {
   systems?: readonly SelectedSystem[];
 }
 
-function SystemAction({ system }: { system: SelectedSystem }) {
+/** A system's link. Pages without the inquiry form pass `inquiryHref` to send inquiries to the homepage's. */
+export function SystemAction({ system, inquiryHref }: { system: SelectedSystem; inquiryHref?: string }) {
   const isExternal = system.action === 'external';
 
   return (
     <a
       aria-label={`${system.linkLabel}: ${system.title}`}
       className="system-dossier__action"
-      href={system.href}
+      href={system.action === 'inquiry' && inquiryHref ? inquiryHref : system.href}
       target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noreferrer' : undefined}
     >
@@ -74,6 +75,8 @@ export default function SelectedSystems({ systems = SELECTED_SYSTEMS }: Selected
             </article>
           ))}
         </div>
+
+        <a className="text-link selected-systems__all" href="/projects/">See all projects</a>
       </div>
     </section>
   );

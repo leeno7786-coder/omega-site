@@ -15,9 +15,7 @@ export const CONTACT_EMAILS = [
 
 export const SITE_NAV = [
   { label: 'Capabilities', href: '/#capabilities' },
-  { label: 'Omega 3.0', href: '/omega-3/' },
-  { label: 'NanoAI', href: '/nanoai/' },
-  { label: 'Nano Apps', href: '/#nano-apps' },
+  { label: 'Projects', href: '/projects/' },
   { label: 'How we work', href: '/#process' },
   { label: 'Company', href: '/#company' },
 ] as const satisfies readonly NavigationItem[];
@@ -187,20 +185,20 @@ export const SELECTED_SYSTEMS = [
     id: 'omega-browser-agent',
     title: 'Omega Browser Agent',
     tier: 'featured',
-    status: 'Working build · Edge MV3',
+    status: 'Live · Microsoft Edge Add-ons',
     summary:
-      'A chat-style autonomous browser agent built to operate with a local 4B model. It plans tasks, navigates, clicks, types, reads page structure and screenshots, and can expand to cloud models when greater capability is needed.',
+      'A side-panel AI agent for Microsoft Edge, built to run on a local model on your own PC. It plans tasks, navigates, clicks, types, reads page structure and screenshots in its own workspace tab, and can use your own cloud key when a task needs more.',
     evidence: [
-      'Local-first 4B inference',
-      'Optional OpenRouter cloud models',
+      'Signed through Microsoft Edge Add-ons',
+      'Local models or your own OpenRouter key',
       'Autonomous planning and execution',
-      'Navigation, interaction, extraction, screenshots, and OCR',
-      'Isolated multi-tab workspace',
+      'Navigation, interaction, extraction and screenshots',
+      'Isolated workspace tab',
       'Action confirmation controls',
     ],
-    action: 'inquiry',
-    href: '#project-inquiry',
-    linkLabel: 'Request a demo',
+    action: 'external',
+    href: 'https://microsoftedge.microsoft.com/addons/detail/omega-browser-agent/djcijkfloeepplakbehdnplfahfhpleo',
+    linkLabel: 'Get it on Edge Add-ons',
   },
   {
     id: 'nano-apps',

@@ -57,9 +57,9 @@ describe('site content contract', () => {
       linkLabel: 'Open live app',
     });
     expect(SELECTED_SYSTEMS.find((system) => system.id === 'omega-browser-agent')).toMatchObject({
-      status: 'Working build · Edge MV3',
-      href: '#project-inquiry',
-      linkLabel: 'Request a demo',
+      status: 'Live · Microsoft Edge Add-ons',
+      href: 'https://microsoftedge.microsoft.com/addons/detail/omega-browser-agent/djcijkfloeepplakbehdnplfahfhpleo',
+      linkLabel: 'Get it on Edge Add-ons',
     });
     expect(SELECTED_SYSTEMS.find((system) => system.id === 'omega-memory-mcp')).toMatchObject({
       status: 'Private memory infrastructure',
@@ -72,7 +72,8 @@ describe('site content contract', () => {
   });
 
   it('exposes real destinations and inquiry categories', () => {
-    expect(SITE_NAV.some((item) => item.href === '/omega-3/')).toBe(true);
+    expect(SITE_NAV.map((item) => item.label)).toEqual(['Capabilities', 'Projects', 'How we work', 'Company']);
+    expect(SITE_NAV.find((item) => item.label === 'Projects')?.href).toBe('/projects/');
     expect(PROJECT_CATEGORIES).toContain('Unsure or another type of project');
     expect(PROJECT_CATEGORIES).toContain('Autonomous systems and drone robotics');
     expect(CAPABILITIES.find((item) => item.id === 'autonomous-systems')).toMatchObject({

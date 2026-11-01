@@ -66,7 +66,7 @@ export type SelectedSystem = SelectedSystemBase & (
   | {
       action: 'external';
       href: `https://${string}`;
-      linkLabel: 'View source' | 'Open live app';
+      linkLabel: 'View source' | 'Open live app' | 'Get it on Edge Add-ons';
     }
   | {
       action: 'inquiry';
