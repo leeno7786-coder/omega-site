@@ -37,6 +37,19 @@ describe("NanoAI privacy policy", () => {
     for (const untrue of ["does not operate an intermediary server", "held only in memory", "does not use or accept a Google OAuth client secret"]) expect(text).not.toContain(untrue);
   });
 
+  it("describes Nano Cloud's accounts as they are and gives NanoAI's support address", () => {
+    // Nano Cloud has accounts, linked PCs, plans and billing since November 2026; its own notice has the details.
+    for (const required of [
+      "https://cloud.omega-dev.uk/privacy",
+      "the PCs you link",
+      "never its content, and are deleted after 30 days",
+      "Clerk",
+      "Stripe",
+      "mailto:nanoai@omega2ai.com",
+    ]) expect(text).toContain(required);
+    for (const outdated of ["Nano Cloud keeps your account email and daily usage counts", "noahlee@omega2ai.com"]) expect(text).not.toContain(outdated);
+  });
+
   it("is linked from the NanoAI page and the company policy", () => {
     expect(readFileSync(resolve("nanoai/index.html"), "utf8")).toContain('href="/nanoai/privacy/"');
     expect(readFileSync(resolve("public/privacy/index.html"), "utf8")).toContain('href="/nanoai/privacy/"');

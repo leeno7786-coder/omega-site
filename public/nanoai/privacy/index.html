@@ -46,7 +46,7 @@
     </header>
     <main>
       <h1>NanoAI Privacy Policy</h1>
-      <p class="meta">Omega AI LLC · Last updated: October 29, 2026</p>
+      <p class="meta">Omega AI LLC · Last updated: November 4, 2026</p>
       <p>
         This policy explains how <strong>NanoAI</strong>, the AI assistant app made by Omega AI LLC, handles your
         information, including data from Google accounts you connect to it. For our website and other products, see the
@@ -59,6 +59,7 @@
           <li>NanoAI runs on your own Windows PC. Your conversations, memory, tasks and files are stored there.</li>
           <li>To answer you, NanoAI sends the content each request needs to an AI model, either through Nano Cloud (our hosted service) or to a model running on your PC.</li>
           <li>Nano Cloud doesn't store what you send. Our AI provider doesn't use it to train models.</li>
+          <li>For a Nano Cloud account, we keep your email address, your linked PCs, your usage and your plan, as the <a href="https://cloud.omega-dev.uk/privacy">NanoAI Cloud privacy notice</a> describes.</li>
           <li>Google data is used only to do what you ask. It's never sold, used for ads, or used to train general-purpose AI models.</li>
         </ul>
       </div>
@@ -72,8 +73,9 @@
       <p>To generate replies, NanoAI uses one of these:</p>
       <ul>
         <li>
-          <strong>Nano Cloud</strong>, Omega AI's hosted AI service. NanoAI sends it the content a request needs, and Nano
-          Cloud passes that to Microsoft Azure to produce the reply.
+          <strong>Nano Cloud</strong>, Omega AI's hosted AI service, which you use by linking your PC to a NanoAI account
+          with a plan. NanoAI sends it the content a request needs, and Nano Cloud passes that to Microsoft Azure to
+          produce the reply.
         </li>
         <li><strong>A local model</strong> you choose. With a local model, that processing stays on your PC.</li>
       </ul>
@@ -98,8 +100,8 @@
           <td>Stored encrypted on your PC. Never sent to Omega AI.</td>
         </tr>
         <tr>
-          <td>Nano Cloud account and usage</td>
-          <td>Your account's email address, and how much of the hosted model each account uses per day, kept by Omega AI for metering and billing.</td>
+          <td>Nano Cloud account, linked PCs, usage and plan</td>
+          <td>Kept by Omega AI to run your account and plan: your verified email address and sign-in id, the PCs you link, how much of the hosted model you use each day and billing period, and your plan and billing status (Stripe holds your payment details). Call records list each call's time, PC, size, result and abuse flags, never its content, and are deleted after 30 days. The <a href="https://cloud.omega-dev.uk/privacy">NanoAI Cloud privacy notice</a> has the details.</td>
         </tr>
         <tr>
           <td>Web research, when you turn it on</td>
@@ -118,13 +120,16 @@
       <ul>
         <li>
           <strong>Nano Cloud stores no request content.</strong> It checks your account, counts the tokens used, and
-          forwards the request to Microsoft Azure. Every request asks Azure not to keep the response.
+          forwards the request to Microsoft Azure. Every request asks Azure not to keep the response. It records the
+          call's metadata, never its content, to apply your plan and check for abuse.
         </li>
         <li>
           <strong>Microsoft Azure</strong> generates the reply. Under Microsoft's
           <a href="https://learn.microsoft.com/azure/ai-foundry/responsible-ai/openai/data-privacy" rel="noopener noreferrer">data, privacy and security terms</a>,
           prompts and replies aren't used to train models and aren't available to other customers or to the model's
-          developer. Microsoft may keep a sample of flagged requests for abuse review, as those terms describe.
+          developer. Microsoft may keep a sample of flagged requests for abuse review, as those terms describe. Nano
+          Cloud uses Azure's global processing: data Azure stores is kept in the United States, but a request may be
+          processed in any Azure region.
         </li>
         <li>NanoAI doesn't use your content to train AI models, and neither does Omega AI.</li>
       </ul>
@@ -255,8 +260,14 @@
       <h2 id="sharing">5. Who else processes data</h2>
       <ul>
         <li><strong>Microsoft Azure</strong> generates replies for Nano Cloud (section 3).</li>
-        <li><strong>Netlify</strong> hosts Omega AI's website and the sign-in service.</li>
+        <li><strong>Clerk</strong> handles signing in to your NanoAI account, and keeps your sign-in details.</li>
+        <li><strong>Stripe</strong> handles Nano Cloud payments, and keeps your payment details and billing history.</li>
+        <li><strong>Netlify</strong> hosts Omega AI's website and the Google sign-in service.</li>
         <li><strong>Cloudflare</strong> carries encrypted traffic to Nano Cloud.</li>
+        <li>
+          <strong>ntfy</strong> carries Nano Cloud's alerts to Omega AI's phone, such as a possible abuse of an account,
+          with the account's email address partly hidden.
+        </li>
         <li><strong>Apps you connect</strong>, such as Google, receive the requests NanoAI makes for you, under their own privacy policies.</li>
         <li>
           <strong>Phone access</strong>, if you turn it on, connects your phone to NanoAI on your PC through your own
@@ -268,12 +279,16 @@
       <h2 id="retention">6. Keeping and deleting data</h2>
       <ul>
         <li>Data on your PC stays until you delete it in NanoAI or delete NanoAI's data folder.</li>
-        <li>Nano Cloud keeps your account email and daily usage counts, not what you sent.</li>
-        <li>The sign-in service keeps nothing.</li>
+        <li>
+          Nano Cloud never keeps what you sent. It keeps your account, linked PCs, usage and plan while your account
+          exists, and call records for 30 days.
+        </li>
+        <li>The Google sign-in service at <code>plugins.omega2ai.com</code> keeps nothing.</li>
         <li>Microsoft's handling is set out in its terms linked in section 3.</li>
         <li>
-          To close a Nano Cloud account or ask about your data, email
-          <a href="mailto:noahlee@omega2ai.com">noahlee@omega2ai.com</a>.
+          To get a copy of your Nano Cloud data, or to close and delete your Nano Cloud account, email
+          <a href="mailto:nanoai@omega2ai.com">nanoai@omega2ai.com</a> from the address on the account. Deleting it
+          also cancels your plan and deletes your sign-in and payment customer record.
         </li>
       </ul>
 
@@ -285,7 +300,10 @@
       </ul>
 
       <h2 id="children">8. Children</h2>
-      <p>NanoAI isn't directed at children under 13 (or the equivalent minimum age where you live).</p>
+      <p>
+        NanoAI isn't directed at children under 13 (or the equivalent minimum age where you live). Nano Cloud accounts
+        are for adults 18 and over.
+      </p>
 
       <h2 id="changes">9. Changes</h2>
       <p>
@@ -295,9 +313,13 @@
 
       <h2 id="contact">10. Contact</h2>
       <p>
-        Omega AI LLC · Privacy questions:
-        <a href="mailto:noahlee@omega2ai.com">noahlee@omega2ai.com</a> ·
+        Omega AI LLC · Support and privacy questions:
+        <a href="mailto:nanoai@omega2ai.com">nanoai@omega2ai.com</a> ·
         <a href="https://omega2ai.com/nanoai/">omega2ai.com/nanoai</a>
+      </p>
+      <p>
+        Nano Cloud's own <a href="https://cloud.omega-dev.uk/terms">terms</a> and
+        <a href="https://cloud.omega-dev.uk/privacy">privacy notice</a> cover your Nano Cloud account and plan.
       </p>
       <p><a href="/nanoai/">Back to NanoAI</a></p>
     </main>
