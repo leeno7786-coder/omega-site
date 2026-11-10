@@ -18,17 +18,15 @@ test('visitor can open the autonomous systems capability page', async ({ page })
 test('visitor can inspect Noah and the selected systems', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { name: 'Omega Browser Agent' })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Nano', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'NanoAI', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Nano', exact: true })).toHaveCount(0);
   await expect(page.getByRole('heading', { name: 'Noah Lee' })).toBeVisible();
   await expect(page.getByText('Founder & Principal Engineer')).toBeVisible();
   const browserAgent = page.getByRole('link', { name: 'Get it on Edge Add-ons: Omega Browser Agent' });
   await expect(browserAgent).toHaveAttribute('href', /^https:\/\/microsoftedge\.microsoft\.com\/addons\/detail\/omega-browser-agent\//);
   await expect(browserAgent).toHaveAttribute('target', '_blank');
   await expect(browserAgent).toHaveAttribute('rel', 'noreferrer');
-  const nano = page.getByRole('link', { name: 'Open live app: Nano' });
-  await expect(nano).toHaveAttribute('href', 'https://omega-dev.uk/');
-  await expect(nano).toHaveAttribute('target', '_blank');
-  await expect(nano).toHaveAttribute('rel', 'noreferrer');
+  await expect(page.getByRole('link', { name: 'Open live app: Nano' })).toHaveCount(0);
   for (const { name, href } of [
     { name: 'View source: Omega Runtime', href: 'https://github.com/leeno7786-coder/Omega-NPU-Runtime' },
     { name: 'View source: NanoAgent', href: 'https://github.com/leeno7786-coder/nanoagent' },

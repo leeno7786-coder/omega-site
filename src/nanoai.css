@@ -26,8 +26,16 @@
 .nanoai-hero__art { margin: 0; border: 1px solid var(--border-bright); background: var(--graphite); }
 .nanoai-hero__art img { display: block; width: 100%; height: auto; }
 .nanoai-hero__art figcaption { padding: 16px 20px; color: #a9bbc4; font-size: 0.72rem; line-height: 1.65; }
-.nanoai-hero__art--companion { display: grid; justify-items: center; padding-top: 28px; }
-.nanoai-hero__art--companion img { width: min(calc(100% - 48px), 380px); }
+.nanoai-hero__note { margin: 20px 0 0; color: var(--steel); font-size: 0.8rem; line-height: 1.6; }
+
+/* Download: the free and Nano Cloud ways to run NanoAI beside the installer link (NanoAiDownload). */
+.nanoai-download { align-self: start; border-top: 1px solid var(--border-bright); }
+.nanoai-download__option { padding: 28px 0; border-bottom: 1px solid var(--border); }
+.nanoai-download__option h3 { margin: 0; font-size: 1.25rem; font-weight: 550; letter-spacing: -0.02em; line-height: 1.3; }
+.nanoai-download__price { margin: 10px 0 0; color: var(--ice); font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; }
+.nanoai-download__option ul { margin: 16px 0 0; padding-left: 18px; color: #a9bbc4; font-size: 0.88rem; line-height: 1.75; }
+.nanoai-download__fine { margin: 24px 0 0; color: var(--steel); font-size: 0.78rem; line-height: 1.7; }
+.nanoai-download__fine a { color: var(--teal); text-decoration: underline; text-underline-offset: 4px; }
 
 .nanoai-evidence dl { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; border-block: 1px solid var(--border-bright); }
 .nanoai-evidence dl > div { display: flex; flex-direction: column-reverse; justify-content: end; gap: 12px; padding: 28px 24px; border-right: 1px solid var(--border); }

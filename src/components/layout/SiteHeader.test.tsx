@@ -15,7 +15,7 @@ describe('SiteHeader', () => {
   it('lists projects under one Projects tab and marks it on every project page', () => {
     const { rerender } = render(<SiteHeader currentPage="home" />);
     const navigation = screen.getByRole('navigation', { name: 'Primary navigation' });
-    for (const name of ['Omega 3.0', 'NanoAI', 'Nano Apps']) {
+    for (const name of ['Omega 3.0', 'NanoAI']) {
       expect(within(navigation).queryByRole('link', { name })).not.toBeInTheDocument();
     }
     expect(within(navigation).getByRole('link', { name: 'Projects' })).not.toHaveAttribute('aria-current');
@@ -25,11 +25,12 @@ describe('SiteHeader', () => {
     }
   });
 
-  it('announces the NanoAI beta above the header and links to its sign-up form', () => {
+  it('announces the NanoAI release above the header and links to its download', () => {
     render(<SiteHeader currentPage="home" />);
-    const launch = screen.getByRole('complementary', { name: 'NanoAI beta launch' });
-    expect(launch).toHaveTextContent('The NanoAI beta is live.');
-    expect(screen.getByRole('link', { name: /Sign up for the beta/ })).toHaveAttribute('href', '/nanoai/#beta');
+    const launch = screen.getByRole('complementary', { name: 'NanoAI launch' });
+    expect(launch).toHaveTextContent('NanoAI is out now for Windows.');
+    expect(launch).not.toHaveTextContent(/beta/i);
+    expect(screen.getByRole('link', { name: /Get NanoAI/ })).toHaveAttribute('href', '/nanoai/#download');
     expect(launch.compareDocumentPosition(screen.getByRole('banner')) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 

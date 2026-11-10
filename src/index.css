@@ -1027,10 +1027,10 @@ a {
     var(--graphite);
 }
 
-.system-dossier--nano-apps {
-  background:
-    linear-gradient(135deg, rgba(125, 211, 252, 0.06), transparent 46%),
-    #09141e;
+/* One featured system takes the whole row instead of half of it. */
+.selected-systems__featured > .system-dossier:only-child {
+  grid-column: 1 / -1;
+  min-height: 0;
 }
 
 .system-dossier__topline {
@@ -2736,7 +2736,8 @@ a {
 .nanoai-preview figcaption { margin-top: 14px; color: #a9bbc4; font-size: 0.72rem; line-height: 1.6; }
 @media (max-width: 900px) { .nanoai-preview { grid-template-columns: 1fr; } }
 
-/* Nano: the Android app builder, announced in the hero and featured right after the proof rail. */
+/* NanoAI launch: announced in the hero and featured right after the proof rail (NanoAiSpotlight). The Projects page's
+   showcases reuse the nano-apps step and price styles. */
 .hero__announcement {
   display: inline-flex;
   align-items: center;
@@ -2752,7 +2753,7 @@ a {
 .hero__announcement:hover { border-color: var(--teal); background: rgba(94, 234, 212, 0.06); }
 .hero__announcement-tag { padding: 3px 7px; background: var(--teal); color: var(--obsidian); font-family: 'Geist Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; }
 
-/* NanoAI beta launch: a bar above the header on every page, linking to the beta sign-up form. */
+/* NanoAI launch: a bar above the header on every page, linking to the NanoAI download. */
 .launch-bar {
   border-bottom: 1px solid var(--border);
   background: linear-gradient(90deg, rgba(94, 234, 212, 0.12), rgba(125, 211, 252, 0.04) 70%), var(--graphite);
@@ -2787,7 +2788,7 @@ a {
 .nano-apps__price { margin: 0; color: var(--ice); font-size: 1.35rem; font-weight: 600; }
 .nano-apps__price span { display: block; margin-top: 4px; color: var(--steel); font-size: 0.82rem; font-weight: 400; }
 .nano-apps__media { margin: 0; min-width: 0; }
-.nano-apps__media video { display: block; width: 100%; height: auto; border: 1px solid var(--border-bright); background: var(--obsidian); }
+.nano-apps__media video, .nano-apps__media img { display: block; width: 100%; height: auto; border: 1px solid var(--border-bright); background: var(--obsidian); }
 .nano-apps__media figcaption { margin-top: 14px; color: #a9bbc4; font-size: 0.75rem; line-height: 1.6; }
 @media (max-width: 900px) {
   .nano-apps__inner { grid-template-columns: 1fr; }
