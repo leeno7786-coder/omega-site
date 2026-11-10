@@ -46,5 +46,5 @@ export function browserAgentImageSrcSet(slug: string) {
 
 export const PROJECTS_PAGE = {
   title: 'Built, shipped and running.',
-  lede: 'Products you can use today and the systems behind them, all engineered by Omega AI. Try the live ones, join a beta, or ask about the rest.',
+  lede: 'Products you can use today and the systems behind them, all engineered by Omega AI. Try the live ones, or ask about the rest.',
 } as const;

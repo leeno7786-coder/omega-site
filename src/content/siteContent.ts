@@ -201,25 +201,6 @@ export const SELECTED_SYSTEMS = [
     linkLabel: 'Get it on Edge Add-ons',
   },
   {
-    id: 'nano-apps',
-    title: 'Nano',
-    tier: 'featured',
-    status: 'Android app builder',
-    summary:
-      'A conversational builder that turns a plain-English description into a native Android app. It asks a few questions for games and larger apps, quotes a fixed price before anything is built, compiles and signs a Kotlin app in minutes, and lets people try it free on a real Android phone in the browser.',
-    evidence: [
-      'Live at omega-dev.uk',
-      'Native Kotlin and Jetpack Compose',
-      'Real Android trial phones, streamed to the browser',
-      'Fixed price quoted with the plan',
-      'Signed APK, Google Play bundle and store listing kit',
-      'Clerk sign-in and Stripe checkout',
-    ],
-    action: 'external',
-    href: 'https://omega-dev.uk/',
-    linkLabel: 'Open live app',
-  },
-  {
     id: 'odin',
     title: 'Odin',
     tier: 'supporting',

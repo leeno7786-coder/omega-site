@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { NANOAI_SCREENSHOTS, NANOAI_WORK_DETAIL, nanoAiImageSource, nanoAiImageSrcSet } from '../../content/nanoaiContent';
+import { NANOAI_SCREENSHOTS, nanoAiImageSource, nanoAiImageSrcSet } from '../../content/nanoaiContent';
 import type { NanoAiMedia } from '../../content/nanoaiContent';
 
 export default function NanoAiGallery() {
@@ -32,7 +32,6 @@ export default function NanoAiGallery() {
           </figure>
         ))}
       </div>
-      <button className="nanoai-detail-link" type="button" onClick={() => setSelected(NANOAI_WORK_DETAIL)}>Inspect the research completion detail <span aria-hidden="true">↗</span></button>
       <dialog className="nanoai-lightbox" ref={dialogRef} aria-labelledby="nanoai-lightbox-title" aria-describedby="nanoai-lightbox-caption" onCancel={() => setSelected(null)} onClose={() => setSelected(null)}>
         {selected ? (
           <>

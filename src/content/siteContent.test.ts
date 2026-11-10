@@ -44,18 +44,14 @@ describe('site content contract', () => {
     ]);
     expect(SELECTED_SYSTEMS.map((system) => system.id)).toEqual([
       'omega-browser-agent',
-      'nano-apps',
       'odin',
       'omega-runtime',
       'omega-memory-mcp',
       'nanoagent',
     ]);
-    expect(SELECTED_SYSTEMS.filter((system) => system.tier === 'featured')).toHaveLength(2);
-    expect(SELECTED_SYSTEMS.find((system) => system.id === 'nano-apps')).toMatchObject({
-      status: 'Android app builder',
-      href: 'https://omega-dev.uk/',
-      linkLabel: 'Open live app',
-    });
+    // NanoAI is featured by its own preview (NanoAiPreview); the retired Nano app builder is gone.
+    expect(SELECTED_SYSTEMS.filter((system) => system.tier === 'featured')).toHaveLength(1);
+    expect(JSON.stringify(SELECTED_SYSTEMS)).not.toMatch(/omega-dev\.uk|Android app builder/);
     expect(SELECTED_SYSTEMS.find((system) => system.id === 'omega-browser-agent')).toMatchObject({
       status: 'Live · Microsoft Edge Add-ons',
       href: 'https://microsoftedge.microsoft.com/addons/detail/omega-browser-agent/djcijkfloeepplakbehdnplfahfhpleo',

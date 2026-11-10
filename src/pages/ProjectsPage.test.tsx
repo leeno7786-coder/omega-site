@@ -38,11 +38,14 @@ describe('ProjectsPage', () => {
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Built, shipped and running.');
 
     const nanoAi = screen.getByRole('article', { name: 'NanoAI' });
-    expect(within(nanoAi).getByRole('link', { name: 'Sign up for the beta' })).toHaveAttribute('href', '/nanoai/#beta');
+    expect(within(nanoAi).getByText('New · Out now for Windows')).toBeVisible();
+    expect(within(nanoAi).getByRole('link', { name: 'Download for Windows' })).toHaveAttribute('href', 'https://omega-dev.uk/download');
     expect(within(nanoAi).getByRole('link', { name: 'Explore NanoAI' })).toHaveAttribute('href', '/nanoai/');
+    expect(within(nanoAi).queryByText(/beta/i)).not.toBeInTheDocument();
 
-    const nano = screen.getByRole('article', { name: 'Nano' });
-    expect(within(nano).getByRole('link', { name: /Build an app with Nano/ })).toHaveAttribute('href', 'https://omega-dev.uk/');
+    // The Nano app builder was retired; omega-dev.uk now serves NanoAI.
+    expect(screen.queryByRole('article', { name: 'Nano' })).not.toBeInTheDocument();
+    expect(screen.queryByText(/join a beta/i)).not.toBeInTheDocument();
 
     const systems = screen.getByRole('region', { name: 'The engineering underneath.' });
     for (const name of ['Omega 3.0', 'Odin', 'Omega Runtime', 'Omega Memory MCP', 'NanoAgent']) {

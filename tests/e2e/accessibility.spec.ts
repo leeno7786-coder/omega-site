@@ -62,26 +62,21 @@ for (const width of [320, 375, 390, 768, 1024, 1440]) {
   });
 }
 
-test('featured systems share a row on desktop and stack on mobile', async ({ page }) => {
-  await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.goto('/');
-  const browserAgent = page.locator('[data-featured-system="omega-browser-agent"]');
-  const nano = page.locator('[data-featured-system="nano-apps"]');
-  const desktopBrowserBox = await browserAgent.boundingBox();
-  const desktopNanoBox = await nano.boundingBox();
-  expect(desktopBrowserBox).not.toBeNull();
-  expect(desktopNanoBox).not.toBeNull();
-  expect(Math.abs((desktopBrowserBox?.y ?? 0) - (desktopNanoBox?.y ?? 0))).toBeLessThan(4);
-  expect(desktopBrowserBox?.x).not.toBe(desktopNanoBox?.x);
-
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.reload();
-  const mobileBrowserBox = await browserAgent.boundingBox();
-  const mobileNanoBox = await nano.boundingBox();
-  expect(mobileBrowserBox).not.toBeNull();
-  expect(mobileNanoBox).not.toBeNull();
-  expect(Math.abs((mobileBrowserBox?.x ?? 0) - (mobileNanoBox?.x ?? 0))).toBeLessThan(4);
-  expect((mobileNanoBox?.y ?? 0)).toBeGreaterThan((mobileBrowserBox?.y ?? 0));
+test('NanoAI leads the selected systems and the one featured system fills its row', async ({ page }) => {
+  for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844 }]) {
+    await page.setViewportSize(viewport);
+    await page.goto('/');
+    const nanoAi = await page.locator('[data-featured-system="nanoai"]').boundingBox();
+    const browserAgent = await page.locator('[data-featured-system="omega-browser-agent"]').boundingBox();
+    const row = await page.locator('.selected-systems__featured').boundingBox();
+    expect(nanoAi).not.toBeNull();
+    expect(browserAgent).not.toBeNull();
+    expect(row).not.toBeNull();
+    expect(browserAgent?.y ?? 0).toBeGreaterThan(nanoAi?.y ?? 0);
+    // The row has a 1px left border; the lone card fills the rest of it.
+    expect(Math.abs((browserAgent?.width ?? 0) - (row?.width ?? 0))).toBeLessThan(4);
+    await expect(page.locator('[data-featured-system="nano-apps"]')).toHaveCount(0);
+  }
 });
 
 test('technical dossier and founder metadata meet WCAG AA contrast on layered backgrounds', async ({ page }) => {
@@ -98,12 +93,6 @@ test('technical dossier and founder metadata meet WCAG AA contrast on layered ba
       locator: page.locator('.system-dossier--omega-browser-agent .system-dossier__topline span:last-child'),
       // The dossier gradient reaches a 5.5% teal wash over graphite.
       background: compositeRgb(hexToRgb('#5eead4'), 0.055, graphite),
-    },
-    {
-      name: 'Nano secondary topline',
-      locator: page.locator('.system-dossier--nano-apps .system-dossier__topline span:last-child'),
-      // The dossier gradient reaches a 6% blue wash over its custom base.
-      background: compositeRgb(blue, 0.06, hexToRgb('#09141e')),
     },
     {
       name: 'Founder eyebrow',

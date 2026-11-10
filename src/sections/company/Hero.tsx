@@ -5,9 +5,9 @@ export default function Hero() {
   return (
     <section className="hero content-shell" aria-labelledby="hero-title">
       <div className="hero__copy">
-        <a className="hero__announcement" href="#nano-apps">
+        <a className="hero__announcement" href="#nanoai-launch">
           <span className="hero__announcement-tag">New</span>
-          Nano builds Android apps from one sentence
+          NanoAI is out now for Windows
           <span aria-hidden="true">→</span>
         </a>
         <p className="eyebrow">

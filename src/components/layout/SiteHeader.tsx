@@ -25,15 +25,15 @@ export default function SiteHeader({ currentPage }: SiteHeaderProps) {
   return (
     <>
       <a className="skip-link" href="#main-content">Skip to content</a>
-      <aside className="launch-bar" aria-label="NanoAI beta launch">
+      <aside className="launch-bar" aria-label="NanoAI launch">
         <div className="content-shell launch-bar__inner">
-          <span className="launch-bar__tag">Launch</span>
+          <span className="launch-bar__tag">New</span>
           <p>
-            <strong>The NanoAI beta is live.</strong>
-            <span className="launch-bar__detail"> Talk to your PC and let Nano work in your Windows apps.</span>
+            <strong>NanoAI is out now for Windows.</strong>
+            <span className="launch-bar__detail"> Free with a model on your PC, or let Nano Cloud run it for you.</span>
           </p>
-          <a className="launch-bar__link" href="/nanoai/#beta">
-            Sign up for the beta <span aria-hidden="true">→</span>
+          <a className="launch-bar__link" href="/nanoai/#download">
+            Get NanoAI <span aria-hidden="true">→</span>
           </a>
         </div>
       </aside>

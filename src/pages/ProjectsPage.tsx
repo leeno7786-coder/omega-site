@@ -1,6 +1,5 @@
 import SiteHeader from '../components/layout/SiteHeader';
-import { NANOAI_DESKTOP, nanoAiImageSource, nanoAiImageSrcSet } from '../content/nanoaiContent';
-import { NANO_APPS } from '../content/nanoAppsContent';
+import { NANOAI_LINKS, NANOAI_MEET, nanoAiImageSource, nanoAiImageSrcSet } from '../content/nanoaiContent';
 import { OMEGA_BROWSER_AGENT, PROJECTS_PAGE, browserAgentImage, browserAgentImageSrcSet } from '../content/projectsContent';
 import { OMEGA_PROOF_CONTENT, SELECTED_SYSTEMS } from '../content/siteContent';
 import useInitialHashNavigation from '../lib/useInitialHashNavigation';
@@ -9,7 +8,6 @@ import { SystemAction } from '../sections/company/SelectedSystems';
 const PROJECT_INDEX = [
   ['Omega Browser Agent', '#omega-browser-agent'],
   ['NanoAI', '#nanoai'],
-  ['Nano', '#nano'],
   ['Research and systems', '#systems'],
 ] as const;
 
@@ -108,68 +106,38 @@ export default function ProjectsPage() {
           <article className="project-showcase" id="nanoai" aria-labelledby="projects-nanoai-title">
             <div className="project-showcase__grid">
               <div className="project-showcase__copy">
-                <p className="eyebrow project-showcase__eyebrow">Beta · Windows</p>
+                <p className="eyebrow project-showcase__eyebrow">New · Out now for Windows</p>
                 <div className="project-showcase__title">
                   <img src="/brand/nanoai-logo-120.png" width={48} height={48} alt="" />
                   <h3 id="projects-nanoai-title">NanoAI</h3>
                 </div>
                 <p className="project-showcase__tagline">Bring your PC to life.</p>
-                <p>Talk to a compact Windows voice companion that remembers context and works in your actual applications. The beta is one Windows download: NanoAI, its memory, voice and plugins run on your PC, and Omega AI provides the model, so you don’t need an AI account of your own.</p>
+                <p>Switch on Live mode and Nano runs your Windows PC for you, hands-free. In the app, it works on an Ubuntu computer of its own, with your connected accounts, memory that learns and tasks that run on a schedule. One signed Windows download: NanoAI, its memory, voice and plugins run on your PC.</p>
                 <ul className="project-showcase__facts" aria-label="NanoAI highlights">
-                  <li>Windows voice companion</li>
-                  <li>Actual computer use</li>
-                  <li>Memory you can inspect</li>
+                  <li>Live mode, hands-free</li>
+                  <li>Nano’s own computer</li>
+                  <li>Free with your own model</li>
+                  <li>Nano Cloud plans from $20 a month</li>
                 </ul>
                 <div className="project-showcase__actions">
-                  <a className="button button--primary" href="/nanoai/#beta">Sign up for the beta</a>
+                  <a className="button button--primary" href={NANOAI_LINKS.download}>Download for Windows</a>
                   <a className="text-link" href="/nanoai/">Explore NanoAI</a>
                 </div>
               </div>
               <figure className="project-showcase__media">
-                <a href="/nanoai/#proof" aria-label="See NanoAI screenshots">
+                <a href="/nanoai/#proof" aria-label="See NanoAI's screens">
                   <img
-                    src={nanoAiImageSource(NANOAI_DESKTOP)}
-                    srcSet={nanoAiImageSrcSet(NANOAI_DESKTOP)}
+                    src={nanoAiImageSource(NANOAI_MEET)}
+                    srcSet={nanoAiImageSrcSet(NANOAI_MEET)}
                     sizes="(max-width: 900px) calc(100vw - 64px), 620px"
-                    width={NANOAI_DESKTOP.width}
-                    height={NANOAI_DESKTOP.height}
+                    width={NANOAI_MEET.width}
+                    height={NANOAI_MEET.height}
                     loading="lazy"
                     decoding="async"
-                    alt={NANOAI_DESKTOP.alt}
+                    alt={NANOAI_MEET.alt}
                   />
                 </a>
-                <figcaption>{NANOAI_DESKTOP.caption}</figcaption>
-              </figure>
-            </div>
-          </article>
-
-          <article className="project-showcase" id="nano" aria-labelledby="projects-nano-title">
-            <div className="project-showcase__grid">
-              <div className="project-showcase__copy">
-                <p className="eyebrow project-showcase__eyebrow">Live · Android app builder</p>
-                <h3 id="projects-nano-title">Nano</h3>
-                <p className="project-showcase__tagline">{NANO_APPS.title}</p>
-                <p>{NANO_APPS.description}</p>
-                <p className="nano-apps__price project-showcase__price">{NANO_APPS.price}<span>{NANO_APPS.priceNote}</span></p>
-                <div className="project-showcase__actions">
-                  <a className="button button--primary" href={NANO_APPS.href} target="_blank" rel="noreferrer">
-                    {NANO_APPS.action}<span aria-hidden="true"> ↗</span>
-                  </a>
-                </div>
-              </div>
-              <figure className="project-showcase__media">
-                <video
-                  src={NANO_APPS.video.src}
-                  poster={NANO_APPS.video.poster}
-                  width={NANO_APPS.video.width}
-                  height={NANO_APPS.video.height}
-                  aria-label={NANO_APPS.video.label}
-                  controls
-                  muted
-                  playsInline
-                  preload="none"
-                />
-                <figcaption>{NANO_APPS.caption}</figcaption>
+                <figcaption>NanoAI 0.3.1. {NANOAI_MEET.caption}</figcaption>
               </figure>
             </div>
           </article>
