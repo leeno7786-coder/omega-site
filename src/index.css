@@ -1336,6 +1336,7 @@ a {
 .founder-profile__links {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 12px 22px;
   margin-top: 40px;
 }
@@ -1346,6 +1347,19 @@ a {
   font-size: 0.65rem;
   text-decoration-color: var(--teal);
   text-underline-offset: 6px;
+}
+
+.founder-profile__links .founder-profile__lounge-badge {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.founder-profile__lounge-badge img {
+  display: block;
+  max-width: 100%;
+  height: 28px;
+  width: auto;
 }
 
 .founder-profile__story {

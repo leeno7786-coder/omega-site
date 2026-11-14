@@ -29,6 +29,20 @@ export default function FounderProfileSection({
               {link.label}<span aria-hidden="true">↗</span>
             </a>
           ))}
+          <a
+            className="founder-profile__lounge-badge"
+            href="https://lounge.ai/@leeno7786-coder"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="https://lounge.ai/api/badge/leeno7786-coder"
+              alt="Noah Lee on AI Lounge"
+              height={28}
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
         </nav>
       </div>
 

@@ -18,6 +18,14 @@ describe('FounderProfileSection', () => {
       expect(link).toHaveAttribute('target', '_blank');
       expect(link).toHaveAttribute('rel', 'noreferrer');
     }
+
+    const loungeLink = screen.getByRole('link', { name: 'Noah Lee on AI Lounge' });
+    expect(loungeLink).toHaveAttribute('href', 'https://lounge.ai/@leeno7786-coder');
+    expect(loungeLink).toHaveAttribute('target', '_blank');
+    expect(loungeLink).toHaveAttribute('rel', 'noopener noreferrer');
+    const badge = screen.getByRole('img', { name: 'Noah Lee on AI Lounge' });
+    expect(badge).toHaveAttribute('src', 'https://lounge.ai/api/badge/leeno7786-coder');
+    expect(badge).toHaveAttribute('height', '28');
   });
 
   it('preserves co-founder credit and omits private résumé details', () => {
