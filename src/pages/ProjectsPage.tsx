@@ -1,7 +1,7 @@
 import SiteHeader from '../components/layout/SiteHeader';
 import { NANOAI_LINKS, NANOAI_MEET, nanoAiImageSource, nanoAiImageSrcSet } from '../content/nanoaiContent';
 import { OMEGA_BROWSER_AGENT, PROJECTS_PAGE, browserAgentImage, browserAgentImageSrcSet } from '../content/projectsContent';
-import { OMEGA_PROOF_CONTENT, SELECTED_SYSTEMS } from '../content/siteContent';
+import { OMEGA3_ARCHIVE_URL, OMEGA_PROOF_CONTENT, SELECTED_SYSTEMS } from '../content/siteContent';
 import useInitialHashNavigation from '../lib/useInitialHashNavigation';
 import { SystemAction } from '../sections/company/SelectedSystems';
 
@@ -149,10 +149,15 @@ export default function ProjectsPage() {
           <div className="supporting-systems projects-systems">
             <article className="supporting-system projects-systems__lead" id="omega-3">
               <div className="supporting-system__index">00</div>
-              <p className="supporting-system__status">Flagship research · Working system</p>
+              <p className="supporting-system__status">Retired research · Open source archive</p>
               <h3>Omega 3.0</h3>
               <p>Metacognitive evaluation and deterministic control loops, with 13 specialized model slots inside a validated 8 GB footprint. Memory: {OMEGA_PROOF_CONTENT.headlineBenchmark}; {OMEGA_PROOF_CONTENT.localBenchmark.replace(/^Up/, 'up')}.</p>
-              <a className="system-dossier__action" href="/omega-3/">See the technical proof<span aria-hidden="true">→</span></a>
+              <div className="project-showcase__actions">
+                <a className="system-dossier__action" href="/omega-3/">See the technical proof<span aria-hidden="true">→</span></a>
+                <a className="system-dossier__action" href={OMEGA3_ARCHIVE_URL} target="_blank" rel="noreferrer">
+                  View public source<span aria-hidden="true"> ↗</span>
+                </a>
+              </div>
             </article>
             {systems.map((system, index) => (
               <article className="supporting-system" id={system.id} key={system.id}>

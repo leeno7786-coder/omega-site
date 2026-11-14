@@ -35,7 +35,7 @@ describe('OmegaProofPage', () => {
   it('distinguishes available source from private systems in the repository summary', () => {
     render(<OmegaProofPage />);
     expect(
-      screen.getByText('Review available source and discuss the private flagship and memory systems.'),
+      screen.getByText("Explore Omega 3.0's public research archive and other available source; Omega Memory MCP remains private."),
     ).toBeVisible();
   });
 
@@ -43,7 +43,6 @@ describe('OmegaProofPage', () => {
     render(<OmegaProofPage />);
 
     for (const link of [
-      screen.getByRole('link', { name: /Private engineering repository Omega 3\.0/ }),
       screen.getByRole('link', { name: /Private engineering repository Omega Memory MCP/ }),
     ]) {
       expect(link).toHaveAttribute('href', '/#project-inquiry');
@@ -52,6 +51,7 @@ describe('OmegaProofPage', () => {
     }
 
     for (const { name, href } of [
+      { name: /Public repository Omega 3\.0/, href: 'https://github.com/leeno7786-coder/omega3-research-archive' },
       { name: /Public repository NanoAgent/, href: 'https://github.com/leeno7786-coder/nanoagent' },
       { name: /Public repository Omega NPU Runtime/, href: 'https://github.com/leeno7786-coder/Omega-NPU-Runtime' },
     ]) {
@@ -61,6 +61,10 @@ describe('OmegaProofPage', () => {
       expect(link).toHaveAttribute('rel', 'noreferrer');
     }
 
+    const archive = screen.getByRole('link', { name: /Explore the public source archive/ });
+    expect(archive).toHaveAttribute('href', 'https://github.com/leeno7786-coder/omega3-research-archive');
+    expect(archive).toHaveAttribute('target', '_blank');
+    expect(archive).toHaveAttribute('rel', 'noreferrer');
     expect(document.querySelector('a[href*="leeno7786-coder/Omega3.0"]')).not.toBeInTheDocument();
     expect(document.querySelector('a[href*="leeno7786-coder/omega-memory-mcp"]')).not.toBeInTheDocument();
   });

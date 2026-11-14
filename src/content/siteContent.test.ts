@@ -5,6 +5,7 @@ import {
   COFOUNDERS,
   FOUNDER_PROFILE,
   HOME_PROOF_METRICS,
+  OMEGA3_ARCHIVE_URL,
   PROCESS_STEPS,
   PROJECT_CATEGORIES,
   SELECTED_SYSTEMS,
@@ -27,6 +28,7 @@ describe('site content contract', () => {
       'Linux',
     ]);
     expect(PROCESS_STEPS).toHaveLength(4);
+    expect(OMEGA3_ARCHIVE_URL).toBe('https://github.com/leeno7786-coder/omega3-research-archive');
   });
 
   it('keeps the approved founder hierarchy and selected systems', () => {

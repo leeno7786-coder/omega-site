@@ -10,6 +10,10 @@ describe('OmegaProofPreview', () => {
     expect(screen.getByText(/up to 78.0% with a local 4B model/i)).toBeVisible();
     expect(screen.getByText(/Linux deployment and support/i)).toBeVisible();
     expect(screen.getByRole('link', { name: 'Explore the technical proof' })).toHaveAttribute('href', '/omega-3/');
+    const archive = screen.getByRole('link', { name: /View public source archive/ });
+    expect(archive).toHaveAttribute('href', 'https://github.com/leeno7786-coder/omega3-research-archive');
+    expect(archive).toHaveAttribute('target', '_blank');
+    expect(archive).toHaveAttribute('rel', 'noreferrer');
   });
 
   it('links to real evidence and omits unavailable video', () => {

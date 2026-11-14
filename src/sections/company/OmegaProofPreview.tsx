@@ -1,4 +1,4 @@
-import { OMEGA_PROOF_CONTENT } from '../../content/siteContent';
+import { OMEGA3_ARCHIVE_URL, OMEGA_PROOF_CONTENT } from '../../content/siteContent';
 
 const proofFacts = [
   { value: 'Cognition', detail: 'Metacognitive evaluation and deterministic control loops' },
@@ -22,11 +22,14 @@ export default function OmegaProofPreview() {
         <div className="proof-preview__copy">
           <p className="eyebrow">
             <span aria-hidden="true">03</span>
-            Flagship proof / Omega 3.0
+            Research archive / Omega 3.0
           </p>
           <h2 id="proof-preview-title">{OMEGA_PROOF_CONTENT.heading}</h2>
           <p className="proof-preview__statement">{OMEGA_PROOF_CONTENT.statement}</p>
           <a className="text-link" href="/omega-3/">Explore the technical proof</a>
+          <p><a className="text-link" href={OMEGA3_ARCHIVE_URL} target="_blank" rel="noreferrer">
+            View public source archive<span aria-hidden="true"> ↗</span>
+          </a></p>
           <nav className="evidence-links" aria-label="Omega 3.0 evidence">
             {evidenceLinks.map((link) => (
               <a
@@ -43,7 +46,7 @@ export default function OmegaProofPreview() {
         <div className="proof-stack" aria-label="Omega 3.0 engineering evidence">
           <div className="proof-stack__topline">
             <span>Validated architecture</span>
-            <span className="proof-stack__state">Working system</span>
+            <span className="proof-stack__state">Retired research platform</span>
           </div>
           <ol>
             {proofFacts.map((fact, index) => (

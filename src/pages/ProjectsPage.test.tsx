@@ -52,6 +52,10 @@ describe('ProjectsPage', () => {
       expect(within(systems).getByRole('heading', { name })).toBeVisible();
     }
     expect(within(systems).getByRole('link', { name: /See the technical proof/ })).toHaveAttribute('href', '/omega-3/');
+    const publicSource = within(systems).getByRole('link', { name: /View public source/ });
+    expect(publicSource).toHaveAttribute('href', 'https://github.com/leeno7786-coder/omega3-research-archive');
+    expect(publicSource).toHaveAttribute('target', '_blank');
+    expect(publicSource).toHaveAttribute('rel', 'noreferrer');
     // This page has no inquiry form of its own, so inquiries go to the homepage's.
     expect(within(systems).getByRole('link', { name: 'Discuss this system: Odin' })).toHaveAttribute('href', '/#project-inquiry');
 

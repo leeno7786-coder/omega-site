@@ -1,4 +1,5 @@
 import SiteHeader from '../components/layout/SiteHeader';
+import { OMEGA3_ARCHIVE_URL } from '../content/siteContent';
 import ProofDisclosure from '../components/proof/ProofDisclosure';
 import image1024 from '../assets/ab_1024.webp';
 import image1152 from '../assets/ab_1152.webp';
@@ -73,9 +74,9 @@ type Repository = RepositoryBase & (
 const repositories = [
   {
     name: 'Omega 3.0',
-    description: 'Flagship autonomous cognitive architecture and shared proof source.',
-    access: 'private',
-    href: '/#project-inquiry',
+    description: 'Retired metacognitive AI operating-system research: the source-only architecture, tests, and documented limitations.',
+    access: 'public',
+    href: OMEGA3_ARCHIVE_URL,
   },
   {
     name: 'NanoAgent',
@@ -107,13 +108,17 @@ export default function OmegaProofPage() {
             <a aria-label="Back to company site" className="proof-page-hero__back" href="/">← Back to company site</a>
             <p className="eyebrow">
               <span aria-hidden="true">P-01</span>
-              Working system / technical evidence
+              Retired research / technical evidence
             </p>
             <h1 id="proof-page-title">Omega 3.0 technical proof</h1>
             <p className="proof-page-hero__lede">
-              A metacognitive, local-first architecture that demonstrates how Omega AI solves cognition,
-              memory, runtime, interface, operating-system, and hardware constraints as one system.
+              A historical, local-first metacognitive architecture spanning persistent memory, coordinated agents,
+              model runtimes, browser control, voice, and MCP infrastructure. Now archived as source research;
+              Odin continues the narrower intelligence-learning direction.
             </p>
+            <a className="button button--secondary" href={OMEGA3_ARCHIVE_URL} target="_blank" rel="noreferrer">
+              Explore the public source archive<span aria-hidden="true"> ↗</span>
+            </a>
           </div>
 
           <dl className="proof-page-hero__metrics">
@@ -362,7 +367,7 @@ export default function OmegaProofPage() {
           <ProofDisclosure
             id="repositories"
             title="Repositories"
-            summary="Review available source and discuss the private flagship and memory systems."
+            summary="Explore Omega 3.0's public research archive and other available source; Omega Memory MCP remains private."
             defaultOpen
           >
             <div className="repository-grid">

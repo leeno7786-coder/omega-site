@@ -9,6 +9,8 @@ import type {
   SelectedSystem,
 } from '../types/site';
 
+export const OMEGA3_ARCHIVE_URL = 'https://github.com/leeno7786-coder/omega3-research-archive' as const;
+
 export const CONTACT_EMAILS = [
   'noahlee@omega2ai.com',
 ] as const;
