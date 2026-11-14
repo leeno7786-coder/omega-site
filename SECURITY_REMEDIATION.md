@@ -1,8 +1,7 @@
 # Dependency security remediation — 2026-11-14
 
 Base: `366d757eb01fb0be32c3b52e15459696f18ce1ce` (`origin/main`, independently
-confirmed against GitHub). Worktree: `E:\omega-site-dependency-tail-20261114`;
-local branch: `fix/dependabot-last-eight-20261114`.
+confirmed against GitHub). Fix branch: `fix/dependabot-last-eight-20261114`.
 
 Authenticated GitHub REST and GraphQL checks confirmed exactly **8 open alerts**,
 all development scope, and **0 open pull requests** before remediation.
